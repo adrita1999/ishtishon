@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Register - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+    <link rel="stylesheet" href="assets/css/smoothproducts.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(118,35,35);padding: 18.2px 0px;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%);">
+        <div class="container"><a class="navbar-brand logo" href="#" style="text-align: left;background: rgba(255,255,255,0);color: rgb(0,0,0);font-family: Lato, sans-serif;font-size: 24px;padding-left: 10px;"><strong>Railsheba</strong></a><button data-toggle="collapse" class="navbar-toggler"
+                data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav" style="text-align: right;">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" style="padding-right: 32px;"><a class="nav-link" href="index.html" style="color: #070606;font-family: Lato, sans-serif;font-weight: 700;padding-right: 8px;">Home</a></li>
+                    <li class="nav-item" style="color: #070606;padding-right: 32px;"><a class="nav-link active" href="cv.html" style="color: #070606;font-family: Lato, sans-serif;font-weight: 700;padding-right: 8px;">Log in</a></li>
+                    <li class="nav-item" style="padding-right: 32px;"><a class="nav-link" href="hire-me.html" style="color: #070606;font-family: Lato, sans-serif;font-weight: 700;padding-right: 8px;">Register</a></li>
+                    <li class="nav-item" style="padding-right: 32px;"><a class="nav-link" href="projects-grid-cards.html" style="color: #070606;font-family: Lato, sans-serif;font-weight: 700;padding-right: 8px;">Dashboard</a></li>
+                    <li class="nav-item" style="color: #070606;padding-right: 32px;"><a class="nav-link" href="#" style="color: #070606;font-family: Lato, sans-serif;font-weight: 700;padding-right: 8px;">Contact us</a></li>
+                    <li class="nav-item" style="padding-right: 0px;"><a class="nav-link" href="#" style="color: #070606;padding: 8px 0px 8px 8px;font-family: Lato, sans-serif;font-weight: 700;padding-right: 0px;">Log out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="clean-block clean-form dark" style="background: url(&quot;assets/img/train6.jpg&quot;) no-repeat;margin: 10px0px;padding-top: 150px;">
+        <form style="width: 800px;">
+            <div class="form-group"><label for="name">First Name</label><input class="form-control item" type="text" id="name"></div>
+            <div class="form-group"><label for="name">Last Name</label><input class="form-control item" type="text" id="name-3"></div>
+            <div class="form-group"><label for="name">Gender</label>
+                <div class="dropdown"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" style="background: rgb(104,171,80);width: 420px;text-align: left;">Select Gender</button>
+                    <div class="dropdown-menu"><a class="dropdown-item" href="#">Male</a><a class="dropdown-item" href="#">Female</a><a class="dropdown-item" href="#">Other</a></div>
+                </div>
+            </div>
+            <div class="form-group"><label for="email">Email</label><input class="form-control item" type="email" id="email"></div>
+            <div class="form-group"><label for="name">NID Number</label><input class="form-control" type="number"></div>
+            <div class="form-group"><label for="name" style="width: 200px;">House Number</label><label class="float-right" for="name" style="width: 200px;">Road Number</label><input class="form-control float-left item" type="text" id="name-6" style="width: 200px;"><input class="form-control float-right item"
+                    type="text" id="name-5" style="width: 200px;"></div>
+            <div class="form-group"><label for="name" style="width: 200px;">ZIP Code</label><label class="float-right" for="name" style="width: 200px;">City</label><input class="form-control float-right item" type="text" id="name-1" style="width: 200px;"><input class="form-control item"
+                    type="text" id="name-4" style="width: 200px;"></div><div class="form-group"><label for="name">Contact Number</label></div>
+
+			<div class="col-sm-10">
+			
+				<div class="phone-list">
+				
+					<div class="input-group phone-input">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="type-text">Type</span> <span class="caret"></span></button>
+							<ul class="dropdown-menu" role="menu">
+								<li><a class="changeType" href="javascript:;" data-type-value="phone">Phone</a></li>
+								<li><a class="changeType" href="javascript:;" data-type-value="fax">Fax</a></li>
+								<li><a class="changeType" href="javascript:;" data-type-value="mobile">Mobile</a></li>
+							</ul>
+						</span>
+						<input type="hidden" name="phone[1][type]" class="type-input" value="">
+						<input type="text" name="phone[1][number]" class="form-control" placeholder="+1 (999) 999 9999">
+					</div>
+					
+				</div>
+				
+				
+				<button style=background-color:rgb(104,171,80) type="button" class="btn btn-success btn-sm btn-add-phone"><span class="glyphicon glyphicon-plus"></span> Add Phone</button>
+			</div>
+			
+		
+            <div class="form-group"><label for="name" style="padding-top: 5px;">User ID</label><input class="form-control item" type="text" id="name-2"></div>
+            <div class="form-group"><label for="password">Password</label><input class="form-control item" type="password" id="password"></div><button class="btn btn-primary btn-block" type="submit" style="background: rgb(104,171,80);">Sign Up</button></form>
+    </section>
+    <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"><img src="assets/img/1.png"><img src="assets/img/2.png"><img src="assets/img/3.png"><img src="assets/img/4.png"><img src="assets/img/5.png"><img src="assets/img/6.png"></main>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script src="assets/js/smoothproducts.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
