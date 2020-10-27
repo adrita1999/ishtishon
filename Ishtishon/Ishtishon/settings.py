@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hr',
+    'rs',
 ]
 
 MIDDLEWARE = [
@@ -85,9 +86,9 @@ WSGI_APPLICATION = 'Ishtishon.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'orcl', #select * from global_name;
-        'USER': 'hr',
-        'PASSWORD': 'hr',
+        'NAME': 'ORCL', #select * from global_name;
+        'USER': 'rs',
+        'PASSWORD': 'rs',
         'HOST': 'localhost',
         'PORT': '1521'
     }

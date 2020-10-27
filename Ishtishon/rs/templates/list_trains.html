@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <title>Trains</title>
+</head>
+<body>
+<h1>Trains</h1>
+<table width="100%" border="1">
+    <tr>
+        <th>TRAIN_ID</th>
+        <th>NAME</th>
+        <th>TOTAL_SEAT_SNIGDHA</th>
+        <th>TOTAL_SEAT_SCHAIR</th>
+        <th>TOTAL_SEAT_SHOVAN</th>
+    </tr>
+    {% for train in trains %}
+    <tr>
+        <td>{{train.TRAIN_ID}}</td>
+        <td>{{train.NAME}}</td>
+        <td>{{train.TOTAL_SEAT_SNIGDHA}}</td>
+        <td>{{train.TOTAL_SEAT_SCHAIR}}</td>
+        <td>{{train.TOTAL_SEAT_SHOVAN}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+
+</body>
+</html>
