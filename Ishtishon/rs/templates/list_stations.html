@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <title>Stations</title>
+</head>
+<body>
+<h1>Stations</h1>
+<table width="100%" border="1">
+    <tr>
+        <th>STATION_ID</th>
+        <th>NAME</th>
+    </tr>
+    {% for station in stations %}
+    <tr>
+        <td>{{station.STATION_ID}}</td>
+        <td>{{station.NAME}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+
+</body>
+</html>

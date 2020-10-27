@@ -15,3 +15,8 @@ class Trains(models.Model):
     class Meta:
          db_table = "train"
 
+class Stations(models.Model):
+    station_id=models.IntegerField()
+    name = models.CharField(max_length=20, null=False)
+    class Meta:
+         db_table = "station"

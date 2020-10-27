@@ -22,4 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('jobs', hr_views.list_jobs),
     path('trains', rs_views.list_trains),
+    path('stations', rs_views.list_stations),
+
+
 ]
