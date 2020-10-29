@@ -19,10 +19,13 @@ from django.urls import path
 import rs.views as rs_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     #path('jobs', hr_views.list_jobs),
-    path('trains', rs_views.list_trains),
-    path('stations', rs_views.list_stations),
+    path('trains', rs_views.list_trains, name= 'train'),
+    path('stations', rs_views.list_stations, name= 'station'),
+    path('',rs_views.homepage,name= 'home'),
+    path('registration',rs_views.registration,name= 'register'),
+    path('login',rs_views.login,name= 'login'),
 
 
 ]

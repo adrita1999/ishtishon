@@ -10,17 +10,15 @@
     <tr>
         <th>TRAIN_ID</th>
         <th>NAME</th>
-        <th>TOTAL_SEAT_SNIGDHA</th>
-        <th>TOTAL_SEAT_SCHAIR</th>
-        <th>TOTAL_SEAT_SHOVAN</th>
+        <th>ARRIVAL TIME</th>
+        <th>DEPARTURE TIME</th>
     </tr>
     {% for train in trains %}
     <tr>
         <td>{{train.TRAIN_ID}}</td>
         <td>{{train.NAME}}</td>
-        <td>{{train.TOTAL_SEAT_SNIGDHA}}</td>
-        <td>{{train.TOTAL_SEAT_SCHAIR}}</td>
-        <td>{{train.TOTAL_SEAT_SHOVAN}}</td>
+        <td>{{train.ARRIVAL_TIME}}</td>
+        <td>{{train.DEPARTURE_TIME}}</td>
     </tr>
     {% endfor %}
 
