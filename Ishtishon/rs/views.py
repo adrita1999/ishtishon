@@ -42,7 +42,7 @@ def list_trains(request):
 
 
     else:
-
+        st=""
         cursor = connection.cursor()
         sql = "SELECT * FROM TRAIN"
         cursor.execute(sql)
@@ -63,7 +63,7 @@ def list_trains(request):
                    'TOTAL_SEAT_SHOVAN': TOTAL_SEAT_SHOVAN}
             dict_result.append(row)
 
-    return render(request, 'list_trains.html', {'trains': dict_result})
+    return render(request, 'list_trains.html', {'trains': dict_result,'cost':st})
     #cost add korbo
 
 def list_stations(request):

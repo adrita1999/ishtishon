@@ -1,29 +1,49 @@
 <!doctype html>
+{% load static %}
 <html lang="eng">
 <head>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="{% static  'fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Features-Boxed.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Trains</title>
 </head>
 <body>
+{% if trains %}
 <h1>Trains</h1>
 <table width="100%" border="1">
     <tr>
         <th>TRAIN_ID</th>
         <th>NAME</th>
-        <th>ARRIVAL TIME</th>
         <th>DEPARTURE TIME</th>
+        <th>ARRIVAL TIME</th>
+        <th>SELECT THE SUITABLE TRAIN</th>
     </tr>
     {% for train in trains %}
     <tr>
         <td>{{train.TRAIN_ID}}</td>
         <td>{{train.NAME}}</td>
-        <td>{{train.ARRIVAL_TIME}}</td>
         <td>{{train.DEPARTURE_TIME}}</td>
+        <td>{{train.ARRIVAL_TIME}}</td>
+        <td><div class="mx-5 p-4 text-center">
+    <button type="button" class="btn btn-primary">Details</button>
+</div></td>
     </tr>
     {% endfor %}
 
 </table>
 
 
+<p>Here is the total cost</p>
+{{ cost }}
+        {% else %}
+        <h2>No available train from source to destination</h2>
+{% endif %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
