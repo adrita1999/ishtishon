@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import Trains
 from django.db import connection
 
-
+#welcome dristi
 def list_trains(request):
     if request.method == "POST":
         fro = request.POST["from"]
