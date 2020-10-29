@@ -38,8 +38,13 @@
             <div class="form-group"><label for="name">Last Name</label><input class="form-control item" name = "last" type="text" id="name-3"></div>
 
             <div class="form-group"><label for="name">Gender</label>
-                <div class="dropdown" ><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" style="background: rgb(104,171,80);width: 420px;text-align: left;">Select Gender</button>
-                    <div class="dropdown-menu"><a class="dropdown-item" href="#">Male</a><a class="dropdown-item" href="#">Female</a><a class="dropdown-item" href="#">Other</a></div>
+                <div class="input-group">
+                <select class="form-control item" name="gender" required="required">
+                    <option disabled hidden="" selected="selected">Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
                 </div>
             </div>
 
@@ -50,24 +55,13 @@
             <div class="form-group"><label for="name" style="width: 200px;">ZIP Code</label><label class="float-right" for="name" style="width: 200px;">City</label><input class="form-control float-right item" name = "city" type="text" id="name-1" style="width: 200px;"><input class="form-control item" name = "zip"
                     type="text" id="name-4" style="width: 200px;"></div><div class="form-group"><label for="name">Contact Number</label></div>
 
-			<div class="col-sm-10">
+			<div class="form-group">
 
-				<div class="phone-list">
+
 
 					<div class="input-group phone-input">
-						<span class="input-group-btn">
-							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="type-text">Type</span> <span class="caret"></span></button>
-							<ul class="dropdown-menu" role="menu">
-								<li><a class="changeType" href="javascript:;" data-type-value="phone">Phone</a></li>
-								<li><a class="changeType" href="javascript:;" data-type-value="fax">Fax</a></li>
-								<li><a class="changeType" href="javascript:;" data-type-value="mobile">Mobile</a></li>
-							</ul>
-						</span>
-						<input type="hidden" name="phonetype" class="type-input" value="">
 						<input type="text" name="phonenumber" class="form-control" placeholder="+1 (999) 999 9999">
 					</div>
-
-				</div>
 
 
 				<button style=background-color:rgb(104,171,80) type="button" class="btn btn-success btn-sm btn-add-phone"><span class="glyphicon glyphicon-plus"></span> Add Phone</button>
