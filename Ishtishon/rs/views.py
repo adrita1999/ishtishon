@@ -64,6 +64,7 @@ def list_trains(request):
             dict_result.append(row)
 
     return render(request, 'list_trains.html', {'trains': dict_result})
+    #cost add korbo
 
 def list_stations(request):
 
