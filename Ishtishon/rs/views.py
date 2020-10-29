@@ -90,6 +90,23 @@ def homepage(request):
     return render(request,'search.html')
 
 def registration(request):
+    if request.method == "POST":
+        print(request.POST)
+        # mail = request.POST["email"]
+        # ps = request.POST["password"]
+        #
+        #
+        # cursor = connection.cursor()
+        # sql = "SELECT EMAIL_ADD,PASSWORD FROM R_USER WHERE EMAIL_ADD=%s AND PASSWORD= %s;"
+        # cursor.execute(sql,[mail,ps])
+        # result = cursor.fetchall()
+        # cursor.close()
+        # if(result):
+        #     print("logged in")
+        #     return render(request, 'search.html')
+        # else:
+        #     print("log in denied")
+
 
     return render(request,'registration.html')
 
@@ -110,7 +127,5 @@ def login(request):
             return render(request, 'search.html')
         else:
             print("log in denied")
-
-
 
     return render(request,'login.html')

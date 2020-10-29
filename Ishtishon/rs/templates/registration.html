@@ -31,19 +31,23 @@
         </div>
     </nav>
     <section class="clean-block clean-form dark" style="background: url(&quot;assets/img/train6.jpg&quot;) no-repeat;margin: 10px0px;padding-top: 150px;">
-        <form style="width: 800px;">
-            <div class="form-group"><label for="name">First Name</label><input class="form-control item" type="text" id="name"></div>
-            <div class="form-group"><label for="name">Last Name</label><input class="form-control item" type="text" id="name-3"></div>
+        <form action="" method="post" style="width: 800px;">
+            {%  csrf_token %}
+
+            <div class="form-group"><label for="name">First Name</label><input class="form-control item" name = "frst" type="text" id="name"></div>
+            <div class="form-group"><label for="name">Last Name</label><input class="form-control item" name = "last" type="text" id="name-3"></div>
+
             <div class="form-group"><label for="name">Gender</label>
-                <div class="dropdown"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" style="background: rgb(104,171,80);width: 420px;text-align: left;">Select Gender</button>
+                <div class="dropdown" ><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" style="background: rgb(104,171,80);width: 420px;text-align: left;">Select Gender</button>
                     <div class="dropdown-menu"><a class="dropdown-item" href="#">Male</a><a class="dropdown-item" href="#">Female</a><a class="dropdown-item" href="#">Other</a></div>
                 </div>
             </div>
-            <div class="form-group"><label for="email">Email</label><input class="form-control item" type="email" id="email"></div>
-            <div class="form-group"><label for="name">NID Number</label><input class="form-control" type="number"></div>
-            <div class="form-group"><label for="name" style="width: 200px;">House Number</label><label class="float-right" for="name" style="width: 200px;">Road Number</label><input class="form-control float-left item" type="text" id="name-6" style="width: 200px;"><input class="form-control float-right item"
+
+            <div class="form-group"><label for="email">Email</label><input class="form-control item" name = "email" type="email" id="email"></div>
+            <div class="form-group"><label for="name">NID Number</label><input class="form-control" name = "nid" type="number"></div>
+            <div class="form-group"><label for="name" style="width: 200px;">House Number</label><label class="float-right" for="name" style="width: 200px;">Road Number</label><input class="form-control float-left item" name = "houseno" type="text" id="name-6" style="width: 200px;"><input class="form-control float-right item" name = "roadno"
                     type="text" id="name-5" style="width: 200px;"></div>
-            <div class="form-group"><label for="name" style="width: 200px;">ZIP Code</label><label class="float-right" for="name" style="width: 200px;">City</label><input class="form-control float-right item" type="text" id="name-1" style="width: 200px;"><input class="form-control item"
+            <div class="form-group"><label for="name" style="width: 200px;">ZIP Code</label><label class="float-right" for="name" style="width: 200px;">City</label><input class="form-control float-right item" name = "city" type="text" id="name-1" style="width: 200px;"><input class="form-control item" name = "zip"
                     type="text" id="name-4" style="width: 200px;"></div><div class="form-group"><label for="name">Contact Number</label></div>
 
 			<div class="col-sm-10">
@@ -59,8 +63,8 @@
 								<li><a class="changeType" href="javascript:;" data-type-value="mobile">Mobile</a></li>
 							</ul>
 						</span>
-						<input type="hidden" name="phone[1][type]" class="type-input" value="">
-						<input type="text" name="phone[1][number]" class="form-control" placeholder="+1 (999) 999 9999">
+						<input type="hidden" name="phonetype" class="type-input" value="">
+						<input type="text" name="phonenumber" class="form-control" placeholder="+1 (999) 999 9999">
 					</div>
 
 				</div>
@@ -70,8 +74,8 @@
 			</div>
 
 
-            <div class="form-group"><label for="name" style="padding-top: 5px;">User ID</label><input class="form-control item" type="text" id="name-2"></div>
-            <div class="form-group"><label for="password">Password</label><input class="form-control item" type="password" id="password"></div><button class="btn btn-primary btn-block" type="submit" style="background: rgb(104,171,80);">Sign Up</button>
+            <div class="form-group"><label for="name" style="padding-top: 5px;">User ID</label><input class="form-control item" name = "username" type="text" id="name-2"></div>
+            <div class="form-group"><label for="password">Password</label><input class="form-control item" name = "password" type="password" id="password"></div><button class="btn btn-primary btn-block" type="submit" style="background: rgb(104,171,80);">Sign Up</button>
         </form>
     </section>
     <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"><img src="assets/img/1.png"><img src="assets/img/2.png"><img src="assets/img/3.png"><img src="assets/img/4.png"><img src="assets/img/5.png"><img src="assets/img/6.png"></main>
