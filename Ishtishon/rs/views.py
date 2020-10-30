@@ -129,3 +129,5 @@ def login(request):
             print("log in denied")
 
     return render(request,'login.html')
+def seatselection(request):
+    return render(request, 'seat_selection.html')
