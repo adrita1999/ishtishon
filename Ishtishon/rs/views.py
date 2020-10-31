@@ -131,3 +131,6 @@ def login(request):
     return render(request,'login.html')
 def seatselection(request):
     return render(request, 'seat_selection.html')
+
+def updateinfo(request):
+    return render(request, 'updateinfo.html')
