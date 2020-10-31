@@ -45,11 +45,15 @@
                                 style="margin-left: 150px;color: rgb(255,255,255);">Label</label><label style="margin-left: 137px;color: rgb(255,255,255);">Label</label></div>
             </div>
         </div>
-        <div class="toggle" style="margin-left: 24px;"><input type="radio" id="cond_new" name="bike_cond" checked="checked"><label for="cond_new" style="background: rgb(0,153,81);">Auto</label><input type="radio" id="cond_used" name="bike_cond"><label for="cond_used">Manual</label></div>
+        <div class="toggle" style="margin-left: 24px;"><input type="radio" id="cond_new" data-toggle="collapse" data-target="#collapseExample.show" aria-expanded="false" aria-controls="collapseExample" name="bike_cond" checked="checked"><label for="cond_new">Auto</label><input type="radio" id="cond_used" name="bike_cond" data-toggle="collapse" data-target="#collapseExample:not(.show)" aria-expanded="false" aria-controls="collapseExample"><label for="cond_used">Manual</label></div>
     </fieldset>
+    <div style="height: 100px; margin-left:100px;"><label style="width: 100%;background: #bec5ba;">Passenger Details</label>
+        <div style="height: 24px;"><label>Name:</label><label style="margin-left: 700px;">Mobile:</label></div>
+        <div style="height: 24px;"><label>Email:</label><label style="margin-left: 702px;">Address:</label></div>
+    </div>
     <div style="height: 1010.4px;">
         <div class="float-left" style="height: 1010.4px;">
-            <div class="container">
+            <div class="container collapse" id="collapseExample" style="margin-left: 80px">
                 <div class="table-responsive" style="width: 100%;padding: 0px;">
                     <table class="table">
                         <thead>
@@ -214,15 +218,16 @@
                 </div>
             </div>
         </div>
-        <div class="float-left" style="width: 450px;height: 300px;margin-left: 50px;"><label style="width: 450px;background: #bec5ba;">&nbsp;Ticket Details</label>
+        <div class="float-left" style="width: 520px;height: 300px;margin-left: 100px;"><label style="width: 1150px;background: #bec5ba;">&nbsp;Ticket Details</label>
             <div style="height: 24px;"><label>&nbsp;Train name:</label></div>
             <div style="height: 24px;"><label>&nbsp;Adult:</label></div>
             <div style="height: 24px;"><label>&nbsp;Child:</label></div>
-            <div style="height: 24px;"><label style="width: 450px;background: #bec5ba;margin-top: 10px;">&nbsp;Review the Rules and Restrictions</label></div>
+            <div style="height: 24px;"><label>&nbsp;Total cost:</label></div>
+            <div style="height: 24px;"><label style="width: 1150px;background: #bec5ba;margin-top: 10px;">&nbsp;Review the Rules and Restrictions</label></div>
             <ul style="margin-top: 22px;padding-left: 15px;">
                 <li>Terms and conditions are applicable</li>
-                <li style="width: 450px;">Tickets are non-transferable and name changes are not allowed</li>
-            </ul><button class="btn btn-primary float-right" type="button" style="border-radius: 0px;background: rgb(0,153,70);">Buy ticket</button></div>
+                <li style="width: 520px;">Tickets are non-transferable and name changes are not allowed</li>
+            </ul><button class="btn btn-primary float-right" type="button" style="border-radius: 0px;background: rgb(0,153,70);margin-left: 10px">Buy ticket</button></div>
     </div>
     <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"><img src="assets/img/1.png"><img src="assets/img/2.png"><img src="assets/img/3.png"><img src="assets/img/4.png"><img src="assets/img/5.png"><img src="assets/img/6.png"></main>
     <script src="assets/js/jquery.min.js"></script>
