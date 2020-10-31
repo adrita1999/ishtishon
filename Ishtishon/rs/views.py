@@ -134,3 +134,6 @@ def seatselection(request):
 
 def updateinfo(request):
     return render(request, 'updateinfo.html')
+
+def changepass(request):
+    return render(request, 'changepass.html')

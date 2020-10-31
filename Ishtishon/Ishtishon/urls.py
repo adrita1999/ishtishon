@@ -33,6 +33,8 @@ urlpatterns = [
     path('login',rs_views.login,name= 'login'),
     path('seat_selection',rs_views.seatselection,name= 'seat_selection'),
     path('updateinfo',rs_views.updateinfo,name= 'updateinfo'),
+    path('changepass',rs_views.changepass,name= 'changepass'),
+
     #hr delete hoyna
 
 
