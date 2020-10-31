@@ -145,3 +145,12 @@ def updateinfo(request):
 
 def changepass(request):
     return render(request, 'changepass.html')
+def changemail(request):
+    return render(request, 'changemail.html')
+def changenum(request):
+    return render(request, 'changenum.html')
+def prev(request):
+    return render(request, 'prev.html')
+def upcoming(request):
+    return render(request, 'upcoming.html')
+
