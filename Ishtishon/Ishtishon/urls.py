@@ -32,6 +32,7 @@ urlpatterns = [
     path('registration',rs_views.registration,name= 'register'),
     path('login',rs_views.login,name= 'login'),
     path('seat_selection',rs_views.seatselection,name= 'seat_selection'),
+    #hr delete hoyna
 
 
 ]
