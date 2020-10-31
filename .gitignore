@@ -1,2 +1,11 @@
-Istishon/hr/migrations/__pycache__
-migrations
+
+*.xml
+*.iml
+Ishtishon/.idea/Ishtishon.iml
+Ishtishon/.idea/misc.xml
+Ishtishon/.idea/workspace.xml
+Ishtishon/rs/__pycache__/views.cpython-39.pyc
+Ishtishon\rs\__pycache__
+*.pyc
+**/_pycache_
+Ishtishon/hr/migrations/__pycache__/__init__.cpython-39.pyc

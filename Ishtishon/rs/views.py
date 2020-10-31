@@ -130,6 +130,4 @@ def login(request):
 
     return render(request,'login.html')
 def seatselection(request):
-    if request.method=="POST":
-        print('hereeeee')
     return render(request, 'seat_selection.html')
