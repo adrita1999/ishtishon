@@ -16,19 +16,23 @@
 
 <body>
     <div class="login-dark" style="background: url(&quot;assets/img/train6.jpg&quot;);color: #d9ebfb;padding: 10px;">
-        <form action="{% url 'train' %}" method="post" style="text-align: right;border-style: none;border-right-style: none;background: rgba(30,40,51,0.88);width: 320px;">
+        <form action="{% url 'train' %}" method="post" style="text-align: right;border-style: none;border-right-style: none;background: rgba(30,40,51,0.88);width:440px;max-width: 440px">
             {%  csrf_token %}
             <h2 class="sr-only">Login Form</h2>
-            <div class="illustration"><i class="icon ion-search" style="color: rgb(104,171,80);"></i></div><small class="form-text text-light" style="width: 120px;text-align: left;font-size: 16px;">Route</small><input class="form-control float-right" type="text" name="to" style="width: 118px;filter: brightness(200%);font-size: 16px;color: rgb(248,249,250);"
+            <div class="illustration"><i class="icon ion-search" style="color: rgb(104,171,80);"></i></div><small class="form-text text-light" style="width: 120px;text-align: left;font-size: 16px;margin-left: 10px">Route</small><input class="form-control float-right" type="text" name="to" style="width: 178px;filter: brightness(200%);font-size: 16px;color: rgb(248,249,250);"
                 placeholder="To">
-            <div class="form-group"><input class="form-control" name="from" type="text" style="width: 118px;margin: 0px;color: rgb(247,248,249);filter: brightness(200%) contrast(200%);background: rgba(104,171,80,0);" placeholder="From"></div>
-            <div class="form-group"><small class="form-text text-muted" style="color: rgb(248,249,250);font-size: 16px;text-align: left;background: rgba(255,255,255,0);filter: brightness(200%) contrast(200%);width: 120px;">Date</small>
-                <div class="dropdown float-right" style="width: 120px;height: 38px;text-align: left;"><button class="btn btn-primary active dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" style="height: 38px;margin: 0px 0px 0px;background: rgba(80,171,133,0);color: rgb(246,247,248);text-align: justify;width: 118px;filter: brightness(100%);padding: 6px 12px;">Choose class</button>
-                    <div
-                        class="dropdown-menu"><a class="dropdown-item" href="#">Snigdha</a><a class="dropdown-item" href="#">S_chair</a><a class="dropdown-item" href="#">Shovan</a></div>
-            </div><input class="form-control" type="date" name= "date" style="opacity: 1;width: 118px;background: rgba(56,66,74,0);color: rgb(246,247,248);filter: brightness(200%) contrast(104%);"></div><small class="form-text text-left text-muted" style="color: rgb(248,249,250);font-size: 16px;filter: brightness(200%) contrast(200%);">Passengers</small>
+            <div class="form-group"><input class="form-control" name="from" type="text" style="width: 178px;margin: 0px;color: rgb(247,248,249);filter: brightness(200%) contrast(200%);background: rgba(104,171,80,0);" placeholder="From"></div>
+            <div class="form-group"><small class="form-text text-muted" style="color: rgb(248,249,250);font-size: 16px;text-align: left;background: rgba(255,255,255,0);filter: brightness(200%) contrast(200%);width: 158px;margin-left: 10px">Date</small>
+                <div class="dropdown float-right" style="width: 178px;height: 38px;text-align: left;">
+                    <select class="form-control" style="filter: brightness(200%) contrast(200%)" name="class" required="required">
+                    <option disabled hidden="" selected="selected">Choose Class</option>
+                    <option style="color: #000000">Snigdha</option>
+                    <option style="color: #000000">S_chair</option>
+                    <option style="color: #000000">Shovan</option>
+                </select>
+            </div><input class="form-control" type="date" name= "date" style="opacity: 1;width: 178px;background: rgba(56,66,74,0);color: rgb(246,247,248);filter: brightness(200%) contrast(104%);"></div><small class="form-text text-left text-muted" style="color: rgb(248,249,250);font-size: 16px;filter: brightness(200%) contrast(200%);margin-left: 10px">Passengers</small>
     <input
-        class="form-control float-right" type="text" name="child" placeholder="Child" style="width: 118px;filter: brightness(200%) contrast(200%);"><input class="form-control" type="text" name="adult" placeholder="Adult" style="width: 118px;filter: brightness(200%) contrast(200%);">
+        class="form-control float-right" type="text" name="child" placeholder="Child" style="width: 178px;filter: brightness(200%) contrast(200%);"><input class="form-control" type="text" name="adult" placeholder="Adult" style="width: 178px;filter: brightness(200%) contrast(200%);">
         <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background: rgb(104,171,80);color: rgb(0,0,0);">Find</button></div>
         </form>
         </div>

@@ -11,6 +11,7 @@ def list_trains(request):
         date = request.POST["date"]
         adult = request.POST["adult"]
         child = request.POST["child"]
+        clas=request.POST["class"]
 
         cursor = connection.cursor()
         sql = "SELECT TRAIN_ID,(select NAME from TRAIN t where t.TRAIN_ID=tab.TRAIN_ID),MIN(DEPARTURE_TIME),MAX(DEPARTURE_TIME)FROM (select st.NAME,t1.TRAIN_ID,t1.DEPARTURE_TIME,st.STATION_ID FROM TRAIN_TIMETABLE t1,STATION st where t1.STATION_ID=st.STATION_ID) tab where (NAME=%s OR NAME=%s) GROUP BY TRAIN_ID HAVING COUNT(*)=2 AND MAX(DEPARTURE_TIME)=ANY(SELECT DEPARTURE_TIME FROM TRAIN_TIMETABLE WHERE STATION_ID=(select STATION_ID from STATION where NAME=%s))"
@@ -26,7 +27,14 @@ def list_trains(request):
 
         st = ""
         for re in result1:
-            st = re[0]
+            if clas=='Snigdha':
+                st = re[0]
+            elif clas=='S_chair':
+                st=re[0]*0.8
+            else:
+                st=re[0]*0.6
+
+
         print(st)
 
         dict_result = []
