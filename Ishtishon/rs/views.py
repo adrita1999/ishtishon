@@ -94,8 +94,19 @@ def list_stations(request):
     return render(request, 'list_stations.html', {'stations': dict_result})
 
 def homepage(request):
+    cursor = connection.cursor()
+    sql="SELECT NAME FROM STATION"
+    cursor.execute(sql)
+    result=cursor.fetchall()
+    cursor.close()
+    dict=[]
+    for r in result:
+        NAME=r[0]
+        row={'NAME':NAME}
+        dict.append(row)
+
     #print("data= ",request.POST)
-    return render(request,'search.html')
+    return render(request,'search.html',{'names':dict})
 
 def registration(request):
     if request.method == "POST":
