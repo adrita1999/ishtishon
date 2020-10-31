@@ -19,11 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af069ee0-0f74-42f0-ad52-509b185601e3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/css/Toggle-Switches.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/Toggle-Switches.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rs/templates/seat_selection.html" beforeDir="false" afterPath="$PROJECT_DIR$/rs/templates/seat_selection.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rs/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/rs/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="af069ee0-0f74-42f0-ad52-509b185601e3" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,6 +82,7 @@
       <workItem from="1603997266019" duration="2108000" />
       <workItem from="1604049361120" duration="5135000" />
       <workItem from="1604072383212" duration="14184000" />
+      <workItem from="1604155749833" duration="776000" />
     </task>
     <servers />
   </component>
