@@ -27,15 +27,12 @@ def list_trains(request):
 
         st = ""
         for re in result1:
-            if clas=='Snigdha':
+            if clas=='SNIGDHA':
                 st = re[0]
-            elif clas=='S_chair':
+            elif clas=='S_CHAIR':
                 st=re[0]*0.8
             else:
                 st=re[0]*0.6
-
-
-        print(st)
 
         dict_result = []
 
@@ -71,7 +68,7 @@ def list_trains(request):
                    'TOTAL_SEAT_SHOVAN': TOTAL_SEAT_SHOVAN}
             dict_result.append(row)
 
-    return render(request, 'list_trains.html', {'trains': dict_result,'cost':st})
+    return render(request, 'list_trains.html', {'trains': dict_result,'cost':str(st)+''+' BDT'})
     #cost add korbo
 
 def list_stations(request):

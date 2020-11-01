@@ -6,40 +6,100 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
     <link rel="stylesheet" href="{% static  'fonts/ionicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/Features-Boxed.css' %}">
+    <link rel="stylesheet" href="{% static "fonts/font-awesome.min.css"%}">
+    <link rel="stylesheet" href="{% static "fonts/ionicons.min.css"%}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Trains</title>
 </head>
 <body>
+<nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(118,35,35);padding: 18.2px 0px;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%);">
+        <div class="container"><a class="navbar-brand logo" href="#" style="text-align: left;background: rgba(255,255,255,0);color: rgb(0,0,0);"><strong>Railsheba</strong></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="navbar-toggler-icon" style="filter: brightness(0%);"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navbarNav" style="text-align: right;">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html" style="color: #070606;">Home</a></li>
+                    <li class="nav-item" style="color: #070606;"><a class="nav-link active" href="cv.html" style="color: #070606;">Log in</a></li>
+                    <li class="nav-item"><a class="nav-link" href="hire-me.html" style="color: #070606;">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="updateinfo" style="color: #070606;">Dashboard</a></li>
+                    <li class="nav-item" style="color: #070606;"><a class="nav-link active" href="#" style="color: #070606;">Contact us</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#" style="color: #070606;padding: 8px 0px 8px 8px;">Log out</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+<fieldset style="padding-top: 100px;">
+<div class="flex-grow-1 flex-shrink-1 flex-fill" style="height: 100px;background: url(&quot;assets/img/train6.jpg&quot;) center / cover repeat, rgba(0,153,89,0.52);opacity: 1;filter: brightness(98%) contrast(107%);border-radius: 10px;margin-bottom: 10px;width: 1566px;">
+            <div class="container flex-grow-1 flex-shrink-1 flex-fill" style="background: rgba(33,37,41,0.81);width: 1566px;height: 100px;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;max-width: none;"><i class="icon ion-location" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i><label style="background: rgba(255,255,255,0);color: #ffffff;">From</label><i class="icon ion-location"
+                    style="width: 20px;height: 20px;margin-right: 5px;margin-left: 200px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i><label style="margin-left: 5px;color: rgb(255,255,255);">To</label><i class="fa fa-calendar-times-o" style="margin-left: 200px;margin-right: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>
+                <label
+                    style="color: rgb(255,255,255);">Date</label><i class="fa fa-train" style="margin-left: 200px;margin-right: 5px;color: rgb(255,255,255);"></i><label style="color: rgb(255,255,255);">Class</label><i class="icon ion-person" style="margin-right: 5px;margin-left: 190px;color: rgb(255,255,255);"></i>
+                    <label
+                        style="color: rgb(255,255,255);">Adult</label><i class="fa fa-child" style="margin-left: 190px;margin-right: 0px;color: rgb(255,255,255);"></i><label style="color: rgb(255,255,255);">Child</label>
+                        <div style="height: 30px;background: rgba(0,153,81,0.03);width: 100%;"><label style="margin-left: 5px;color: rgb(255,255,255);">Label</label><label style="margin-left: 210px;color: rgb(255,255,255);">Label</label><label style="margin-left: 200px;color: rgb(255,255,255);">Label</label><label style="margin-left: 215px;color: rgb(255,255,255);">Label</label>
+                            <label
+                                style="margin-left: 210px;color: rgb(255,255,255);">Label</label><label style="margin-left: 215px;color: rgb(255,255,255);">Label</label></div>
+                <div><a href="http://127.0.0.1:8000/" style="color:#f0f0f0;"><u>Change</u></a></div>
+            </div>
+
+        </div>
+</fieldset>
+<div style="height: 50px; margin-left:50px;"><label style="width: 1400px;background: rgb(104,171,80);height: 50px;padding-top: 5px;padding-left:5px;color: #212529;font-size: 24px;"><strong>Results :</strong></label></div>
 {% if trains %}
-<h1>Trains</h1>
-<table width="100%" border="1">
+<table class="table table-striped table-sm"  style="width:95%;margin-left: 50px;margin-top: 20px ;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%)">
     <tr>
-        <th>TRAIN_ID</th>
-        <th>NAME</th>
-        <th>DEPARTURE TIME</th>
-        <th>ARRIVAL TIME</th>
-        <th>SELECT THE SUITABLE TRAIN</th>
+        <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">TRAIN ID</th>
+        <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">NAME</th>
+        <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">DEPARTURE TIME</th>
+        <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">ARRIVAL TIME</th>
+        <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">TOTAL COST</th>
+        <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">SELECT THE SUITABLE TRAIN</th>
     </tr>
     {% for train in trains %}
     <tr>
-        <td>{{train.TRAIN_ID}}</td>
-        <td>{{train.NAME}}</td>
-        <td>{{train.DEPARTURE_TIME}}</td>
-        <td>{{train.ARRIVAL_TIME}}</td>
+        <td style="text-align: center;padding-top: 35px">{{train.TRAIN_ID}}</td>
+        <td style="text-align: center;padding-top: 35px">{{train.NAME}}</td>
+        <td style="text-align: center;padding-top: 35px">{{train.DEPARTURE_TIME}}</td>
+        <td style="text-align: center;padding-top: 35px">{{train.ARRIVAL_TIME}}</td>
+        <td style="text-align: center;padding-top: 35px">{{cost}}</td>
         <td><div class="mx-5 p-4 text-center">
-    <button type="button" class="btn btn-primary">Details</button>
+    <a href ="seat_selection" class="btn btn-primary" style="background: rgb(104,171,80)">Purchase</a>
+            <button data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"  type="button" class="btn btn-primary" style="background: rgb(104,171,80)">Availability</button>
 </div></td>
     </tr>
     {% endfor %}
-
 </table>
+               <table class="table table-striped table-sm collapse" id="collapseExample" style="width:95%;border:2px; margin-left: 50px;margin-top: 20px ;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%)">
 
+         <th width="350px" style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;"> CLASS </th>
+        <th  width="350px" style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;"> AVAILABLE SEATS </th>
+        <th  width="350px" style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;"> FAIR(ADULT) </th>
+        <th  width="350px" style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;"> FAIR(CHILD) </th>
+    </tr>
+               <tr>
+        <td style="text-align: center">SNIGDHA</td>
+        <td style="text-align: center">78</td>
+        <td style="text-align: center">BDT</td>
+        <td style="text-align: center">BDT</td>
+               </tr>
+               <tr>
+        <td style="text-align: center">S_CHAIR</td>
+        <td style="text-align: center">78</td>
+        <td style="text-align: center">BDT</td>
+        <td style="text-align: center">BDT</td>
+               </tr>
+               <tr>
+        <td style="text-align: center">SHOVAN</td>
+        <td style="text-align: center">78</td>
+        <td style="text-align: center">BDT</td>
+        <td style="text-align: center">BDT</td>
+               </tr>
+               </table>
+</div>
 
-<p>Here is the total cost</p>
-<p>BDT {{ cost }}</p>
         {% else %}
-        <h2>No available train from source to destination</h2>
+    <label style="margin-left: 50px;margin-top: 20px;font-size: 24px"><strong>No available train from source to destination</strong></label>
+    <svg xmlns="http://www.w3.org/2000/svg" style="margin-left:10px;padding-top: 0px" width="1em" height="2em" font-size="50px" viewBox="0 0 24 24" fill="none"><path d="M9 11C9.55228 11 10 10.5523 10 10C10 9.44772 9.55228 9 9 9C8.44772 9 8 9.44772 8 10C8 10.5523 8.44772 11 9 11Z" fill="currentColor"></path><path d="M14 17C14 15.8954 13.1046 15 12 15C10.8954 15 10 15.8954 10 17H8C8 14.7909 9.79086 13 12 13C14.2091 13 16 14.7909 16 17H14Z" fill="currentColor"></path><path d="M16 10C16 10.5523 15.5523 11 15 11C14.4477 11 14 10.5523 14 10C14 9.44772 14.4477 9 15 9C15.5523 9 16 9.44772 16 10Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z" fill="currentColor"></path></svg>
 {% endif %}
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
