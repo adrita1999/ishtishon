@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -6,71 +5,63 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Register - Brand</title>
-    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css"%}">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="{% static "fonts/simple-line-icons.min.css"%}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
-    <link rel="stylesheet" href="{% static "css/smoothproducts.css"%}">
+    <link rel="stylesheet" href="assets/css/smoothproducts.css">
 </head>
 
 <body>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(118,35,35);padding: 18.2px 0px;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%);">
-        <div class="container"><a class="navbar-brand logo" href="#" style="text-align: left;background: rgba(255,255,255,0);color: rgb(0,0,0);font-family: Lato, sans-serif;font-size: 24px;padding-left: 10px;"><strong>Railsheba</strong></a><button data-toggle="collapse" class="navbar-toggler"
-                data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarNav" style="text-align: right;">
+        <div class="container"><a class="navbar-brand logo" href="#" style="background: rgba(255,255,255,0);padding-left: 10px;color: rgb(0,0,0);text-align: left;"><strong>Railsheba</strong></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="navbar-toggler-icon" style="filter: brightness(0%);"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navbarNav" style="text-align: right;">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" style="padding-right: 32px;"><a class="nav-link active" href="http://127.0.0.1:8000/" style="color: #070606;font-family: Lato, sans-serif;font-weight: 700;padding-right: 8px;">Home</a></li>
-                    <li class="nav-item" style="color: #070606;padding-right: 32px;"><a class="nav-link active" href="login" style="color: #070606;font-family: Lato, sans-serif;font-weight: 700;padding-right: 8px;">Log in</a></li>
-                    <li class="nav-item" style="padding-right: 32px;"><a class="nav-link active" href="registration" style="color: #070606;font-family: Lato, sans-serif;font-weight: 700;padding-right: 8px;">Register</a></li>
-                    <li class="nav-item" style="padding-right: 32px;"><a class="nav-link active" href="updateinfo" style="color: #070606;font-family: Lato, sans-serif;font-weight: 700;padding-right: 8px;">Dashboard</a></li>
-                    <li class="nav-item" style="color: #070606;padding-right: 32px;"><a class="nav-link active" href="#" style="color: #070606;font-family: Lato, sans-serif;font-weight: 700;padding-right: 8px;">Contact us</a></li>
-                    <li class="nav-item" style="padding-right: 0px;"><a class="nav-link active" href="#" style="color: #070606;padding: 8px 0px 8px 8px;font-family: Lato, sans-serif;font-weight: 700;padding-right: 0px;">Log out</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="http://127.0.0.1:8000/" style="color: #070606;">Home</a></li>
+                    <li class="nav-item" style="color: #070606;"><a class="nav-link active" href="login" style="color: #070606;">Log in</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="registration" style="color: #070606;">Register</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="updateinfo" style="color: #070606;">Dashboard</a></li>
+                    <li class="nav-item" style="color: #070606;"><a class="nav-link active" href="contactus" style="color: #070606;">Contact us</a></li>
+                    <li class="nav-item" style="padding-right: 0px;"><a class="nav-link active" href="#" style="color: #070606;padding: 8px 0px 8px 8px;">Log out</a></li>
                 </ul>
-            </div>
+        </div>
         </div>
     </nav>
-    <section class="clean-block clean-form dark" style="background: url(&quot;assets/img/train6.jpg&quot;) no-repeat;margin: 10px0px;padding-top: 150px;">
-        <form action="" method="post" style="width: 800px;">
+    <section class="clean-block clean-form dark" style="background: url(&quot;assets/img/train6.jpg&quot;) no-repeat;margin: 10px0px;padding-top: 120px;padding-bottom: 20px;margin-bottom: 0px;">
+        <form action="" method="post" style="width: 800px;font-family: Lato, sans-serif;padding-top: 30px;margin-bottom: 0px;">
             {%  csrf_token %}
-
+            <h1 style="font-family: Lato, sans-serif;font-size: 34px;">Registration</h1>
+            <hr style="background: #000000;">
             <div class="form-group"><label for="name">First Name</label><input class="form-control item" name = "frst" type="text" id="name"></div>
             <div class="form-group"><label for="name">Last Name</label><input class="form-control item" name = "last" type="text" id="name-3"></div>
-
+            <div class="form-group"><label for="name">Date of Birth</label><input class="form-control" name= "dob" type="date"></div>
             <div class="form-group"><label for="name">Gender</label>
-                <div class="input-group">
-                <select class="form-control item" name="gender" required="required">
-                    <option disabled hidden="" selected="selected">Gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
-                </select>
+                 <div class="input-group" >
+                    <select class="form-control item" name="gender"  required="required" style="background: rgb(104,171,80);">
+                        <option disabled hidden="" selected="selected">Gender</option>
+                        <option style="background: white;">Male</option>
+                        <option style="background: white;">Female</option>
+                        <option style="background: white;">Other</option>
+                    </select>
                 </div>
             </div>
-
-            <div class="form-group"><label for="email">Email</label><input class="form-control item" name = "email" type="email" id="email"></div>
+            </div>
+            <div class="form-group"><label for="email">Email</label><input class="form-control item" type="email" name = "email" id="email"></div>
             <div class="form-group"><label for="name">NID Number</label><input class="form-control" name = "nid" type="number"></div>
+            <div class="form-group" style="padding-top: 5px;margin-bottom: 0px;"><label for="name">Address:</label></div>
             <div class="form-group"><label for="name" style="width: 200px;">House Number</label><label class="float-right" for="name" style="width: 200px;">Road Number</label><input class="form-control float-left item" name = "houseno" type="text" id="name-6" style="width: 200px;"><input class="form-control float-right item" name = "roadno"
                     type="text" id="name-5" style="width: 200px;"></div>
-            <div class="form-group"><label for="name" style="width: 200px;">ZIP Code</label><label class="float-right" for="name" style="width: 200px;">City</label><input class="form-control float-right item" name = "city" type="text" id="name-1" style="width: 200px;"><input class="form-control item" name = "zip"
-                    type="text" id="name-4" style="width: 200px;"></div><div class="form-group"><label for="name">Contact Number</label></div>
-
-			<div class="form-group">
-
-
-
-					<div class="input-group phone-input">
-						<input type="text" name="phonenumber" class="form-control" placeholder="+1 (999) 999 9999">
-					</div>
-
-
-				<button style=background-color:rgb(104,171,80) type="button" class="btn btn-success btn-sm btn-add-phone"><span class="glyphicon glyphicon-plus"></span> Add Phone</button>
-			</div>
-
-
-            <div class="form-group"><label for="name" style="padding-top: 5px;">User ID</label><input class="form-control item" name = "username" type="text" id="name-2"></div>
-            <div class="form-group"><label for="password">Password</label><input class="form-control item" name = "password" type="password" id="password"></div><button class="btn btn-primary btn-block" type="submit" style="background: rgb(104,171,80);">Sign Up</button>
-        </form>
+            <div class="form-group"><label for="name" style="width: 200px;">ZIP Code</label><label class="float-right" for="name" style="width: 200px;">City</label><input class="form-control float-right item" name = "city" type="text" id="name-1" style="width: 200px;"><input class="form-control item" name="zip"
+                    type="text" id="name-4" style="width: 200px;"></div>
+            <div class="form-group"><label for="name">Contact Number</label>
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text">+880</span></div><input class="form-control" name="contact" type="tel">
+                    <div class="input-group-append"></div>
+                </div>
+            </div>
+            <div class="form-group"><label for="password">Password</label><input class="form-control item" name = "password" type="password" id="password"></div>
+            <div class="form-group" style="padding-bottom: 20px;"><label for="password">Confirm Passsword</label><input class="form-control item" name = "confirmpass" type="password" id="password-1" style="padding-bottom: 6px;"></div><button class="btn btn-primary btn-block" type="submit" style="background: rgb(104,171,80) ;color: rgb(0,0,0);">Sign Up</button></form>
     </section>
     <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"><img src="assets/img/1.png"><img src="assets/img/2.png"><img src="assets/img/3.png"><img src="assets/img/4.png"><img src="assets/img/5.png"><img src="assets/img/6.png"></main>
     <script src="assets/js/jquery.min.js"></script>
