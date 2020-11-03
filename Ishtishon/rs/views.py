@@ -1,4 +1,5 @@
-
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render
 from .models import Trains
 from django.db import connection
@@ -91,6 +92,9 @@ def list_stations(request):
     return render(request, 'list_stations.html', {'stations': dict_result})
 
 def homepage(request):
+    my_user=request.user
+    #is_user_logged = my_user.is_authenticated
+    #print(is_user_logged)
     cursor = connection.cursor()
     sql="SELECT NAME FROM STATION"
     cursor.execute(sql)
@@ -133,18 +137,38 @@ def login(request):
         ps = request.POST["password"]
 
 
+
         cursor = connection.cursor()
         sql = "SELECT EMAIL_ADD,PASSWORD FROM R_USER WHERE EMAIL_ADD=%s AND PASSWORD= %s;"
         cursor.execute(sql,[mail,ps])
         result = cursor.fetchall()
         cursor.close()
+
+
         if(result):
-            print("logged in")
-            return render(request, 'search.html')
+
+            #user = authenticate(request, username=username, password=password)
+
+            cursor1 = connection.cursor()
+            sql1 = "SELECT FIRST_NAME||' '||LAST_NAME FROM R_USER WHERE EMAIL_ADD=%s AND PASSWORD= %s;"
+            cursor1.execute(sql1, [mail, ps])
+            result1 = cursor1.fetchall()
+            cursor1.close()
+
+            fullname=""
+            for r in result1:
+                fullname=r[0]
+
+            #print("logged in")
+            response="Dear {}, you are successfully logged in.".format(fullname)
+            return render(request, "search.html",{"status":response})
         else:
-            print("log in denied")
+            #print("log in denied")
+            response = "Login Denied. Invalid email or password."
+            return render(request, "login.html", {"status": response})
 
     return render(request,'login.html')
+
 def seatselection(request):
     return render(request, 'seat_selection.html')
 def contactus(request):
