@@ -205,18 +205,18 @@ def login(request):
                 fullname=r[0]
 
             #print("logged in")
-<<<<<<< Updated upstream
+#<<<<<<< Updated upstream
             #response="Dear {}, you are successfully logged in.".format(fullname)
             return redirect("/"+"?status="+fullname)
             #return redirect('home', {"status": response})
-=======
+#=======
             response="Dear {}, you are successfully logged in.".format(fullname)
             #status=response
             app_name='home'
             return render(request, 'http://127.0.0.1:8000/search.html',{"status":response})
             #return redirect('http://127.0.0.1:8000/', status)
             #return homepage(request)
->>>>>>> Stashed changes
+#>>>>>>> Stashed changes
         else:
             #print("log in denied")
             response = "Login Denied. Invalid email or password."
