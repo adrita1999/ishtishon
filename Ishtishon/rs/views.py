@@ -1,6 +1,9 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render,redirect
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 from .models import Trains
 from django.db import connection
 
@@ -92,6 +95,7 @@ def list_stations(request):
     return render(request, 'list_stations.html', {'stations': dict_result})
 
 def homepage(request):
+
     my_user=request.user
     #is_user_logged = my_user.is_authenticated
     #print(is_user_logged)
@@ -105,9 +109,11 @@ def homepage(request):
         NAME=r[0]
         row={'NAME':NAME}
         dict.append(row)
-
-    #print("data= ",request.POST)
-    return render(request,'search.html',{'names':dict})
+    if request.method=="GET":
+        return render(request, 'search.html', {'names': dict})
+        #print("data= ",request.POST)
+    else:
+        return render(request,'search.html',{'names':dict})
 
 def registration(request):
     if request.method == "POST":
@@ -160,15 +166,16 @@ def login(request):
                 fullname=r[0]
 
             #print("logged in")
-            response="Dear {}, you are successfully logged in.".format(fullname)
-            #return render(request, "search.html",{"status":response})
-            return redirect('http://127.0.0.1:8000/', {"status": response})
+            #response="Dear {}, you are successfully logged in.".format(fullname)
+            return redirect("/"+"?status="+fullname)
+            #return redirect('home', {"status": response})
         else:
             #print("log in denied")
             response = "Login Denied. Invalid email or password."
             return render(request, "login.html", {"status": response})
 
-    return render(request,'login.html')
+    else :
+        return render(request,'login.html')
 
 def seatselection(request):
     return render(request, 'seat_selection.html')
