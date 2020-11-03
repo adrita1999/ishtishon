@@ -118,22 +118,61 @@ def homepage(request):
 def registration(request):
     if request.method == "POST":
         print(request.POST)
-        # mail = request.POST["email"]
-        # ps = request.POST["password"]
-        #
-        #
-        # cursor = connection.cursor()
-        # sql = "SELECT EMAIL_ADD,PASSWORD FROM R_USER WHERE EMAIL_ADD=%s AND PASSWORD= %s;"
-        # cursor.execute(sql,[mail,ps])
-        # result = cursor.fetchall()
-        # cursor.close()
-        # if(result):
-        #     print("logged in")
-        #     return render(request, 'search.html')
-        # else:
-        #     print("log in denied")
+        first = request.POST["frst"]
+        last= request.POST["last"]
+        dob=request.POST["dob"]
+        gender=request.POST["gender"]
+        mail=request.POST["email"]
+        nid = request.POST["nid"]
+        house = request.POST["houseno"]
+        road = request.POST["roadno"]
+        city = request.POST["city"]
+        zip = request.POST["zip"]
+        contact = request.POST["contact"]
+        ps = request.POST["password"]
 
+        cursor1 = connection.cursor()
+        sql1 = "SELECT EMAIL_ADD FROM R_USER WHERE EMAIL_ADD=%s;"
+        cursor1.execute(sql1, [mail])
+        result1 = cursor1.fetchall()
+        cursor1.close()
 
+        if (result1):
+            print('1')
+            msg="This E-mail ID is already registered."
+            return render(request,'registration.html',{"status":msg})
+        else:
+            print('2')
+            cursor2 = connection.cursor()
+            sql2 = "SELECT NID_NO FROM R_USER WHERE NID_NO=%s;"
+            cursor2.execute(sql2, [nid])
+            result2 = cursor2.fetchall()
+            cursor2.close()
+
+            if(result2):
+                print('3')
+                msg = "This NID number is already registered."
+                return render(request, 'registration.html', {"status": msg})
+            else:
+                print('4')
+                cursor3 = connection.cursor()
+                sql3 = "SELECT CONTACT_NO FROM R_USER WHERE CONTACT_NO='+880'||%s;"
+                cursor3.execute(sql3, [contact])
+                result3 = cursor3.fetchall()
+                cursor3.close()
+
+                if(result3):
+                    print('5')
+                    msg = "This contact number is already registered."
+                    return render(request, 'registration.html', {"status": msg})
+                else:
+                    print('6')
+                    cursor = connection.cursor()
+                    sql = "INSERT INTO R_USER VALUES((SELECT MAX(USER_ID)+1 FROM R_USER),%s,UPPER(%s),UPPER(%s),TO_DATE(%s,'YYYY-MM-DD'),'+880'||%s,UPPER(%s),%s,%s,UPPER(%s),UPPER(%s),UPPER(%s),UPPER(%s));"
+                    cursor.execute(sql, [ps, first, last, dob, contact, gender, mail, nid, house, road, zip, city])
+                    # result = cursor.fetchall()
+                    cursor.close()
+                    return render(request, 'login.html')
     return render(request,'registration.html')
 
 def login(request):
@@ -166,9 +205,18 @@ def login(request):
                 fullname=r[0]
 
             #print("logged in")
+<<<<<<< Updated upstream
             #response="Dear {}, you are successfully logged in.".format(fullname)
             return redirect("/"+"?status="+fullname)
             #return redirect('home', {"status": response})
+=======
+            response="Dear {}, you are successfully logged in.".format(fullname)
+            #status=response
+            app_name='home'
+            return render(request, 'http://127.0.0.1:8000/search.html',{"status":response})
+            #return redirect('http://127.0.0.1:8000/', status)
+            #return homepage(request)
+>>>>>>> Stashed changes
         else:
             #print("log in denied")
             response = "Login Denied. Invalid email or password."
