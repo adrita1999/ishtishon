@@ -7,16 +7,19 @@ from django.urls import reverse
 from .models import Trains
 from django.db import connection
 
-#welcome dristi
+global is_logged_in
+is_logged_in=0#welcome dristi
 def list_trains(request):
     if request.method == "POST":
+        if is_logged_in==0:
+            return redirect("/" + "?not_logged_in=" + str(is_logged_in))
+
         fro = request.POST["from"]
         to = request.POST["to"]
         date = request.POST["date"]
         adult = request.POST["adult"]
         child = request.POST["child"]
         clas=request.POST["class"]
-
         cursor = connection.cursor()
         sql = "SELECT TRAIN_ID,(select NAME from TRAIN t where t.TRAIN_ID=tab.TRAIN_ID),MIN(DEPARTURE_TIME),MAX(DEPARTURE_TIME)FROM (select st.NAME,t1.TRAIN_ID,t1.DEPARTURE_TIME,st.STATION_ID FROM TRAIN_TIMETABLE t1,STATION st where t1.STATION_ID=st.STATION_ID) tab where (NAME=%s OR NAME=%s) GROUP BY TRAIN_ID HAVING COUNT(*)=2 AND MAX(DEPARTURE_TIME)=ANY(SELECT DEPARTURE_TIME FROM TRAIN_TIMETABLE WHERE STATION_ID=(select STATION_ID from STATION where NAME=%s))"
         cursor.execute(sql, [fro, to, to])
@@ -95,6 +98,7 @@ def list_stations(request):
     return render(request, 'list_stations.html', {'stations': dict_result})
 
 def homepage(request):
+
 
     my_user=request.user
     #is_user_logged = my_user.is_authenticated
@@ -178,6 +182,10 @@ def registration(request):
 def login(request):
     if request.method == "POST":
         print(request.POST)
+        global is_logged_in
+        if is_logged_in==1:
+            print('already logged in')
+            return redirect("/" + "?logged_in=" + str(is_logged_in))
         mail = request.POST["email"]
         ps = request.POST["password"]
 
@@ -192,6 +200,7 @@ def login(request):
 
         if(result):
 
+            is_logged_in=1;
             #user = authenticate(request, username=username, password=password)
 
             cursor1 = connection.cursor()
@@ -208,7 +217,7 @@ def login(request):
 <<<<<<< HEAD
 #<<<<<<< Updated upstream
             #response="Dear {}, you are successfully logged in.".format(fullname)
-            return redirect("/"+"?status="+fullname)
+            return redirect("/"+"?user="+fullname)
             #return redirect('home', {"status": response})
 #=======
             response="Dear {}, you are successfully logged in.".format(fullname)
