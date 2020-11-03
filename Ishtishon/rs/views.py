@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import AnonymousUser
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Trains
 from django.db import connection
 
@@ -161,7 +161,8 @@ def login(request):
 
             #print("logged in")
             response="Dear {}, you are successfully logged in.".format(fullname)
-            return render(request, "search.html",{"status":response})
+            #return render(request, "search.html",{"status":response})
+            return redirect('http://127.0.0.1:8000/', {"status": response})
         else:
             #print("log in denied")
             response = "Login Denied. Invalid email or password."
