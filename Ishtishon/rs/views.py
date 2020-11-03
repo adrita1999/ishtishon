@@ -213,27 +213,9 @@ def login(request):
             for r in result1:
                 fullname=r[0]
 
-            #print("logged in")
-<<<<<<< HEAD
-#<<<<<<< Updated upstream
-            #response="Dear {}, you are successfully logged in.".format(fullname)
-            return redirect("/"+"?user="+fullname)
-            #return redirect('home', {"status": response})
-#=======
-            response="Dear {}, you are successfully logged in.".format(fullname)
-            #status=response
-            app_name='home'
-            return render(request, 'http://127.0.0.1:8000/search.html',{"status":response})
-            #return redirect('http://127.0.0.1:8000/', status)
-            #return homepage(request)
-#>>>>>>> Stashed changes
-=======
-            #response="Dear {}, you are successfully logged in.".format(fullname)
-            return redirect("/"+"?status="+fullname)
 
->>>>>>> c3b7f675f91dbfbe1ddc558efa95cc70fbcc6274
+            return redirect("/"+"?user="+fullname)
         else:
-            #print("log in denied")
             response = "Login Denied. Invalid email or password."
             return render(request, "login.html", {"status": response})
 

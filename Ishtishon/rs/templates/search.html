@@ -71,10 +71,8 @@
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
         <script src="assets/js/theme.js"></script>
-<<<<<<< Updated upstream
-{% if request.GET.status %}
-    <script>alert("Dear {{ request.GET.status }}, You have successfully logged in");</script>
-=======
+
+
 {% if request.GET.user %}
     <script>alert("Dear {{ request.GET.user }}, You are successfully logged in");</script>
 {% endif%}
@@ -83,7 +81,7 @@
 {% endif%}
 {% if request.GET.not_logged_in == '0' %}
     <script>alert("You are not logged in.Please log in or sign up to search");</script>
->>>>>>> Stashed changes
+
 {% endif%}
 </body>
 
