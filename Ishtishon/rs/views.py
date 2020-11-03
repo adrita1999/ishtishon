@@ -1,5 +1,5 @@
 
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Trains
 from django.db import connection
 
@@ -140,11 +140,14 @@ def login(request):
         cursor.close()
         if(result):
             print("logged in")
-            return render(request, 'search.html')
+            return redirect('http://127.0.0.1:8000/')
         else:
             print("log in denied")
+            return render(request, 'login.html')
+    else:
+        return render(request, 'login.html')
 
-    return render(request,'login.html')
+
 def seatselection(request):
     return render(request, 'seat_selection.html')
 def contactus(request):
