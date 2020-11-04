@@ -8,11 +8,13 @@ from .models import Trains
 from django.db import connection
 
 global is_logged_in
-is_logged_in=0#welcome dristi
+is_logged_in=0
+
 def list_trains(request):
     if request.method == "POST":
         if is_logged_in==0:
             return redirect("/" + "?not_logged_in=" + str(is_logged_in))
+
 
         fro = request.POST["from"]
         to = request.POST["to"]
@@ -76,7 +78,7 @@ def list_trains(request):
             dict_result.append(row)
 
     return render(request, 'list_trains.html', {'trains': dict_result,'cost':str(st)+''+' BDT'})
-    #cost add korbo
+
 
 def list_stations(request):
 
@@ -97,12 +99,8 @@ def list_stations(request):
 
     return render(request, 'list_stations.html', {'stations': dict_result})
 
+
 def homepage(request):
-
-
-    my_user=request.user
-    #is_user_logged = my_user.is_authenticated
-    #print(is_user_logged)
     cursor = connection.cursor()
     sql="SELECT NAME FROM STATION"
     cursor.execute(sql)
@@ -120,6 +118,8 @@ def homepage(request):
         return render(request,'search.html',{'names':dict})
 
 def registration(request):
+    if is_logged_in == 1:
+        return redirect("/" + "?already_logged_in=" + str(is_logged_in))
     if request.method == "POST":
         print(request.POST)
         first = request.POST["frst"]
@@ -176,7 +176,9 @@ def registration(request):
                     cursor.execute(sql, [ps, first, last, dob, contact, gender, mail, nid, house, road, zip, city])
                     # result = cursor.fetchall()
                     cursor.close()
-                    return render(request, 'login.html')
+                    fullname=first+" "+last
+                    return redirect("/login" + "?user=" + fullname)
+                    #return render(request, 'login.html')
     return render(request,'registration.html')
 
 def login(request):

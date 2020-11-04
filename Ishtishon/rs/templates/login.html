@@ -46,6 +46,9 @@
 {% if status %}
     <script>alert("{{ status }}");</script>
 {% endif%}
+{% if request.GET.user %}
+    <script>alert("Dear {{ request.GET.user }}, You have successfully registered.");</script>
+{% endif%}
 </body>
 
 </html>

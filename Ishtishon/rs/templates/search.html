@@ -74,13 +74,16 @@
 
 
 {% if request.GET.user %}
-    <script>alert("Dear {{ request.GET.user }}, You are successfully logged in");</script>
+    <script>alert("Dear {{ request.GET.user }}, You have successfully logged in.");</script>
 {% endif%}
 {% if request.GET.logged_in == '1' %}
-    <script>alert("You are already logged in.Please log out to log in again");</script>
+    <script>alert("You are already logged in. Please log out to log in from a different account.");</script>
+{% endif%}
+{% if request.GET.already_logged_in == '1' %}
+    <script>alert("You are already logged in. Please log out to register a new account");</script>
 {% endif%}
 {% if request.GET.not_logged_in == '0' %}
-    <script>alert("You are not logged in.Please log in or sign up to search");</script>
+    <script>alert("You are not logged in. Please log in to search trains.");</script>
 
 {% endif%}
 </body>
