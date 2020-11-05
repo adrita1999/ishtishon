@@ -8,7 +8,9 @@ from .models import Trains
 from django.db import connection
 
 global is_logged_in
+global details
 is_logged_in=0
+details={}
 
 def list_trains(request):
     if request.method == "POST":
@@ -22,6 +24,8 @@ def list_trains(request):
         adult = request.POST["adult"]
         child = request.POST["child"]
         clas=request.POST["class"]
+        global details
+        details={'from':fro,'to':to,'date':date,'adult':adult,'child':child,'class':clas}
         cursor = connection.cursor()
         sql = "SELECT TRAIN_ID,(select NAME from TRAIN t where t.TRAIN_ID=tab.TRAIN_ID),MIN(DEPARTURE_TIME),MAX(DEPARTURE_TIME)FROM (select st.NAME,t1.TRAIN_ID,t1.DEPARTURE_TIME,st.STATION_ID FROM TRAIN_TIMETABLE t1,STATION st where t1.STATION_ID=st.STATION_ID) tab where (NAME=%s OR NAME=%s) GROUP BY TRAIN_ID HAVING COUNT(*)=2 AND MAX(DEPARTURE_TIME)=ANY(SELECT DEPARTURE_TIME FROM TRAIN_TIMETABLE WHERE STATION_ID=(select STATION_ID from STATION where NAME=%s))"
         cursor.execute(sql, [fro, to, to])
@@ -52,10 +56,17 @@ def list_trains(request):
             arrival = r[3]
             row = {'TRAIN_ID': TRAIN_ID, 'NAME': NAME, 'DEPARTURE_TIME': departure, 'ARRIVAL_TIME': arrival}
             dict_result.append(row)
-
-
-
+        request.session['trains']=dict_result
+        request.session['cost']=st
+        return render(request, 'list_trains.html', {'trains': dict_result, 'cost': str(st) + '' + ' BDT', 'details': details})
     else:
+        dict_result=request.session.get('trains')
+        st=request.session.get('cost')
+        return render(request, 'list_trains.html',
+                      {'trains': dict_result, 'cost': str(st) + '' + ' BDT', 'details': details})
+
+
+        """else:
         st=""
         cursor = connection.cursor()
         sql = "SELECT * FROM TRAIN"
@@ -75,9 +86,8 @@ def list_trains(request):
             row = {'TRAIN_ID': TRAIN_ID, 'NAME': NAME, 'TOTAL_SEAT_SNIGDHA': TOTAL_SEAT_SNIGDHA,
                    'TOTAL_SEAT_SCHAIR': TOTAL_SEAT_SCHAIR,
                    'TOTAL_SEAT_SHOVAN': TOTAL_SEAT_SHOVAN}
-            dict_result.append(row)
+            dict_result.append(row)"""
 
-    return render(request, 'list_trains.html', {'trains': dict_result,'cost':str(st)+''+' BDT'})
 
 
 def list_stations(request):
