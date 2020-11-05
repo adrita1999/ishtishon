@@ -64,7 +64,7 @@
                         </thead>
                         <tbody style="padding: 5px;">
                             <tr>
-                                <td><button class="btn btn-primary" type="button" style="padding: 5px;padding-top: 0px;border-radius: 0px;background: #009946;width: 68px;">4</button>
+                                <td><button id="one" onclick="changecolour(id)" class="btn btn-primary" type="button" style="padding: 5px;padding-top: 0px;border-radius: 0px;background: #009946;width: 68px;">4</button>
                                     <button
                                         class="btn btn-primary" type="button" style="padding: 5px;padding-top: 0px;border-radius: 0px;background: rgb(0,153,70);margin-left: 5px;width: 68px;">3</button>
                                 </td>
@@ -235,5 +235,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="assets/js/theme.js"></script>
 </body>
+<script>
 
+    function changecolour(ID) {
+            var btn = document.getElementById(ID);
+
+            btn.style.backgroundColor="black";
+
+          }
+    </script>
 </html>

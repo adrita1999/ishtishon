@@ -62,31 +62,14 @@ def list_trains(request):
     else:
         dict_result=request.session.get('trains')
         st=request.session.get('cost')
+        name=request.GET.get('name')
+        name=name[1:]
+
         return render(request, 'list_trains.html',
                       {'trains': dict_result, 'cost': str(st) + '' + ' BDT', 'details': details})
 
 
-        """else:
-        st=""
-        cursor = connection.cursor()
-        sql = "SELECT * FROM TRAIN"
-        cursor.execute(sql)
-        result = cursor.fetchall()
 
-
-        cursor.close()
-        dict_result = []
-
-        for r in result:
-            TRAIN_ID = r[0]
-            NAME = r[1]
-            TOTAL_SEAT_SNIGDHA = r[2]
-            TOTAL_SEAT_SCHAIR = r[3]
-            TOTAL_SEAT_SHOVAN = r[4]
-            row = {'TRAIN_ID': TRAIN_ID, 'NAME': NAME, 'TOTAL_SEAT_SNIGDHA': TOTAL_SEAT_SNIGDHA,
-                   'TOTAL_SEAT_SCHAIR': TOTAL_SEAT_SCHAIR,
-                   'TOTAL_SEAT_SHOVAN': TOTAL_SEAT_SHOVAN}
-            dict_result.append(row)"""
 
 
 

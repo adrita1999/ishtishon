@@ -64,12 +64,21 @@
         <td style="text-align: center;padding-top: 35px">{{cost}}</td>
         <td><div class="mx-5 p-4 text-center">
     <a class="btn btn-primary" id="{{ train.TRAIN_ID }}" onclick="getid(id)" style="background: rgb(104,171,80)">Purchase</a>
+           {% if request.GET.name|slice:":1" == '1' %}
+            <a id="{{ train.NAME }}" onclick="getname2(id)"  type="button" class="btn btn-primary" style="background: rgb(104,171,80)">Availability</a>
+            {% else %}
             <a id="{{ train.NAME }}" onclick="getname(id)"  type="button" class="btn btn-primary" style="background: rgb(104,171,80)">Availability</a>
+            {% endif %}
 </div></td>
     </tr>
     {% endfor %}
 </table>
-               <table id="myDIV" class="table table-striped table-sm collapse" style="width:95%;border:2px; margin-left: 50px;margin-top: 20px ;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%)">
+    {% else %}
+     <label style="margin-left: 50px;margin-top: 20px;font-size: 24px"><strong>No available train from source to destination</strong></label>
+    <svg xmlns="http://www.w3.org/2000/svg" style="margin-left:10px;padding-top: 0px" width="1em" height="2em" font-size="50px" viewBox="0 0 24 24" fill="none"><path d="M9 11C9.55228 11 10 10.5523 10 10C10 9.44772 9.55228 9 9 9C8.44772 9 8 9.44772 8 10C8 10.5523 8.44772 11 9 11Z" fill="currentColor"></path><path d="M14 17C14 15.8954 13.1046 15 12 15C10.8954 15 10 15.8954 10 17H8C8 14.7909 9.79086 13 12 13C14.2091 13 16 14.7909 16 17H14Z" fill="currentColor"></path><path d="M16 10C16 10.5523 15.5523 11 15 11C14.4477 11 14 10.5523 14 10C14 9.44772 14.4477 9 15 9C15.5523 9 16 9.44772 16 10Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z" fill="currentColor"></path></svg>
+{% endif %}
+    {% if request.GET.name|slice:":1" == '1' %}
+        <table id="myDIV" class="table table-striped table-sm" style="width:95%;border:2px; margin-left: 50px;margin-top: 20px ;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%)">
 
          <th width="350px" style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;"> CLASS </th>
         <th  width="350px" style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;"> AVAILABLE SEATS </th>
@@ -95,12 +104,11 @@
         <td style="text-align: center">BDT</td>
                </tr>
                </table>
+{% endif %}
 </div>
 
-        {% else %}
-    <label style="margin-left: 50px;margin-top: 20px;font-size: 24px"><strong>No available train from source to destination</strong></label>
-    <svg xmlns="http://www.w3.org/2000/svg" style="margin-left:10px;padding-top: 0px" width="1em" height="2em" font-size="50px" viewBox="0 0 24 24" fill="none"><path d="M9 11C9.55228 11 10 10.5523 10 10C10 9.44772 9.55228 9 9 9C8.44772 9 8 9.44772 8 10C8 10.5523 8.44772 11 9 11Z" fill="currentColor"></path><path d="M14 17C14 15.8954 13.1046 15 12 15C10.8954 15 10 15.8954 10 17H8C8 14.7909 9.79086 13 12 13C14.2091 13 16 14.7909 16 17H14Z" fill="currentColor"></path><path d="M16 10C16 10.5523 15.5523 11 15 11C14.4477 11 14 10.5523 14 10C14 9.44772 14.4477 9 15 9C15.5523 9 16 9.44772 16 10Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z" fill="currentColor"></path></svg>
-{% endif %}
+
+
 <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"><img src="assets/img/1.png"><img src="assets/img/2.png"><img src="assets/img/3.png"><img src="assets/img/4.png"><img src="assets/img/5.png"><img src="assets/img/6.png"></main>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -108,19 +116,18 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 <script>
-          function getid(ID) {
+
+    function getid(ID) {
             var txt = document.getElementById(ID).id;
             window.location.href = "{% url 'seat_selection' %}" +"?id="+txt;
           }
           function getname(ID) {
             var text = document.getElementById(ID).id;
-            var x = document.getElementById("myDIV");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                     x.style.display = "none";
-            }
-            window.location.href = "{% url 'train' %}" +"?name="+text;
+            window.location.href = "{% url 'train' %}" +"?name="+'1'+text;
+          }
+          function getname2(ID) {
+            var text = document.getElementById(ID).id;
+            window.location.href = "{% url 'train' %}" +"?name="+'0'+text;
           }
 
 </script>
