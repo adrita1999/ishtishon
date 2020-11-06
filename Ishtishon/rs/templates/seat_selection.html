@@ -64,7 +64,7 @@
                         </thead>
                         <tbody style="padding: 5px;">
                             <tr>
-                                <td><button id="one" onclick="changecolour(id)" class="btn btn-primary" type="button" style="padding: 5px;padding-top: 0px;border-radius: 0px;background: #009946;width: 68px;">4</button>
+                                <td><button id="one" onclick="changecolour(id)" class="btn btn-primary" type="button" style="padding: 5px;padding-top: 0px;border-radius: 0px;background-color:green;width: 68px;">4</button>
                                     <button
                                         class="btn btn-primary" type="button" style="padding: 5px;padding-top: 0px;border-radius: 0px;background: rgb(0,153,70);margin-left: 5px;width: 68px;">3</button>
                                 </td>
@@ -238,9 +238,19 @@
 <script>
 
     function changecolour(ID) {
-            var btn = document.getElementById(ID);
+            var button = document.getElementById(ID).style.backgroundColor;
+            var color = '';
 
-            btn.style.backgroundColor="black";
+            if (button !== 'green') {
+                color = 'green';
+                document.getElementById(ID).style.backgroundColor = color;
+
+            }
+            else if (button === 'green') {
+                color = 'black';
+                document.getElementById(ID).style.backgroundColor = color;
+
+            }
 
           }
     </script>
