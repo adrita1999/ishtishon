@@ -241,9 +241,11 @@ def login(request):
 
     else :
         if (request.GET.get('logged_out')):
-            #if (request.GET.logged_out == '1'):
-            is_logged_in = 0
-            response="You are logged out."
+            if(is_logged_in==0):
+                response="You are not logged in yet.Please log in first"#if (request.GET.logged_out == '1'):
+            else:
+                is_logged_in = 0
+                response="You are logged out."
             return render(request, 'login.html', {"status": response})
         else:
             return render(request, 'login.html')
