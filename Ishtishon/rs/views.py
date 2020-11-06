@@ -193,10 +193,8 @@ def registration(request):
     return render(request,'registration.html')
 
 def login(request):
-    if(request.GET.logged_out):
-        if(request.GET.logged_out=='1'):
-            is_logged_in=0
     if request.method == "POST":
+        global is_logged_in
         print(request.POST)
         if is_logged_in==1:
             print('already logged in')
@@ -242,9 +240,17 @@ def login(request):
             return render(request, "login.html", {"status": response})
 
     else :
-        return render(request,'login.html')
+        if (request.GET.get('logged_out')):
+            #if (request.GET.logged_out == '1'):
+            is_logged_in = 0
+            response="You are logged out."
+            return render(request, 'login.html', {"status": response})
+        else:
+            return render(request, 'login.html')
 
 def seatselection(request):
+    id=request.GET.get('id')
+
     return render(request, 'seat_selection.html')
 def contactus(request):
     return render(request, 'contactus.html')
