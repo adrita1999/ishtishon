@@ -193,9 +193,11 @@ def registration(request):
     return render(request,'registration.html')
 
 def login(request):
+    if(request.GET.logged_out):
+        if(request.GET.logged_out=='1'):
+            is_logged_in=0
     if request.method == "POST":
         print(request.POST)
-        global is_logged_in
         if is_logged_in==1:
             print('already logged in')
             return redirect("/" + "?logged_in=" + str(is_logged_in))
