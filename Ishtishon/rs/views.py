@@ -3,6 +3,8 @@ from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+#from hashutils import make_pw_hash,check_pw_hash
+import hashlib
 
 from .models import Trains
 from django.db import connection
@@ -11,6 +13,14 @@ global is_logged_in
 global details
 is_logged_in=0
 details={}
+
+def make_pw_hash(password):
+    return hashlib.sha256(str.encode(password)).hexdigest()
+
+def check_pw_hash(password,hash):
+    if make_pw_hash(password)==hash:
+        return True
+    return False
 
 def list_trains(request):
     if request.method == "POST":
@@ -164,9 +174,17 @@ def registration(request):
                     return render(request, 'registration.html', {"status": msg})
                 else:
                     print('6')
+                    pw_hash=make_pw_hash(ps)
+                    print(pw_hash)
+
+                    f = open("info.txt", "a+")
+                    f.write(mail+" "+ps)
+                    f.write("\n")
+                    f.close()
+
                     cursor = connection.cursor()
-                    sql = "INSERT INTO R_USER VALUES((SELECT MAX(USER_ID)+1 FROM R_USER),%s,UPPER(%s),UPPER(%s),TO_DATE(%s,'YYYY-MM-DD'),'+880'||%s,UPPER(%s),%s,%s,UPPER(%s),UPPER(%s),UPPER(%s),UPPER(%s));"
-                    cursor.execute(sql, [ps, first, last, dob, contact, gender, mail, nid, house, road, zip, city])
+                    sql = "INSERT INTO R_USER VALUES(NVL((SELECT MAX(USER_ID)+1 FROM R_USER),1),%s,UPPER(%s),UPPER(%s),TO_DATE(%s,'YYYY-MM-DD'),'+880'||%s,UPPER(%s),%s,%s,UPPER(%s),UPPER(%s),UPPER(%s),UPPER(%s));"
+                    cursor.execute(sql, [pw_hash, first, last, dob, contact, gender, mail, nid, house, road, zip, city])
                     # result = cursor.fetchall()
                     cursor.close()
                     fullname=first+" "+last
@@ -187,31 +205,38 @@ def login(request):
 
 
         cursor = connection.cursor()
-        sql = "SELECT EMAIL_ADD,PASSWORD FROM R_USER WHERE EMAIL_ADD=%s AND PASSWORD= %s;"
-        cursor.execute(sql,[mail,ps])
+        sql = "SELECT PASSWORD FROM R_USER WHERE EMAIL_ADD=%s;"
+        cursor.execute(sql,[mail])
         result = cursor.fetchall()
         cursor.close()
 
 
         if(result):
 
-            is_logged_in=1;
-            #user = authenticate(request, username=username, password=password)
+            for r in result:
+                hash=r[0]
+            if(check_pw_hash(ps,hash)):
 
-            cursor1 = connection.cursor()
-            sql1 = "SELECT FIRST_NAME||' '||LAST_NAME FROM R_USER WHERE EMAIL_ADD=%s AND PASSWORD= %s;"
-            cursor1.execute(sql1, [mail, ps])
-            result1 = cursor1.fetchall()
-            cursor1.close()
+                is_logged_in=1;
+                #user = authenticate(request, username=username, password=password)
 
-            fullname=""
-            for r in result1:
-                fullname=r[0]
+                cursor1 = connection.cursor()
+                sql1 = "SELECT FIRST_NAME||' '||LAST_NAME FROM R_USER WHERE EMAIL_ADD=%s;"
+                cursor1.execute(sql1, [mail])
+                result1 = cursor1.fetchall()
+                cursor1.close()
+
+                fullname=""
+                for r in result1:
+                    fullname=r[0]
 
 
-            return redirect("/"+"?user="+fullname)
+                return redirect("/"+"?user="+fullname)
+            else:
+                response = "Login Denied. Wrong Password."
+                return render(request, "login.html", {"status": response})
         else:
-            response = "Login Denied. Invalid email or password."
+            response = "Login Denied. Invalid E-mail."
             return render(request, "login.html", {"status": response})
 
     else :
