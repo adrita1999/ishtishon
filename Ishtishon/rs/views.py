@@ -251,9 +251,19 @@ def login(request):
             return render(request, 'login.html')
 
 def seatselection(request):
-    id=request.GET.get('id')
+    id=request.GET.get('id');
+    cursor = connection.cursor()
+    sql="SELECT SEAT_NO FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SNIGDHA' AND DATE_OF_JOURNEY= TO_DATE('15-11-2020','DD-MM-YYYY');"
+    cursor.execute(sql,[id])
+    result=cursor.fetchall();
+    cursor.close()
+    booked_seats=[]
+    for r in result:
+        seat_no=r[0]
+        booked_seats.append(seat_no)
 
-    return render(request, 'seat_selection.html')
+    print(booked_seats)
+    return render(request, 'seat_selection.html',{'booked_seats':booked_seats})
 def contactus(request):
     return render(request, 'contactus.html')
 
