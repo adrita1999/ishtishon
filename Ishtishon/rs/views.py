@@ -37,8 +37,8 @@ def list_trains(request):
         global details
         details={'from':fro,'to':to,'date':date,'adult':adult,'child':child,'class':clas}
         cursor = connection.cursor()
-        sql = "SELECT TRAIN_ID,(select NAME from TRAIN t where t.TRAIN_ID=tab.TRAIN_ID),MIN(DEPARTURE_TIME),MAX(DEPARTURE_TIME)FROM (select st.NAME,t1.TRAIN_ID,t1.DEPARTURE_TIME,st.STATION_ID FROM TRAIN_TIMETABLE t1,STATION st where t1.STATION_ID=st.STATION_ID) tab where (NAME=%s OR NAME=%s) GROUP BY TRAIN_ID HAVING COUNT(*)=2 AND MAX(DEPARTURE_TIME)=ANY(SELECT DEPARTURE_TIME FROM TRAIN_TIMETABLE WHERE STATION_ID=(select STATION_ID from STATION where NAME=%s))"
-        cursor.execute(sql, [fro, to, to])
+        sql = "SELECT TT1.TRAIN_ID,(SELECT NAME FROM TRAIN T1 WHERE T1.TRAIN_ID=TT1.TRAIN_ID) NAME1,TT1.DEPARTURE_TIME,TT2.DEPARTURE_TIME FROM TRAIN_TIMETABLE TT1,TRAIN_TIMETABLE TT2 WHERE (TT1.DIRECTION='FROM' AND TT1.STATION_ID=(SELECT STATION_ID FROM STATION WHERE NAME=%s)) AND (TT2.DIRECTION='TO' AND TT2.STATION_ID=(SELECT STATION_ID FROM STATION WHERE NAME=%s)) AND (TT1.TRAIN_ID=TT2.TRAIN_ID) ORDER BY TO_TIMESTAMP(LPAD(TT1.DEPARTURE_TIME,4,'0'), 'HH24:MI');"
+        cursor.execute(sql, [fro, to])
         result = cursor.fetchall()
         cursor.close()
 
