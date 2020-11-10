@@ -40,6 +40,7 @@ urlpatterns = [
     path('upcoming',rs_views.upcoming,name= 'upcoming'),
     path('contactus',rs_views.contactus,name= 'contactus'),
     path('successful',rs_views.successful,name= 'successful'),
+    path('payment_selection',rs_views.payment_selection,name= 'payment_selection'),
 
 
     #hr delete hoyna

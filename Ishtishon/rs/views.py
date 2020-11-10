@@ -282,4 +282,6 @@ def upcoming(request):
     return render(request, 'upcoming.html')
 def successful(request):
     return render(request, 'successful.html')
+def payment_selection(request):
+    return render(request, 'payment_selection.html')
 

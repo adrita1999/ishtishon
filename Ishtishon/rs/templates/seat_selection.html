@@ -622,7 +622,7 @@
             <ul style="margin-top: 22px;padding-left: 15px;">
                 <li>Terms and conditions are applicable</li>
                 <li style="width: 520px;">Tickets are non-transferable and name changes are not allowed</li>
-            </ul><button class="btn btn-primary float-right" type="button" style="border-radius: 0px;background: rgb(0,153,70);margin-left: 10px">Buy ticket</button></div>
+            </ul><button onclick="blackbuttons()" class="btn btn-primary float-right" type="button" style="border-radius: 0px;background: rgb(0,153,70);margin-left: 10px">Buy ticket</button></div>
     </div>
     <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"><img src="assets/img/1.png"><img src="assets/img/2.png"><img src="assets/img/3.png"><img src="assets/img/4.png"><img src="assets/img/5.png"><img src="assets/img/6.png"></main>
     <script src="assets/js/jquery.min.js"></script>
@@ -648,6 +648,20 @@
             }
 
           }
+    function blackbuttons() {
+        let ele = document.getElementsByTagName('button')
+        let text='';
+        for (let i = 0; i < ele.length; i++) {
+            let butt = ele[i];
+            if(butt.style.backgroundColor==='black') {
+                text=text+butt.innerHTML+" ";
+            }
+
+        }
+
+        window.location.href = "{% url 'payment_selection' %}" +"?seat_nos="+text;
+
+    }
     </script>
 <script>
 function logout() {
