@@ -1,3 +1,5 @@
+import decimal
+
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render,redirect
@@ -44,10 +46,34 @@ def list_trains(request):
 
         cursor1 = connection.cursor()
         sql1 = "select (COST*%s+COST*%s*0.5) FROM COST WHERE STATION_ID=(SELECT STATION_ID from STATION where NAME=%s) AND TO_STATION_ID=(SELECT STATION_ID from STATION where NAME=%s)"
-        cursor1.execute(sql1, [adult, child, fro, to])
+        cursor1.execute(sql1, [adult,child,fro, to])
         result1 = cursor1.fetchall()
         cursor1.close()
-
+        cursor2 = connection.cursor()
+        sql2 = "select COST FROM COST WHERE STATION_ID=(SELECT STATION_ID from STATION where NAME=%s) AND TO_STATION_ID=(SELECT STATION_ID from STATION where NAME=%s)"
+        cursor2.execute(sql2, [fro,to])
+        result2 = cursor2.fetchall()
+        cursor2.close()
+        st1=""
+        st2=""
+        st3=""
+        st4=""
+        st5=""
+        st6=""
+        for re2 in result2:
+            st1=int(re2[0])
+            st2=int(re2[0]*decimal.Decimal('0.5'))
+            st3=int(re2[0]*decimal.Decimal('0.8'))
+            st4 = int(re2[0]*decimal.Decimal('0.8')*decimal.Decimal('0.5'))
+            st5= int(re2[0]*decimal.Decimal('0.6'))
+            st6 = int(re2[0]*decimal.Decimal('0.6')*decimal.Decimal('0.5'))
+        fare_list=[]
+        fare_list.append(str(st1))
+        fare_list.append(str(st2))
+        fare_list.append(str(st3))
+        fare_list.append(str(st4))
+        fare_list.append(str(st5))
+        fare_list.append(str(st6))
         st = ""
         for re in result1:
             if clas=='SNIGDHA':
@@ -68,15 +94,45 @@ def list_trains(request):
             dict_result.append(row)
         request.session['trains']=dict_result
         request.session['cost']=st
+        request.session['snigdha_fare'] = fare_list
         return render(request, 'list_trains.html', {'trains': dict_result, 'cost': str(st) + '' + ' BDT', 'details': details})
     else:
         dict_result=request.session.get('trains')
         st=request.session.get('cost')
         name=request.GET.get('name')
-        name=name[1:]
+        snigdha_fare=request.session.get('snigdha_fare')
+        id=name[1:4]
+        print(id);
+        snigdha=""
+        s_chair=""
+        shovan=""
+        available_seats=[]
+        cursor=connection.cursor()
+        sql="SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SNIGDHA' AND DATE_OF_JOURNEY= TO_DATE('15-11-2020','DD-MM-YYYY');"
+        cursor.execute(sql,[id])
+        result=cursor.fetchall()
+        for r in result:
+            snigdha=r[0];
 
+        cursor1 = connection.cursor()
+        sql1 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='S_CHAIR' AND DATE_OF_JOURNEY= TO_DATE('15-11-2020','DD-MM-YYYY');"
+        cursor1.execute(sql1, [id])
+        result1 = cursor1.fetchall()
+        for r1 in result1:
+            s_chair=r1[0];
+        cursor2 = connection.cursor()
+        sql2 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SHOVAN' AND DATE_OF_JOURNEY= TO_DATE('15-11-2020','DD-MM-YYYY');"
+        cursor2.execute(sql2, [id])
+        result2 = cursor2.fetchall()
+        for r2 in result2:
+            shovan=r2[0];
+
+
+        row={'snigdha':snigdha,'s_chair':s_chair,'shovan':shovan}
+        available_seats.append(row)
+        print(available_seats)
         return render(request, 'list_trains.html',
-                      {'trains': dict_result, 'cost': str(st) + '' + ' BDT', 'details': details})
+                      {'trains': dict_result, 'cost': str(st) + '' + ' BDT', 'details': details,'available_seats':available_seats,'snigdha_fare':snigdha_fare})
 
 
 
