@@ -339,5 +339,8 @@ def upcoming(request):
 def successful(request):
     return render(request, 'successful.html')
 def payment_selection(request):
+    seat_nos=request.GET.get('seat_nos')
+    seat_list=seat_nos.split()
+    print(seat_list)
     return render(request, 'payment_selection.html')
 
