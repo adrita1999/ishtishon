@@ -1,5 +1,10 @@
 import decimal
-
+import os
+import sys
+import twilio
+import random
+from twilio.rest import Client
+from googlevoice import Voice
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render,redirect
@@ -342,5 +347,31 @@ def payment_selection(request):
     seat_nos=request.GET.get('seat_nos')
     seat_list=seat_nos.split()
     print(seat_list)
-    return render(request, 'payment_selection.html')
+    return render(request, 'payment selection.html')
+def bkash(request):
+    if request.method == "POST":
+        name = request.POST["name"]
+        ps = request.POST["password"]
+        print(request.POST)
+        # otp=random.randint(1000,9999)
+        # account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
+        # auth_token = 'a11dca3b1d3cbeef6caeb0f99a592999'
+        # client = Client(account_sid, auth_token)
+        #
+        # message = client.messages \
+        #     .create(
+        #     body='Your OTP is '+str(otp),
+        #     from_='+12543235243',
+        #     to='+8801878046439'
+        # )
+
+        print(message.sid)
+    return render(request, 'bkash_payment.html')
+def card(request):
+    return render(request, 'card_payment.html')
+def nexus(request):
+    return render(request, 'nexus_payment.html')
+def rocket(request):
+    return render(request, 'rocket_payment.html')
+
 

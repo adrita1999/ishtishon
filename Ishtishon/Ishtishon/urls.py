@@ -41,6 +41,10 @@ urlpatterns = [
     path('contactus',rs_views.contactus,name= 'contactus'),
     path('successful',rs_views.successful,name= 'successful'),
     path('payment_selection',rs_views.payment_selection,name= 'payment_selection'),
+    path('bkash_payment',rs_views.bkash,name= 'bkash_payment'),
+    path('card_payment',rs_views.card,name= 'card_payment'),
+    path('nexus_payment',rs_views.nexus,name= 'nexus_payment'),
+    path('rocket_payment',rs_views.rocket,name= 'rocket_payment'),
 
 
     #hr delete hoyna
