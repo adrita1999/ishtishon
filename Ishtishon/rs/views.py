@@ -4,7 +4,6 @@ import sys
 import twilio
 import random
 from twilio.rest import Client
-from googlevoice import Voice
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render,redirect
@@ -256,7 +255,7 @@ def registration(request):
 def login(request):
     if request.method == "POST":
         global is_logged_in
-        print(request.POST)
+        #print(request.POST)
         if is_logged_in==1:
             print('already logged in')
             return redirect("/" + "?logged_in=" + str(is_logged_in))
@@ -345,9 +344,10 @@ def successful(request):
     return render(request, 'successful.html')
 def payment_selection(request):
     seat_nos=request.GET.get('seat_nos')
+    amount = request.session.get('cost')
     seat_list=seat_nos.split()
     print(seat_list)
-    return render(request, 'payment selection.html')
+    return render(request, 'payment selection.html',{'amount':amount})
 def bkash(request):
     name=""
     ps=""
@@ -374,6 +374,7 @@ def bkash(request):
         # )
 
         #print(message.sid)
+<<<<<<< Updated upstream
 
 
     if request.method == "POST" and 'btn2' in request.POST:
@@ -400,11 +401,48 @@ def bkash(request):
             return render(request, 'bkash_payment.html', {"status": msg})
 
 
+=======
+>>>>>>> Stashed changes
     return render(request, 'bkash_payment.html')
 def card(request):
-    return render(request, 'card_payment.html')
+    amount = request.session.get('cost')
+    if request.method=="POST":
+
+        cardnumber=request.POST["cardnumber"]
+        name=request.POST["name"]
+        cvv=request.POST["cvv"]
+        date = request.POST["date"]
+        cursor=connection.cursor()
+        sql="INSERT INTO PAYMENT VALUES(NVL((SELECT MAX(PAYMENT_ID)+1 FROM PAYMENT),1),%s,SYSDATE);"
+        cursor.execute(sql,[amount])
+        cursor.close()
+        cursor1=connection.cursor()
+        sql1="INSERT INTO CARD VALUES(NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1),UPPER(%s),%s,TO_DATE(%s,'YYYY-MM-DD'),%s);"
+        cursor1.execute(sql1,[name,cardnumber,date,cvv])
+        cursor1.close()
+        return  redirect("/successful")
+        #print(request.POST);
+
+
+    return render(request, 'card_payment.html',{'amount':amount})
 def nexus(request):
-    return render(request, 'nexus_payment.html')
+    amount = request.session.get('cost')
+    if request.method=="POST":
+
+        cardnumber=request.POST["cardnumber"]
+        name=request.POST["name"]
+        pin=request.POST["pin"]
+        cursor = connection.cursor()
+        sql = "INSERT INTO PAYMENT VALUES(NVL((SELECT MAX(PAYMENT_ID)+1 FROM PAYMENT),1),%s,SYSDATE);"
+        cursor.execute(sql, [amount])
+        cursor.close()
+        cursor1 = connection.cursor()
+        sql1 = "INSERT INTO NEXUSPAY VALUES(NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1),UPPER(%s),%s,%s);"
+        cursor1.execute(sql1, [name, cardnumber,pin])
+        cursor1.close()
+
+        return redirect("/successful")
+    return render(request, 'nexus_payment.html',{'amount':amount})
 def rocket(request):
     return render(request, 'rocket_payment.html')
 

@@ -62,6 +62,12 @@
                         <li class="nav-item"><a class="nav-link active" href="updateinfo" style="color: #070606;">Dashboard</a></li>
                         <li class="nav-item" style="color: #070606;"><a class="nav-link active" href="contactus" style="color: #070606;">Contact us</a></li>
                         <li class="nav-item" style="padding-right: 0px;"><a class="nav-link active" onclick="logout()" style="color: #070606;padding: 8px 0px 8px 8px;">Log out</a></li>
+                        {% if request.GET.not_logged_in == '0' %}
+                        <li id="LOADING" class="nav-item" style="padding-right: 0px;"><div style="background-color: red;width: 450px;height: 30px;margin-left: 30px;text-align: center;color: black">You are not logged in.Please log in to search trains.</div></li>
+                        {% endif %}
+                        {% if request.GET.user %}
+                        <li id="LOADING2" class="nav-item" style="padding-right: 0px;"><div style="background-color: green;width: 500px;height: 30px;margin-left: 30px;text-align: center;color: black">Dear {{ request.GET.user }},You have successfully logged in.</div></li>
+                        {% endif %}
                     </ul>
             </div>
             </div>
@@ -72,26 +78,32 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
         <script src="assets/js/theme.js"></script>
 
-
-{% if request.GET.user %}
-    <script>alert("Dear {{ request.GET.user }}, You have successfully logged in.");</script>
-{% endif%}
 {% if request.GET.logged_in == '1' %}
     <script>alert("You are already logged in. Please log out to log in from a different account.");</script>
 {% endif%}
 {% if request.GET.already_logged_in == '1' %}
     <script>alert("You are already logged in. Please log out to register a new account");</script>
 {% endif%}
-{% if request.GET.not_logged_in == '0' %}
-    <script>alert("You are not logged in. Please log in to search trains.");</script>
 
-{% endif%}
+
+
 </body>
 <script>
 function logout() {
             window.location.href = "{% url 'login' %}" +"?logged_out="+"1";
           }
 
+
 </script>
+<script>
+    setTimeout(function(){
+        document.getElementById('LOADING').style.display = 'none';
+    }, 4000);
+    </script>
+<script>
+    setTimeout(function(){
+        document.getElementById('LOADING2').style.display = 'none';
+    }, 4000);
+    </script>
 
 </html>
