@@ -401,7 +401,10 @@ def bkash(request):
             return render(request, 'bkash_payment.html', {"status": msg},{'amount':amount})
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     return render(request, 'bkash_payment.html')
 def card(request):
     amount = request.session.get('cost')
