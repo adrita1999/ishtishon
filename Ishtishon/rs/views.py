@@ -443,6 +443,52 @@ def nexus(request):
         return redirect("/successful")
     return render(request, 'nexus_payment.html',{'amount':amount})
 def rocket(request):
+    name = ""
+    ps = ""
+    vcode = ""
+    otp = 1111
+    if request.method == "POST" and 'btn1' in request.POST:
+        # print(request.POST)
+        # otp=random.randint(1000,9999)
+        otp = 1111
+        account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
+        auth_token = 'a11dca3b1d3cbeef6caeb0f99a592999'
+
+        print("otp jacche")
+        # client = Client(account_sid, auth_token)
+        #
+        # message = client.messages \
+        #     .create(
+        #     body='Your OTP is '+str(otp),
+        #     from_='+12543235243',
+        #     to='+8801878046439'
+        # )
+
+        # print(message.sid)
+
+    if request.method == "POST" and 'btn2' in request.POST:
+        name = request.POST["name"]
+        ps = request.POST["password"]
+        vcode = request.POST["vcode"]
+        amount = request.session.get('cost')
+        print(request.POST)
+        if vcode == str(otp):
+            cursor = connection.cursor()
+            sql = "INSERT INTO PAYMENT VALUES(NVL((SELECT (MAX(PAYMENT_ID)+1) FROM PAYMENT),1),%s,SYSDATE);"
+            cursor.execute(sql, [amount])
+            cursor.close()
+            cursor1 = connection.cursor()
+            print("payment e dhukse")
+            sql1 = "INSERT INTO MOBILE_BANKING VALUES(NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1), TO_NUMBER(%s),TO_NUMBER(%s),TO_NUMBER(%s));"
+            cursor1.execute(sql1, [name, vcode, ps])
+            cursor1.close()
+            print("mb e dhukse")
+            return redirect("/successful")
+        if vcode != "" and vcode != str(otp):
+            print("otp milena")
+            msg = "Wrong OTP Entered."
+            return render(request, 'rocket_payment.html', {"status": msg})
+
     return render(request, 'rocket_payment.html')
 
 
