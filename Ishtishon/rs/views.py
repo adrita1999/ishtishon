@@ -353,6 +353,7 @@ def bkash(request):
     ps=""
     vcode=""
     otp=1111
+    amount = request.session.get('cost')
     if request.method == "POST"and 'btn1' in request.POST:
         #name = request.POST["name"]
         #ps = request.POST["password"]
@@ -381,7 +382,6 @@ def bkash(request):
         name = request.POST["name"]
         ps = request.POST["password"]
         vcode=request.POST["vcode"]
-        amount=request.session.get('cost')
         print(request.POST)
         if vcode == str(otp):
             cursor = connection.cursor()
@@ -398,7 +398,7 @@ def bkash(request):
         if vcode != "" and vcode != str(otp):
             print("otp milena")
             msg = "Wrong OTP Entered."
-            return render(request, 'bkash_payment.html', {"status": msg})
+            return render(request, 'bkash_payment.html', {"status": msg},{'amount':amount})
 
 
 
