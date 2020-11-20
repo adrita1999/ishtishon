@@ -374,7 +374,7 @@ def bkash(request):
         # )
 
         #print(message.sid)
-<<<<<<< Updated upstream
+
 
 
     if request.method == "POST" and 'btn2' in request.POST:
@@ -401,8 +401,7 @@ def bkash(request):
             return render(request, 'bkash_payment.html', {"status": msg})
 
 
-=======
->>>>>>> Stashed changes
+
     return render(request, 'bkash_payment.html')
 def card(request):
     amount = request.session.get('cost')
