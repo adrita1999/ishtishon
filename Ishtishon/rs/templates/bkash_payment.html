@@ -26,12 +26,12 @@
 
 
             {% if request.GET.disable|slice:":1" == '1' %}
-                <div class="form-group"><label style="padding-top: 10px;">Verification Code</label><input class="form-control"  type="password" name="vcode" id="otp"></div>
+                <div class="form-group"><label style="padding-top: 10px;">Verification Code</label><input class="form-control"  type="password" name="vcode" id="otp" ></div>
                 <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2" required><label class="form-check-label" for="formCheck-2">I agree to the terms and conditions of service</label></div>
             <button class="btn btn-primary" type="submit" name="btn2" id="btn2" style="width: 400px;font-size: 16px;background: linear-gradient(white, rgb(81,171,90) 4%), rgb(81,171,90);filter: brightness(102%);">Proceed to pay</button></form>
             {% else %}
-                <div class="form-group"><label style="padding-top: 10px;">Verification Code</label><input class="form-control" disabled type="password" name="vcode" id="otp"></div>
-            <button class="btn btn-primary" disabled type="submit" name="btn2" id="btn2" style="width: 400px;font-size: 16px;background: linear-gradient(white, rgb(81,171,90) 4%), rgb(81,171,90);filter: brightness(102%);">Proceed to pay</button></form>
+                <div class="form-group"><label style="padding-top: 10px; color:rgba(80,94,108,0.48);">Verification Code</label><input class="form-control" disabled type="password" name="vcode" id="otp" style="background: rgb(157,157,157,0.2);"></div>
+            <button class="btn btn-primary" disabled type="submit" name="btn2" id="btn2" style="width: 400px;font-size: 16px;background: linear-gradient(rgb(157,157,157) 0% ,rgb(157,157,157) 100%);filter: brightness(102%);">Proceed to pay</button></form>
             {% endif %}
     </div>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(118,35,35);padding: 18.2px 0px;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%);">
