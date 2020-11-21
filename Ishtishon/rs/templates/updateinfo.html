@@ -29,6 +29,9 @@
         </div>
         </div>
     </nav>
+    {% if status %}
+        <label id="LOADING" style="margin-top: 75px;margin-left: 1050px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>{{ status }}</strong></label>
+            {% endif %}
     <div style="padding-top: 95px;">
         <div class="container" style="background: url(&quot;assets/img/train6.jpg&quot;) center / cover no-repeat;">
             <section style="padding-top: 25px;background: rgba(0,0,0,0.85);padding-right: 20px;padding-left: 20px;">
@@ -65,6 +68,7 @@
         </div>
     </div>
     <main class="text-center page lanidng-page" style="text-align: center;padding: 0px;padding-top: 0px;padding-right: 0px;padding-left: 0px;"></main>
+
     <div style="padding-left: 25px;padding-top: 10px;padding-right: 25px;padding-bottom: 25px;">
         <div class="container" style="padding-left: 0px;padding-right: 0px;">
             <h1 style="background: rgb(104,171,80);padding: 10px;text-align: left;padding-left: 10px;margin: 0px;">Dashboard</h1>
@@ -93,25 +97,42 @@
                     <div style="padding-left: 10px;padding-top: 10px;"><i class="fa fa-user" style="padding-right: 10px;font-size: 36px;"></i>
                         <h1 class="d-inline" style="font-size: 36px;padding-top: 10px;">Update User Profile</h1>
                         <hr style="color: rgb(0,0,0);background: #000000;">
-                        <form style="padding-bottom: 10px;">
-                            <div class="form-group"><label>First Name</label><input class="form-control" value="{{ first }}" type="text"></div>
-                            <div class="form-group"><label>Last Name</label><input class="form-control" value="{{ last }}"type="text"></div>
-                            <div class="form-group"><label>Date of Birth</label><input class="form-control" value="{{ dob }}" type="date"></div>
+                        <form action="" method="post"  style="padding-bottom: 10px;">
+                            {%  csrf_token %}
+                            <div class="form-group"><label>First Name</label><input required maxlength="25" class="form-control" name="first" value="{{ first }}" type="text"></div>
+                            <div class="form-group"><label>Last Name</label><input required maxlength="25" class="form-control" name="last" value="{{ last }}"type="text"></div>
+                            <div class="form-group"><label>Date of Birth</label><input class="form-control" required name="dob" value="{{ dob }}" type="date"></div>
                             <div class="form-group"><label>Gender</label>
-                                <div class="dropdown"><button class="btn btn-primary dropdown-toggle border rounded" data-toggle="dropdown" aria-expanded="false" type="button" style="width: 720px;text-align: left;background: rgb(104,171,80);color: rgb(0,0,0);">Select Gender</button>
-                                    <div
-                                        class="dropdown-menu"><a class="dropdown-item" href="#">Male</a><a class="dropdown-item" href="#">Female</a><a class="dropdown-item" href="#">Other</a></div>
-                            </div>
+                                <div class="input-group" >
+                    <select class="form-control item" name="gender"  required="required" style="background: rgb(104,171,80);text-transform: capitalize">
+                        <option  selected="selected">{{ gender }}</option>
+                        {% if gender == 'Female' %}
+                        <option style="background: white;">Male</option>
+                        <option style="background: white;">Other</option>
+                        {% elif gender == 'Male' %}
+                        <option style="background: white;">Female</option>
+                        <option style="background: white;">Other</option>
+                        {% elif gender == 'Other' %}
+                        <option style="background: white;">Female</option>
+                        <option style="background: white;">Male</option>
+                            {% else %}
+                            <option style="background: white;">Male</option>
+                            <option style="background: white;">Female</option>
+                        <option style="background: white;">Other</option>
+                        {% endif %}
+                    </select>
+                </div>
                     </div>
-                    <div class="form-group"><label>NID Number</label><input class="form-control" value="{{ nid }}" type="number"></div>
+                    <div class="form-group"><label>NID Number</label><input class="form-control" name="nid" required value="{{ nid }}" type="number"></div>
                     <div class="form-group"><label style="padding-top: 10px;">Address:</label></div>
-                    <div class="form-group" style="height: 70px;"><label class="float-left" style="width: 340px;">House Number</label><label class="float-right" style="text-align: left;width: 340px;">Road Number</label><input value="{{ house }}" class="form-control float-left" type="text" style="width: 340px;">
+                    <div class="form-group" style="height: 70px;"><label class="float-left" style="width: 340px;">House Number</label><label class="float-right" style="text-align: left;width: 340px;">Road Number</label><input value="{{ house }}" name="house" class="form-control float-left" type="text" style="width: 340px;">
                         <input
-                            class="form-control float-right" value="{{ road }}" type="text" style="width: 340px;"></div>
-                    <div class="form-group" style="height: 70px;"><label class="float-left" style="width: 340px;">ZIP Code</label><label class="float-right" style="width: 340px;">City</label><input class="form-control float-left" value="{{ zip }}" type="text" style="width: 340px;"><input class="form-control float-right"
-                          value="{{ city }}"  type="text" style="width: 340px;"></div>
-                    </form>
-                    <hr style="color: rgb(0,0,0);filter: brightness(87%);background: #000000;padding-bottom: 0px;margin-bottom: 32px;"><button class="btn btn-primary border rounded" type="button" style="width: 720px;margin-bottom: 35px;background: rgb(104,171,80);color: rgb(0,0,0);">Update Your Profile<br></button></div>
+                            class="form-control float-right" name="road" value="{{ road }}" type="text" style="width: 340px;"></div>
+                    <div class="form-group" style="height: 70px;"><label class="float-left" style="width: 340px;">ZIP Code</label><label class="float-right" style="width: 340px;">City</label><input class="form-control float-left" value="{{ zip }}" name="zip" type="text" style="width: 340px;"><input class="form-control float-right"
+                          value="{{ city }}" required name="city" type="text" style="width: 340px;"></div>
+
+                    <hr style="color: rgb(0,0,0);filter: brightness(87%);background: #000000;padding-bottom: 0px;margin-bottom: 32px;"><button class="btn btn-primary border rounded" type="submit" style="width: 720px;margin-bottom: 35px;background: rgb(104,171,80);color: rgb(0,0,0);">Update Your Profile<br></button>
+                     </form>
             </div>
         </div>
     </div>
@@ -127,5 +148,10 @@ function logout() {
           }
 
 </script>
+<script>
+    setTimeout(function(){
+        document.getElementById('LOADING').style.display = 'none';
+    }, 4000);
+    </script>
 
 </html>
