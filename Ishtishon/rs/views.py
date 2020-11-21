@@ -282,7 +282,7 @@ def login(request):
                 #user = authenticate(request, username=username, password=password)
 
                 cursor1 = connection.cursor()
-                sql1 = "SELECT FIRST_NAME,LAST_NAME,DOB,GENDER,NID_NO,HOUSE_NO,ROAD_NO,ZIP_CODE,CITY FROM R_USER WHERE EMAIL_ADD=%s;"
+                sql1 = "SELECT FIRST_NAME,LAST_NAME,DOB,GENDER,NID_NO,HOUSE_NO,ROAD_NO,ZIP_CODE,CITY,CONTACT_NO FROM R_USER WHERE EMAIL_ADD=%s;"
                 cursor1.execute(sql1, [mail])
                 result1 = cursor1.fetchall()
                 cursor1.close()
@@ -299,10 +299,12 @@ def login(request):
                     request.session['road'] = r[6]
                     request.session['zip'] = r[7]
                     request.session['city'] = r[8]
+                    request.session['contact'] = r[9]
 
                 #request.session['fullname']=fullname;
                 return redirect("/"+"?user="+fullname)
             else:
+                print(make_pw_hash(ps))
                 response = "Login Denied. Wrong Password."
                 return render(request, "login.html", {"status": response})
         else:
@@ -338,6 +340,12 @@ def contactus(request):
     return render(request, 'contactus.html')
 
 def updateinfo(request):
+
+    mail = request.session.get('usermail')
+    contact = request.session.get('contact')
+
+
+
     first=request.session.get('first')
     last=request.session.get('last')
     dob=request.session.get('dob')
@@ -349,14 +357,83 @@ def updateinfo(request):
     city=request.session.get('city')
     dob=dob[0:10]
     print(dob)
+
+    fullname = first + " " + last
+    address = ""
+    if (house):
+        if (road):
+            if (zip):
+                address = "House no: " + house + ", Road no: " + road + ", " + city + "-" + zip
+            else:
+                address = "House no: " + house + ", Road no: " + road + ", " + city
+        else:
+            if (zip):
+                address = "House no: " + house + ", " + city + "-" + zip
+            else:
+                address = "House no: " + house + ", " + city
+    else:
+        if (road):
+            if (zip):
+                address = "Road no: " + road + ", " + city + "-" + zip
+
+            else:
+                address = "Road no: " + road + ", " + city
+
+        else:
+            if (zip):
+                address = city + "-" + zip
+
+            else:
+                address = city
+    slice_object = slice(4, 13, 1)
+    pnr = contact[slice_object]
     return render(request, 'updateinfo.html',{"first":first,"last":last,"dob":dob,"gender":gender,"nid":nid,"house":house,
-                                              "road":road,"zip":zip,"city":city})
+                                              "road":road,"zip":zip,"city":city,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr})
 
 def changepass(request):
+    first=request.session.get('first')
+    last = request.session.get('last')
+    mail = request.session.get('usermail')
+    house = request.session.get('house')
+    road = request.session.get('road')
+    zip = request.session.get('zip')
+    city = request.session.get('city')
+    contact=request.session.get('contact')
+    nid = request.session.get('nid')
+    fullname= first + " " +last
+    address=""
+    if(house):
+        if(road):
+            if(zip):
+                address= "House no: "+house+", Road no: "+road+", "+city+"-"+zip
+            else:
+                address = "House no: " + house + ", Road no: " + road + ", " + city
+        else:
+            if (zip):
+                address = "House no: " + house  + ", " + city + "-" + zip
+            else:
+                address = "House no: " + house +  ", " + city
+    else:
+        if (road):
+            if (zip):
+                address = "Road no: " + road + ", " + city + "-" + zip
+
+            else:
+                address = "Road no: " + road + ", " + city
+
+        else:
+            if (zip):
+                address = city + "-" + zip
+
+            else:
+                address = city
+    slice_object = slice(4, 13, 1)
+    pnr=contact[slice_object]
+
     if request.method == "POST":
         ps = request.POST["pass"]
         newps = request.POST["newpass"]
-        mail=request.session.get('usermail')
+
 
         cursor = connection.cursor()
         sql = "SELECT PASSWORD FROM R_USER WHERE EMAIL_ADD=%s;"
@@ -378,7 +455,7 @@ def changepass(request):
             cursor1.execute(sql1, [newps_hash,mail])
             cursor1.close()
             response = "Password successfully updated. "
-            return render(request, "changepass.html", {"status": response})
+            return render(request, "changepass.html", {"status": response},{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 
 
 
@@ -386,18 +463,170 @@ def changepass(request):
 
         else:
             response = "Wrong Password."
-            return render(request, "changepass.html", {"status": response})
+            return render(request, "changepass.html", {"status": response},{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 
 
-    return render(request, 'changepass.html')
+    return render(request, 'changepass.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 def changemail(request):
-    return render(request, 'changemail.html')
+    first = request.session.get('first')
+    last = request.session.get('last')
+    mail = request.session.get('usermail')
+    house = request.session.get('house')
+    road = request.session.get('road')
+    zip = request.session.get('zip')
+    city = request.session.get('city')
+    contact = request.session.get('contact')
+    nid = request.session.get('nid')
+    fullname = first + " " + last
+    address = ""
+    if (house):
+        if (road):
+            if (zip):
+                address = "House no: " + house + ", Road no: " + road + ", " + city + "-" + zip
+            else:
+                address = "House no: " + house + ", Road no: " + road + ", " + city
+        else:
+            if (zip):
+                address = "House no: " + house + ", " + city + "-" + zip
+            else:
+                address = "House no: " + house + ", " + city
+    else:
+        if (road):
+            if (zip):
+                address = "Road no: " + road + ", " + city + "-" + zip
+
+            else:
+                address = "Road no: " + road + ", " + city
+
+        else:
+            if (zip):
+                address = city + "-" + zip
+
+            else:
+                address = city
+    slice_object = slice(4, 13, 1)
+    pnr = contact[slice_object]
+    return render(request, 'changemail.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 def changenum(request):
-    return render(request, 'changenum.html')
+    first = request.session.get('first')
+    last = request.session.get('last')
+    mail = request.session.get('usermail')
+    house = request.session.get('house')
+    road = request.session.get('road')
+    zip = request.session.get('zip')
+    city = request.session.get('city')
+    contact = request.session.get('contact')
+    nid = request.session.get('nid')
+    fullname = first + " " + last
+    address = ""
+    if (house):
+        if (road):
+            if (zip):
+                address = "House no: " + house + ", Road no: " + road + ", " + city + "-" + zip
+            else:
+                address = "House no: " + house + ", Road no: " + road + ", " + city
+        else:
+            if (zip):
+                address = "House no: " + house + ", " + city + "-" + zip
+            else:
+                address = "House no: " + house + ", " + city
+    else:
+        if (road):
+            if (zip):
+                address = "Road no: " + road + ", " + city + "-" + zip
+
+            else:
+                address = "Road no: " + road + ", " + city
+
+        else:
+            if (zip):
+                address = city + "-" + zip
+
+            else:
+                address = city
+    slice_object = slice(4, 13, 1)
+    pnr = contact[slice_object]
+    return render(request, 'changenum.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 def prev(request):
-    return render(request, 'prev.html')
+    first = request.session.get('first')
+    last = request.session.get('last')
+    mail = request.session.get('usermail')
+    house = request.session.get('house')
+    road = request.session.get('road')
+    zip = request.session.get('zip')
+    city = request.session.get('city')
+    contact = request.session.get('contact')
+    nid = request.session.get('nid')
+    fullname = first + " " + last
+    address = ""
+    if (house):
+        if (road):
+            if (zip):
+                address = "House no: " + house + ", Road no: " + road + ", " + city + "-" + zip
+            else:
+                address = "House no: " + house + ", Road no: " + road + ", " + city
+        else:
+            if (zip):
+                address = "House no: " + house + ", " + city + "-" + zip
+            else:
+                address = "House no: " + house + ", " + city
+    else:
+        if (road):
+            if (zip):
+                address = "Road no: " + road + ", " + city + "-" + zip
+
+            else:
+                address = "Road no: " + road + ", " + city
+
+        else:
+            if (zip):
+                address = city + "-" + zip
+
+            else:
+                address = city
+    slice_object = slice(4, 13, 1)
+    pnr = contact[slice_object]
+    return render(request, 'prev.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 def upcoming(request):
-    return render(request, 'upcoming.html')
+    first = request.session.get('first')
+    last = request.session.get('last')
+    mail = request.session.get('usermail')
+    house = request.session.get('house')
+    road = request.session.get('road')
+    zip = request.session.get('zip')
+    city = request.session.get('city')
+    contact = request.session.get('contact')
+    nid = request.session.get('nid')
+    fullname = first + " " + last
+    address = ""
+    if (house):
+        if (road):
+            if (zip):
+                address = "House no: " + house + ", Road no: " + road + ", " + city + "-" + zip
+            else:
+                address = "House no: " + house + ", Road no: " + road + ", " + city
+        else:
+            if (zip):
+                address = "House no: " + house + ", " + city + "-" + zip
+            else:
+                address = "House no: " + house + ", " + city
+    else:
+        if (road):
+            if (zip):
+                address = "Road no: " + road + ", " + city + "-" + zip
+
+            else:
+                address = "Road no: " + road + ", " + city
+
+        else:
+            if (zip):
+                address = city + "-" + zip
+
+            else:
+                address = city
+    slice_object = slice(4, 13, 1)
+    pnr = contact[slice_object]
+    return render(request, 'upcoming.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 def successful(request):
     return render(request, 'successful.html')
 def payment_selection(request):
@@ -455,13 +684,12 @@ def bkash(request):
             msg = "Wrong OTP Entered."
             return render(request, 'bkash_payment.html', {"status": msg},{'amount':amount})
 
-<<<<<<< Updated upstream
+
 
 
     return render(request, 'bkash_payment.html',{'amount':amount})
-=======
-    return render(request, 'bkash_payment.html')
->>>>>>> Stashed changes
+
+
 def card(request):
     amount = request.session.get('cost')
     if request.method=="POST":
