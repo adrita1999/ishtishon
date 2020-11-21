@@ -355,14 +355,11 @@ def bkash(request):
     otp=1111
     amount = request.session.get('cost')
     if request.method == "POST"and 'btn1' in request.POST:
-        #name = request.POST["name"]
-        #ps = request.POST["password"]
-        #vcode=request.POST["vcode"]
-        #print(request.POST)
-        #otp=random.randint(1000,9999)
-        otp=1111
+        # print(request.POST)
+        # otp=random.randint(1000,9999)
+        otp = 1111
         account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
-        auth_token = 'a11dca3b1d3cbeef6caeb0f99a592999'
+        auth_token = '36e0fe6c03fff9833e5f9173250e9723'
 
         print("otp jacche")
         # client = Client(account_sid, auth_token)
@@ -374,7 +371,7 @@ def bkash(request):
         #     to='+8801878046439'
         # )
 
-        #print(message.sid)
+        # print(message.sid)
 
 
 
@@ -401,11 +398,8 @@ def bkash(request):
             return render(request, 'bkash_payment.html', {"status": msg},{'amount':amount})
 
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
-    return render(request, 'bkash_payment.html')
+    return render(request, 'bkash_payment.html',{'amount':amount})
 def card(request):
     amount = request.session.get('cost')
     if request.method=="POST":
@@ -450,12 +444,13 @@ def rocket(request):
     ps = ""
     vcode = ""
     otp = 1111
+    amount = request.session.get('cost')
     if request.method == "POST" and 'btn1' in request.POST:
         # print(request.POST)
         # otp=random.randint(1000,9999)
         otp = 1111
         account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
-        auth_token = 'a11dca3b1d3cbeef6caeb0f99a592999'
+        auth_token = '36e0fe6c03fff9833e5f9173250e9723'
 
         print("otp jacche")
         # client = Client(account_sid, auth_token)
@@ -473,7 +468,7 @@ def rocket(request):
         name = request.POST["name"]
         ps = request.POST["password"]
         vcode = request.POST["vcode"]
-        amount = request.session.get('cost')
+
         print(request.POST)
         if vcode == str(otp):
             cursor = connection.cursor()
@@ -490,8 +485,8 @@ def rocket(request):
         if vcode != "" and vcode != str(otp):
             print("otp milena")
             msg = "Wrong OTP Entered."
-            return render(request, 'rocket_payment.html', {"status": msg})
+            return render(request, 'rocket_payment.html', {"status": msg},{'amount':amount})
 
-    return render(request, 'rocket_payment.html')
+    return render(request, 'rocket_payment.html',{'amount':amount})
 
 
