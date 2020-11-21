@@ -343,6 +343,7 @@ def contactus(request):
 def updateinfo(request):
     if is_logged_in == 0:
         return redirect("/login" + "?notdash_logged_in=" + str(is_logged_in))
+<<<<<<< Updated upstream
 
     mail = request.session.get('usermail')
     contact = request.session.get('contact')
@@ -389,6 +390,46 @@ def updateinfo(request):
     pnr = contact[slice_object]
     return render(request, 'updateinfo.html',{"first":first,"last":last,"dob":dob,"gender":gender,"nid":nid,"house":house,
                                               "road":road,"zip":zip,"city":city,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr})
+=======
+    if request.method == "POST":
+        first=request.POST["first"]
+        last=request.POST["last"]
+        dob=request.POST["dob"]
+        gender=request.POST["gender"]
+        nid = request.POST["nid"]
+        house = request.POST["house"]
+        road = request.POST["road"]
+        zip = request.POST["zip"]
+        city = request.POST["city"]
+        mail = request.session.get('usermail')
+        print(request.POST)
+        cursor = connection.cursor()
+        sql = "UPDATE R_USER SET  FIRST_NAME=upper(%s),LAST_NAME=UPPER (%s),DOB=TO_DATE(%s,'YYYY-MM-DD'),GENDER=UPPER (%s),NID_NO=%s,HOUSE_NO=UPPER(%s),ROAD_NO=UPPER(%s),ZIP_CODE=UPPER(%s),CITY=UPPER(%s) WHERE EMAIL_ADD=%s;"
+        cursor.execute(sql, [first,last,dob,gender,nid,house,road,zip,city,mail])
+        cursor.close()
+        first=first.upper()
+        last=last.upper()
+        city=city.upper()
+        response='Profile updated successfully'
+        return render(request, 'updateinfo.html',{"status":response,"first":first,"last":last,"dob":dob,"gender":gender,"nid":nid,"house":house,
+                                              "road":road,"zip":zip,"city":city})
+
+    else:
+        first=request.session.get('first')
+        last=request.session.get('last')
+        dob=request.session.get('dob')
+        gender=request.session.get('gender')
+        gender=gender.capitalize()
+        nid=request.session.get('nid')
+        house=request.session.get('house')
+        road=request.session.get('road')
+        zip=request.session.get('zip')
+        city=request.session.get('city')
+        dob=dob[0:10]
+        print(dob)
+        return render(request, 'updateinfo.html',{"first":first,"last":last,"dob":dob,"gender":gender,"nid":nid,"house":house,
+                                              "road":road,"zip":zip,"city":city})
+>>>>>>> Stashed changes
 
 def changepass(request):
     first=request.session.get('first')
@@ -433,8 +474,12 @@ def changepass(request):
     if request.method == "POST":
         ps = request.POST["pass"]
         newps = request.POST["newpass"]
+<<<<<<< Updated upstream
 
 
+=======
+        mail=request.session.get('usermail')
+>>>>>>> Stashed changes
         cursor = connection.cursor()
         sql = "SELECT PASSWORD FROM R_USER WHERE EMAIL_ADD=%s;"
         cursor.execute(sql, [mail])
