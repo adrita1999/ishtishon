@@ -385,7 +385,7 @@ def updateinfo(request):
 
             else:
                 address = city
-    slice_object = slice(4, 13, 1)
+    slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
     return render(request, 'updateinfo.html',{"first":first,"last":last,"dob":dob,"gender":gender,"nid":nid,"house":house,
                                               "road":road,"zip":zip,"city":city,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr})
@@ -427,7 +427,7 @@ def changepass(request):
 
             else:
                 address = city
-    slice_object = slice(4, 13, 1)
+    slice_object = slice(4, 14, 1)
     pnr=contact[slice_object]
 
     if request.method == "POST":
@@ -504,7 +504,7 @@ def changemail(request):
 
             else:
                 address = city
-    slice_object = slice(4, 13, 1)
+    slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
     return render(request, 'changemail.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 def changenum(request):
@@ -544,7 +544,7 @@ def changenum(request):
 
             else:
                 address = city
-    slice_object = slice(4, 13, 1)
+    slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
     return render(request, 'changenum.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 def prev(request):
@@ -584,7 +584,7 @@ def prev(request):
 
             else:
                 address = city
-    slice_object = slice(4, 13, 1)
+    slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
     return render(request, 'prev.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 def upcoming(request):
@@ -624,7 +624,7 @@ def upcoming(request):
 
             else:
                 address = city
-    slice_object = slice(4, 13, 1)
+    slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
     return render(request, 'upcoming.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 def successful(request):
