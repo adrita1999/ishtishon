@@ -277,7 +277,8 @@ def login(request):
                 hash=r[0]
             if(check_pw_hash(ps,hash)):
 
-                is_logged_in=1;
+                is_logged_in=1
+                request.session['usermail']=mail
                 #user = authenticate(request, username=username, password=password)
 
                 cursor1 = connection.cursor()
@@ -352,6 +353,42 @@ def updateinfo(request):
                                               "road":road,"zip":zip,"city":city})
 
 def changepass(request):
+    if request.method == "POST":
+        ps = request.POST["pass"]
+        newps = request.POST["newpass"]
+        mail=request.session.get('usermail')
+
+        cursor = connection.cursor()
+        sql = "SELECT PASSWORD FROM R_USER WHERE EMAIL_ADD=%s;"
+        cursor.execute(sql, [mail])
+        result = cursor.fetchall()
+        cursor.close()
+
+        for r in result:
+            dbps = r[0]
+        if (check_pw_hash(ps,dbps)):
+            newps_hash = make_pw_hash(newps)
+
+            f = open("info.txt", "a+")
+            f.write(mail + " " + newps)
+            f.write("\n")
+            f.close()
+            cursor1 = connection.cursor()
+            sql1 = "UPDATE R_USER SET  PASSWORD= %s WHERE EMAIL_ADD=%s;"
+            cursor1.execute(sql1, [newps_hash,mail])
+            cursor1.close()
+            response = "Password successfully updated. "
+            return render(request, "changepass.html", {"status": response})
+
+
+
+
+
+        else:
+            response = "Wrong Password."
+            return render(request, "changepass.html", {"status": response})
+
+
     return render(request, 'changepass.html')
 def changemail(request):
     return render(request, 'changemail.html')
