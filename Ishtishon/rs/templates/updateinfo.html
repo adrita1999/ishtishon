@@ -94,22 +94,22 @@
                         <h1 class="d-inline" style="font-size: 36px;padding-top: 10px;">Update User Profile</h1>
                         <hr style="color: rgb(0,0,0);background: #000000;">
                         <form style="padding-bottom: 10px;">
-                            <div class="form-group"><label>First Name</label><input class="form-control" type="text"></div>
-                            <div class="form-group"><label>Last Name</label><input class="form-control" type="text"></div>
-                            <div class="form-group"><label>Date of Birth</label><input class="form-control" type="date"></div>
+                            <div class="form-group"><label>First Name</label><input class="form-control" value="{{ first }}" type="text"></div>
+                            <div class="form-group"><label>Last Name</label><input class="form-control" value="{{ last }}"type="text"></div>
+                            <div class="form-group"><label>Date of Birth</label><input class="form-control" value="{{ dob }}" type="date"></div>
                             <div class="form-group"><label>Gender</label>
                                 <div class="dropdown"><button class="btn btn-primary dropdown-toggle border rounded" data-toggle="dropdown" aria-expanded="false" type="button" style="width: 720px;text-align: left;background: rgb(104,171,80);color: rgb(0,0,0);">Select Gender</button>
                                     <div
                                         class="dropdown-menu"><a class="dropdown-item" href="#">Male</a><a class="dropdown-item" href="#">Female</a><a class="dropdown-item" href="#">Other</a></div>
                             </div>
                     </div>
-                    <div class="form-group"><label>NID Number</label><input class="form-control" type="number"></div>
+                    <div class="form-group"><label>NID Number</label><input class="form-control" value="{{ nid }}" type="number"></div>
                     <div class="form-group"><label style="padding-top: 10px;">Address:</label></div>
-                    <div class="form-group" style="height: 70px;"><label class="float-left" style="width: 340px;">House Number</label><label class="float-right" style="text-align: left;width: 340px;">Road Number</label><input class="form-control float-left" type="text" style="width: 340px;">
+                    <div class="form-group" style="height: 70px;"><label class="float-left" style="width: 340px;">House Number</label><label class="float-right" style="text-align: left;width: 340px;">Road Number</label><input value="{{ house }}" class="form-control float-left" type="text" style="width: 340px;">
                         <input
-                            class="form-control float-right" type="text" style="width: 340px;"></div>
-                    <div class="form-group" style="height: 70px;"><label class="float-left" style="width: 340px;">ZIP Code</label><label class="float-right" style="width: 340px;">City</label><input class="form-control float-left" type="text" style="width: 340px;"><input class="form-control float-right"
-                            type="text" style="width: 340px;"></div>
+                            class="form-control float-right" value="{{ road }}" type="text" style="width: 340px;"></div>
+                    <div class="form-group" style="height: 70px;"><label class="float-left" style="width: 340px;">ZIP Code</label><label class="float-right" style="width: 340px;">City</label><input class="form-control float-left" value="{{ zip }}" type="text" style="width: 340px;"><input class="form-control float-right"
+                          value="{{ city }}"  type="text" style="width: 340px;"></div>
                     </form>
                     <hr style="color: rgb(0,0,0);filter: brightness(87%);background: #000000;padding-bottom: 0px;margin-bottom: 32px;"><button class="btn btn-primary border rounded" type="button" style="width: 720px;margin-bottom: 35px;background: rgb(104,171,80);color: rgb(0,0,0);">Update Your Profile<br></button></div>
             </div>

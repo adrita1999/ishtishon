@@ -281,7 +281,7 @@ def login(request):
                 #user = authenticate(request, username=username, password=password)
 
                 cursor1 = connection.cursor()
-                sql1 = "SELECT FIRST_NAME||' '||LAST_NAME FROM R_USER WHERE EMAIL_ADD=%s;"
+                sql1 = "SELECT FIRST_NAME,LAST_NAME,DOB,GENDER,NID_NO,HOUSE_NO,ROAD_NO,ZIP_CODE,CITY FROM R_USER WHERE EMAIL_ADD=%s;"
                 cursor1.execute(sql1, [mail])
                 result1 = cursor1.fetchall()
                 cursor1.close()
@@ -289,8 +289,17 @@ def login(request):
                 fullname=""
                 for r in result1:
                     fullname=r[0]
+                    request.session['first'] = r[0]
+                    request.session['last'] = r[1]
+                    request.session['dob'] = str(r[2])
+                    request.session['gender'] = r[3]
+                    request.session['nid'] =r[4]
+                    request.session['house'] = r[5]
+                    request.session['road'] = r[6]
+                    request.session['zip'] = r[7]
+                    request.session['city'] = r[8]
 
-
+                #request.session['fullname']=fullname;
                 return redirect("/"+"?user="+fullname)
             else:
                 response = "Login Denied. Wrong Password."
@@ -328,7 +337,19 @@ def contactus(request):
     return render(request, 'contactus.html')
 
 def updateinfo(request):
-    return render(request, 'updateinfo.html')
+    first=request.session.get('first')
+    last=request.session.get('last')
+    dob=request.session.get('dob')
+    gender=request.session.get('gender')
+    nid=request.session.get('nid')
+    house=request.session.get('house')
+    road=request.session.get('road')
+    zip=request.session.get('zip')
+    city=request.session.get('city')
+    dob=dob[0:10]
+    print(dob)
+    return render(request, 'updateinfo.html',{"first":first,"last":last,"dob":dob,"gender":gender,"nid":nid,"house":house,
+                                              "road":road,"zip":zip,"city":city})
 
 def changepass(request):
     return render(request, 'changepass.html')
@@ -397,9 +418,13 @@ def bkash(request):
             msg = "Wrong OTP Entered."
             return render(request, 'bkash_payment.html', {"status": msg},{'amount':amount})
 
+<<<<<<< Updated upstream
 
 
     return render(request, 'bkash_payment.html',{'amount':amount})
+=======
+    return render(request, 'bkash_payment.html')
+>>>>>>> Stashed changes
 def card(request):
     amount = request.session.get('cost')
     if request.method=="POST":

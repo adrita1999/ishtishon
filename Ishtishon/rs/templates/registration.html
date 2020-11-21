@@ -31,7 +31,15 @@
         </div>
         </div>
     </nav>
-    <section class="clean-block clean-form dark" style="background: url(&quot;assets/img/train6.jpg&quot;) no-repeat;margin: 10px0px;padding-top: 120px;padding-bottom: 20px;margin-bottom: 0px;">
+    {% if status %}
+    <section class="clean-block clean-form dark" style="background: url(&quot;assets/img/train6.jpg&quot;) no-repeat;margin: 0px;padding-top: 20px;padding-bottom: 60px;margin-bottom: 0px;">
+
+        <label id="LOADING" style="margin-top: 57px;margin-left: 1070px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>{{ status }}</strong></label>
+
+    {% else %}
+    <section class="clean-block clean-form dark" style="background: url(&quot;assets/img/train6.jpg&quot;) no-repeat;margin: 0px;padding-top: 120px;padding-bottom: 60px;margin-bottom: 0px;">
+        {% endif %}
+
         <form action="" method="post" style="width: 800px;font-family: Lato, sans-serif;padding-top: 30px;margin-bottom: 0px;">
             {%  csrf_token %}
             <h1 style="font-family: Lato, sans-serif;font-size: 34px;">Registration</h1>
@@ -72,10 +80,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="assets/js/smoothproducts.min.js"></script>
     <script src="assets/js/theme.js"></script>
-{% if status %}
-    <script>alert("{{ status }}");</script>
-{% endif%}
-
 </body>
     <script>
     var password = document.getElementById("password")
@@ -99,5 +103,10 @@ function logout() {
           }
 
 </script>
+<script>
+    setTimeout(function(){
+        document.getElementById('LOADING').style.visibility = "hidden";
+    }, 4000);
+    </script>
 
 </html>
