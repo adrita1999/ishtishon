@@ -315,6 +315,7 @@ def login(request):
                 response="You are not logged in yet.Please log in first"#if (request.GET.logged_out == '1'):
             else:
                 is_logged_in = 0
+                request.session.flush()
                 response="You are logged out."
             return render(request, 'login.html', {"status": response})
         else:
@@ -338,6 +339,8 @@ def contactus(request):
     return render(request, 'contactus.html')
 
 def updateinfo(request):
+    if is_logged_in == 0:
+        return redirect("/login" + "?notdash_logged_in=" + str(is_logged_in))
     first=request.session.get('first')
     last=request.session.get('last')
     dob=request.session.get('dob')
@@ -455,13 +458,9 @@ def bkash(request):
             msg = "Wrong OTP Entered."
             return render(request, 'bkash_payment.html', {"status": msg},{'amount':amount})
 
-<<<<<<< Updated upstream
 
 
     return render(request, 'bkash_payment.html',{'amount':amount})
-=======
-    return render(request, 'bkash_payment.html')
->>>>>>> Stashed changes
 def card(request):
     amount = request.session.get('cost')
     if request.method=="POST":
