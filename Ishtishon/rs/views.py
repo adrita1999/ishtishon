@@ -317,6 +317,7 @@ def login(request):
                 response="You are not logged in yet.Please log in first"#if (request.GET.logged_out == '1'):
             else:
                 is_logged_in = 0
+                request.session.flush()
                 response="You are logged out."
             return render(request, 'login.html', {"status": response})
         else:
@@ -340,12 +341,11 @@ def contactus(request):
     return render(request, 'contactus.html')
 
 def updateinfo(request):
+    if is_logged_in == 0:
+        return redirect("/login" + "?notdash_logged_in=" + str(is_logged_in))
 
     mail = request.session.get('usermail')
     contact = request.session.get('contact')
-
-
-
     first=request.session.get('first')
     last=request.session.get('last')
     dob=request.session.get('dob')
@@ -683,8 +683,6 @@ def bkash(request):
             print("otp milena")
             msg = "Wrong OTP Entered."
             return render(request, 'bkash_payment.html', {"status": msg},{'amount':amount})
-
-
 
 
     return render(request, 'bkash_payment.html',{'amount':amount})
