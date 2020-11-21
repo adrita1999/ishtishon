@@ -343,9 +343,8 @@ def contactus(request):
 def updateinfo(request):
     if is_logged_in == 0:
         return redirect("/login" + "?notdash_logged_in=" + str(is_logged_in))
-<<<<<<< Updated upstream
 
-    mail = request.session.get('usermail')
+    """mail = request.session.get('usermail')
     contact = request.session.get('contact')
     first=request.session.get('first')
     last=request.session.get('last')
@@ -389,17 +388,22 @@ def updateinfo(request):
     slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
     return render(request, 'updateinfo.html',{"first":first,"last":last,"dob":dob,"gender":gender,"nid":nid,"house":house,
-                                              "road":road,"zip":zip,"city":city,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr})
-=======
+                                              "road":road,"zip":zip,"city":city,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr})"""
     if request.method == "POST":
         first=request.POST["first"]
         last=request.POST["last"]
         dob=request.POST["dob"]
+        request.session["dob"]=dob
         gender=request.POST["gender"]
+        request.session["gender"] = gender.upper()
         nid = request.POST["nid"]
+        request.session["nid"] = nid
         house = request.POST["house"]
+        request.session["house"] = house
         road = request.POST["road"]
+        request.session["road"] = road
         zip = request.POST["zip"]
+        request.session["zip"] = zip
         city = request.POST["city"]
         mail = request.session.get('usermail')
         print(request.POST)
@@ -408,8 +412,11 @@ def updateinfo(request):
         cursor.execute(sql, [first,last,dob,gender,nid,house,road,zip,city,mail])
         cursor.close()
         first=first.upper()
+        request.session["first"] = first
         last=last.upper()
+        request.session["last"] = last
         city=city.upper()
+        request.session["city"] = city
         response='Profile updated successfully'
         return render(request, 'updateinfo.html',{"status":response,"first":first,"last":last,"dob":dob,"gender":gender,"nid":nid,"house":house,
                                               "road":road,"zip":zip,"city":city})
@@ -429,7 +436,7 @@ def updateinfo(request):
         print(dob)
         return render(request, 'updateinfo.html',{"first":first,"last":last,"dob":dob,"gender":gender,"nid":nid,"house":house,
                                               "road":road,"zip":zip,"city":city})
->>>>>>> Stashed changes
+
 
 def changepass(request):
     first=request.session.get('first')
@@ -474,12 +481,7 @@ def changepass(request):
     if request.method == "POST":
         ps = request.POST["pass"]
         newps = request.POST["newpass"]
-<<<<<<< Updated upstream
-
-
-=======
         mail=request.session.get('usermail')
->>>>>>> Stashed changes
         cursor = connection.cursor()
         sql = "SELECT PASSWORD FROM R_USER WHERE EMAIL_ADD=%s;"
         cursor.execute(sql, [mail])
