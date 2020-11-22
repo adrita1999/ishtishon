@@ -40,6 +40,8 @@ def list_trains(request):
         adult = request.POST["adult"]
         child = request.POST["child"]
         clas=request.POST["class"]
+        temp=int(child)+int(adult)
+        request.session["total_seats"]=str(temp)
         global details
         details={'from':fro,'to':to,'date':date,'adult':adult,'child':child,'class':clas}
         cursor = connection.cursor()
@@ -325,6 +327,7 @@ def login(request):
 
 def seatselection(request):
     id=request.GET.get('id');
+    request.session["train_id"]=id
     cursor = connection.cursor()
     sql="SELECT SEAT_NO FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SNIGDHA' AND DATE_OF_JOURNEY= TO_DATE('15-11-2020','DD-MM-YYYY');"
     cursor.execute(sql,[id])
@@ -675,13 +678,34 @@ def upcoming(request):
     pnr = contact[slice_object]
     return render(request, 'upcoming.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 def successful(request):
-    return render(request, 'successful.html')
+    train_id=request.session.get('train_id')
+    cursor=connection.cursor()
+    sql="SELECT NAME FROM TRAIN WHERE TRAIN_ID=%s;"
+    cursor.execute(sql,[train_id])
+    result = cursor.fetchall()
+    cursor.close()
+
+    for r in result:
+        name = r[0]
+
+    return render(request, 'successful.html',{"name":name,"train_id":train_id,"total_seats":request.session.get('total_seats'),
+                                              "amount":request.session.get('cost'),"details":details})
 def payment_selection(request):
     seat_nos=request.GET.get('seat_nos')
     amount = request.session.get('cost')
-    seat_list=seat_nos.split()
-    print(seat_list)
-    return render(request, 'payment selection.html',{'amount':amount})
+    if(seat_nos[0]=='a'):
+        return render(request, 'payment selection.html', {'amount': amount})
+    else:
+        total_seats=request.session.get('total_seats')
+        print(total_seats)
+        seat_nos=seat_nos[1:]
+        seat_list=seat_nos.split()
+        if(int(total_seats)!=len(seat_list)):
+            return redirect("/seat_selection" + "?not_equal=" + str('1'))
+
+
+        #print(seat_list)
+        return render(request, 'payment selection.html',{'amount':amount})
 def bkash(request):
     name=""
     ps=""
