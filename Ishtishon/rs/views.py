@@ -333,9 +333,11 @@ def login(request):
 def seatselection(request):
     id=request.GET.get('id');
     request.session["train_id"]=id
+    clas = request.session.get('class')
+    doj = request.session.get('doj')
     cursor = connection.cursor()
-    sql="SELECT SEAT_NO FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SNIGDHA' AND DATE_OF_JOURNEY= TO_DATE('15-11-2020','DD-MM-YYYY');"
-    cursor.execute(sql,[id])
+    sql="SELECT SEAT_NO FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS=%s AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
+    cursor.execute(sql,[id,clas,doj])
     result=cursor.fetchall();
     cursor.close()
     booked_seats=[]
@@ -737,11 +739,22 @@ def successful(request):
                                               "amount":request.session.get('cost'),"details":details})
 def payment_selection(request):
     seat_nos=request.GET.get('seat_nos')
+
+    total_seats = request.session.get('total_seats')
     amount = request.session.get('cost')
     if(seat_nos[0]=='a'):
+        clas=request.session.get('class')
+        train_id=request.session.get('train_id')
+        doj=request.session.get('doj')
+        cursor=connection.cursor()
+        out=""
+        total_seats=int(total_seats)
+        result=cursor.callproc('SEATNOS',[total_seats,train_id,clas,doj,out])
+        print(result[4])
+        request.session["seat_nos"] = result[4]
         return render(request, 'payment selection.html', {'amount': amount})
     else:
-        total_seats=request.session.get('total_seats')
+
         print(total_seats)
         seat_nos=seat_nos[1:]
         print(seat_nos)
