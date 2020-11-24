@@ -42,6 +42,10 @@ def list_trains(request):
         clas=request.POST["class"]
         temp=int(child)+int(adult)
         request.session["total_seats"]=str(temp)
+        request.session["doj"]=str(date)
+        request.session["class"] = clas
+        request.session["from"] = fro
+        request.session["to"] = to
         global details
         details={'from':fro,'to':to,'date':date,'adult':adult,'child':child,'class':clas}
         cursor = connection.cursor()
@@ -284,7 +288,7 @@ def login(request):
                 #user = authenticate(request, username=username, password=password)
 
                 cursor1 = connection.cursor()
-                sql1 = "SELECT FIRST_NAME,LAST_NAME,DOB,GENDER,NID_NO,HOUSE_NO,ROAD_NO,ZIP_CODE,CITY,CONTACT_NO FROM R_USER WHERE EMAIL_ADD=%s;"
+                sql1 = "SELECT FIRST_NAME,LAST_NAME,DOB,GENDER,NID_NO,HOUSE_NO,ROAD_NO,ZIP_CODE,CITY,CONTACT_NO,USER_ID FROM R_USER WHERE EMAIL_ADD=%s;"
                 cursor1.execute(sql1, [mail])
                 result1 = cursor1.fetchall()
                 cursor1.close()
@@ -302,6 +306,7 @@ def login(request):
                     request.session['zip'] = r[7]
                     request.session['city'] = r[8]
                     request.session['contact'] = r[9]
+                    request.session['user_id'] = r[10]
 
                 #request.session['fullname']=fullname;
                 return redirect("/"+"?user="+fullname)
@@ -739,7 +744,10 @@ def payment_selection(request):
         total_seats=request.session.get('total_seats')
         print(total_seats)
         seat_nos=seat_nos[1:]
+        print(seat_nos)
+        request.session["seat_nos"] = seat_nos
         seat_list=seat_nos.split()
+        print(seat_list)
         if(int(total_seats)!=len(seat_list)):
             return redirect("/seat_selection" + "?not_equal=" + str('1'))
 
@@ -815,6 +823,24 @@ def card(request):
         sql1="INSERT INTO CARD VALUES(NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1),UPPER(%s),%s,TO_DATE(%s,'YYYY-MM-DD'),%s);"
         cursor1.execute(sql1,[name,cardnumber,date,cvv])
         cursor1.close()
+        doj = request.session.get('doj')
+        tot = request.session.get('total_seats')
+        cls = request.session.get('class')
+        fro = request.session.get('from')
+        to = request.session.get('to')
+        tr = request.session.get('train_id')
+        id = request.session.get('user_id')
+        cursor2 = connection.cursor()
+        sql2 = "INSERT INTO RESERVATION VALUES(NVL((SELECT (MAX(RESERVATION_ID)+1) FROM RESERVATION),1),SYSDATE,TO_DATE(%s,'DD-MM-YYYY'),TO_NUMBER(%s),%s,%s,%s,TO_NUMBER(%s),TO_NUMBER(%s),NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1));"
+        cursor2.execute(sql1, [doj, tot, cls, fro,to,tr,id])
+        cursor2.close()
+        seat_nos = request.session.get('seat_nos')
+        seat_list = seat_nos.split()
+        cursor3 = connection.cursor()
+        for s in seat_list:
+            sql3 = "INSERT INTO CARD VALUES(NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1),UPPER(%s),%s,TO_DATE(%s,'YYYY-MM-DD'),%s);"
+        cursor3.execute(sql1, [name, cardnumber, date, cvv])
+        cursor3.close()
         return  redirect("/successful")
         #print(request.POST);
 
