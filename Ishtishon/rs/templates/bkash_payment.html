@@ -16,13 +16,19 @@
 </head>
 
 <body>
+{% if status %}
+    <div class="contact-clean" style="background: url(&quot;assets/img/train6.jpg&quot;);padding-top: 0px;">
+
+        <label id="LOADING" style="margin-top: 77px;margin-left: 1069px;margin-bottom: 38px; width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>{{ status }}</strong></label>
+    {% else %}
     <div class="contact-clean" style="background: url(&quot;assets/img/train6.jpg&quot;);padding-top: 150px;">
+    {% endif %}
         <form action="" method="post" style="border-top-color: rgb(206,212,218);padding-top: 40px;">
             {%  csrf_token %}
             <h2 class="text-center"><img src="assets/img/bkash.png" style="width: 100px;height: 100px;"></h2>
-            <div class="form-group"><label>Mobile Account</label><input class="form-control" type="text" pattern="\d*" title="Input can be only numbers" name="name" maxlength="11" minlength="11" required></div>
+            <div class="form-group"><label>Mobile Account</label><input class="form-control" type="text" pattern="\d*" title="Input can be only numbers" name="name" maxlength="11" minlength="11" required ></div>
 
-            <div class="form-group"><label>PIN</label><input class="form-control" type="password" name="password" pattern="\d*" title="Input can be only numbers" maxlength="4" minlength="4" required></div>
+            <div class="form-group"><label>PIN</label><input class="form-control" type="password" name="password" pattern="\d*" title="Input can be only numbers" maxlength="4" minlength="4" required ></div>
 
             <div class="form-group">
                 {% if amount %}
@@ -30,17 +36,12 @@
                 {% else %}
                 <label style="width: 400px;margin-top: 10px;margin-bottom: 12px;">Amount:</label>
                 {% endif %}
-                <label style="width: 400px;">Currency: BDT</label></div><button class="btn btn-primary" name="btn1" id= "btn1" type="submit" onclick="disableid()" style="width: 400px;font-size: 16px;background: linear-gradient(white, rgb(81,171,90) 4%), rgb(81,171,90);filter: brightness(102%);">Send verification code</button>
+                <label style="width: 400px;">Currency: BDT</label></div>
+            <button class="btn btn-primary" name="btn1" id= "btn1" type="submit" style="width: 400px;font-size: 16px;background: linear-gradient(white, rgb(81,171,90) 4%), rgb(81,171,90);filter: brightness(102%);">Send verification code</button>
+            <button class="btn btn-primary" name="btn2" type="button" data-toggle="modal" data-target="#exampleModalCenter" style="width: 400px;font-size: 16px;background: linear-gradient(white, rgb(81,171,90) 4%), rgb(81,171,90);filter: brightness(102%);">Enter verification code</button>
+        </form>
 
 
-            {% if request.GET.disable|slice:":1" == '1' %}
-                <div class="form-group"><label style="padding-top: 10px;">Verification Code</label><input class="form-control"  type="password" name="vcode" id="otp" ></div>
-                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2" required><label class="form-check-label" for="formCheck-2">I agree to the terms and conditions of service</label></div>
-            <button class="btn btn-primary" type="submit" name="btn2" id="btn2" style="width: 400px;font-size: 16px;background: linear-gradient(white, rgb(81,171,90) 4%), rgb(81,171,90);filter: brightness(102%);">Proceed to pay</button></form>
-            {% else %}
-                <div class="form-group"><label style="padding-top: 10px; color:rgba(80,94,108,0.48);">Verification Code</label><input class="form-control" disabled type="password" name="vcode" id="otp" style="background: rgb(157,157,157,0.2);"></div>
-            <button class="btn btn-primary" disabled type="submit" name="btn2" id="btn2" style="width: 400px;font-size: 16px;background: linear-gradient(rgb(157,157,157) 0% ,rgb(157,157,157) 100%);filter: brightness(102%);">Proceed to pay</button></form>
-            {% endif %}
     </div>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(118,35,35);padding: 18.2px 0px;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%);">
         <div class="container"><a class="navbar-brand logo" href="#" style="text-align: left;background: rgba(255,255,255,0);color: rgb(0,0,0);"><strong>Railsheba</strong></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="navbar-toggler-icon" style="filter: brightness(0%);"></span></button>
@@ -57,14 +58,38 @@
         </div>
         </div>
     </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+        {%  csrf_token %}
+        <div class="form-group">
+            <label for="exampleInputPassword1">Enter Verification Code:</label>
+            <input type="password" name="otpin" class="form-control" id="exampleInputPassword1" placeholder="OTP" pattern="\d*" title="Input can be only numbers" maxlength="4" minlength="4" required>
+         </div>
+            <button type="submit" name="btn3" class="btn btn-primary" style="margin-top: 5px; width:100%; background: linear-gradient(white, rgb(81,171,90) 4%), rgb(81,171,90);filter: brightness(102%);">Submit</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
     <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"></main>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="assets/js/theme.js"></script>
-{% if status %}
-    <script>alert("{{ status }}");</script>
-{% endif%}
+
 </body>
 <script>
         function disableid()
@@ -72,6 +97,17 @@
             var text="1";
             window.location.href="{% url 'bkash_payment' %}"+ "?disable=" + text;
         }
+
+</script>
+<script>
+    setTimeout(function(){
+        document.getElementById('LOADING').style.visibility = "hidden";
+    }, 4000);
+    </script>
+    <script>
+function logout() {
+            window.location.href = "{% url 'login' %}" +"?logged_out="+"1";
+          }
 
 </script>
 

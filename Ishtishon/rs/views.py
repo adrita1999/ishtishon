@@ -742,6 +742,7 @@ def payment_selection(request):
 
     total_seats = request.session.get('total_seats')
     amount = request.session.get('cost')
+    request.session["paymentflag"] = ""
     if(seat_nos[0]=='a'):
         clas=request.session.get('class')
         train_id=request.session.get('train_id')
@@ -768,37 +769,38 @@ def payment_selection(request):
         #print(seat_list)
         return render(request, 'payment selection.html',{'amount':amount})
 def bkash(request):
-    name=""
-    ps=""
-    vcode=""
-    otp=1111
     amount = request.session.get('cost')
-    if request.method == "POST"and 'btn1' in request.POST:
-        # print(request.POST)
-        # otp=random.randint(1000,9999)
-        otp = 1111
-        account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
-        auth_token = '36e0fe6c03fff9833e5f9173250e9723'
-
-        print("otp jacche")
-        # client = Client(account_sid, auth_token)
-        #
-        # message = client.messages \
-        #     .create(
-        #     body='Your OTP is '+str(otp),
-        #     from_='+12543235243',
-        #     to='+8801878046439'
-        # )
-
-        # print(message.sid)
-
-
-
-    if request.method == "POST" and 'btn2' in request.POST:
+    if request.method == "POST" and 'btn1' in request.POST:
         name = request.POST["name"]
+        request.session["paymentname"] = name
         ps = request.POST["password"]
-        vcode=request.POST["vcode"]
-        print(request.POST)
+        request.session["paymentpass"] = ps
+        request.session["paymentflag"] = "done"
+        otp=random.randint(1000,9999)
+        request.session["otp"] = str(otp)
+        print("otp= "+str(otp))
+        account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
+        auth_token = '17891e6b307b4a4fc2a65078525cad4a'
+        client = Client(account_sid, auth_token)
+
+        message = client.messages \
+            .create(
+            body='Your OTP is '+str(otp),
+            from_='+12543235243',
+            to='+88'+name
+        )
+
+        print(message.sid)
+
+    if request.method == "POST" and 'btn3' in request.POST:
+        flag=request.session.get('paymentflag')
+        if flag=="":
+            msg = "Click 'Send Verification Code' first to get an OTP."
+            return render(request, 'bkash_payment.html', {"status": msg, 'amount': amount})
+        vcode=request.POST["otpin"]
+        name=request.session.get('paymentname')
+        ps=request.session.get('paymentpass')
+        otp=request.session.get('otp')
         if vcode == str(otp):
             cursor = connection.cursor()
             sql = "INSERT INTO PAYMENT VALUES(NVL((SELECT (MAX(PAYMENT_ID)+1) FROM PAYMENT),1),%s,SYSDATE);"
@@ -809,7 +811,27 @@ def bkash(request):
             sql1 = "INSERT INTO MOBILE_BANKING VALUES(NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1), TO_NUMBER(%s),TO_NUMBER(%s),TO_NUMBER(%s));"
             cursor1.execute(sql1, [name,vcode,ps])
             cursor1.close()
-            print("mb e dhukse")
+            doj = request.session.get('doj')
+            doj = str(doj)
+            print(doj)
+            tot = request.session.get('total_seats')
+            cls = request.session.get('class')
+            fro = request.session.get('from')
+            to = request.session.get('to')
+            tr = request.session.get('train_id')
+            id = request.session.get('user_id')
+            cursor2 = connection.cursor()
+            sql2 = "INSERT INTO RESERVATION VALUES(NVL((SELECT (MAX(RESERVATION_ID)+1) FROM RESERVATION),1),SYSDATE,TO_DATE(%s,'YYYY-MM-DD'),TO_NUMBER(%s),%s,%s,%s,TO_NUMBER(%s),TO_NUMBER(%s),NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1));"
+            cursor2.execute(sql2, [doj, tot, cls, fro, to, tr, id])
+            cursor2.close()
+            seat_nos = request.session.get('seat_nos')
+            seat_list = seat_nos.split()
+            cursor3 = connection.cursor()
+            for s in seat_list:
+                seat = str(s)
+                sql3 = "INSERT INTO BOOKED_SEAT VALUES(TO_NUMBER(%s),TO_NUMBER(%s),NVL((SELECT (MAX(RESERVATION_ID)) FROM RESERVATION),1),%s,TO_DATE(%s,'YYYY-MM-DD'));"
+                cursor3.execute(sql3, [tr, seat, cls, doj])
+            cursor3.close()
             return redirect("/successful")
         if vcode != "" and vcode != str(otp):
             print("otp milena")
@@ -904,36 +926,38 @@ def nexus(request):
         return redirect("/successful")
     return render(request, 'nexus_payment.html',{'amount':amount})
 def rocket(request):
-    name = ""
-    ps = ""
-    vcode = ""
-    otp = 1111
     amount = request.session.get('cost')
     if request.method == "POST" and 'btn1' in request.POST:
-        # print(request.POST)
-        # otp=random.randint(1000,9999)
-        otp = 1111
-        account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
-        auth_token = '36e0fe6c03fff9833e5f9173250e9723'
-
-        print("otp jacche")
-        # client = Client(account_sid, auth_token)
-        #
-        # message = client.messages \
-        #     .create(
-        #     body='Your OTP is '+str(otp),
-        #     from_='+12543235243',
-        #     to='+8801878046439'
-        # )
-
-        # print(message.sid)
-
-    if request.method == "POST" and 'btn2' in request.POST:
         name = request.POST["name"]
+        request.session["paymentname"] = name
         ps = request.POST["password"]
-        vcode = request.POST["vcode"]
+        request.session["paymentpass"] = ps
+        request.session["paymentflag"] = "done"
+        otp=random.randint(1000,9999)
+        request.session["otp"] = str(otp)
+        print("otp= "+str(otp))
+        account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
+        auth_token = '17891e6b307b4a4fc2a65078525cad4a'
+        client = Client(account_sid, auth_token)
 
-        print(request.POST)
+        message = client.messages \
+            .create(
+            body='Your OTP is '+str(otp),
+            from_='+12543235243',
+            to='+88'+name
+        )
+
+        print(message.sid)
+
+    if request.method == "POST" and 'btn3' in request.POST:
+        flag=request.session.get('paymentflag')
+        if flag=="":
+            msg = "Click 'Send Verification Code' first to get an OTP."
+            return render(request, 'rocket_payment.html', {"status": msg, 'amount': amount})
+        vcode=request.POST["otpin"]
+        name=request.session.get('paymentname')
+        ps=request.session.get('paymentpass')
+        otp=request.session.get('otp')
         if vcode == str(otp):
             cursor = connection.cursor()
             sql = "INSERT INTO PAYMENT VALUES(NVL((SELECT (MAX(PAYMENT_ID)+1) FROM PAYMENT),1),%s,SYSDATE);"
@@ -942,9 +966,29 @@ def rocket(request):
             cursor1 = connection.cursor()
             print("payment e dhukse")
             sql1 = "INSERT INTO MOBILE_BANKING VALUES(NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1), TO_NUMBER(%s),TO_NUMBER(%s),TO_NUMBER(%s));"
-            cursor1.execute(sql1, [name, vcode, ps])
+            cursor1.execute(sql1, [name,vcode,ps])
             cursor1.close()
-            print("mb e dhukse")
+            doj = request.session.get('doj')
+            doj = str(doj)
+            print(doj)
+            tot = request.session.get('total_seats')
+            cls = request.session.get('class')
+            fro = request.session.get('from')
+            to = request.session.get('to')
+            tr = request.session.get('train_id')
+            id = request.session.get('user_id')
+            cursor2 = connection.cursor()
+            sql2 = "INSERT INTO RESERVATION VALUES(NVL((SELECT (MAX(RESERVATION_ID)+1) FROM RESERVATION),1),SYSDATE,TO_DATE(%s,'YYYY-MM-DD'),TO_NUMBER(%s),%s,%s,%s,TO_NUMBER(%s),TO_NUMBER(%s),NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1));"
+            cursor2.execute(sql2, [doj, tot, cls, fro, to, tr, id])
+            cursor2.close()
+            seat_nos = request.session.get('seat_nos')
+            seat_list = seat_nos.split()
+            cursor3 = connection.cursor()
+            for s in seat_list:
+                seat = str(s)
+                sql3 = "INSERT INTO BOOKED_SEAT VALUES(TO_NUMBER(%s),TO_NUMBER(%s),NVL((SELECT (MAX(RESERVATION_ID)) FROM RESERVATION),1),%s,TO_DATE(%s,'YYYY-MM-DD'));"
+                cursor3.execute(sql3, [tr, seat, cls, doj])
+            cursor3.close()
             return redirect("/successful")
         if vcode != "" and vcode != str(otp):
             print("otp milena")
