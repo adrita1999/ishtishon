@@ -11,6 +11,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 #from hashutils import make_pw_hash,check_pw_hash
 import hashlib
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
 
 from .models import Trains
 from django.db import connection
@@ -170,6 +173,15 @@ def list_stations(request):
 
 
 def homepage(request):
+
+    """email=EmailMessage(
+        'subject',
+        'body',
+        settings.EMAIL_HOST_USER,
+        ['adrita_99@yahoo.com'],
+    )
+    email.fail_silently=False
+    email.send()"""
     cursor = connection.cursor()
     sql="SELECT NAME FROM STATION"
     cursor.execute(sql)
