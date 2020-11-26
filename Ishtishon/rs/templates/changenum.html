@@ -1,3 +1,4 @@
+{%  load static %}
 <!DOCTYPE html>
 <html>
 
@@ -29,6 +30,9 @@
         </div>
         </div>
     </nav>
+        {% if status %}
+        <label id="LOADING" style="margin-top: 75px;margin-left: 1050px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>{{ status }}</strong></label>
+            {% endif %}
     <div style="padding-top: 95px;">
         <div class="container" style="background: url(&quot;assets/img/train6.jpg&quot;) center / cover no-repeat;">
             <section style="padding-top: 25px;background: rgba(0,0,0,0.85);padding-right: 20px;padding-left: 20px;">
@@ -93,37 +97,74 @@
                     <div style="padding-left: 10px;padding-top: 10px;padding-right: 0px;"><i class="fa fa-mobile" style="padding-right: 10px;font-size: 36px;"></i>
                         <h1 class="d-inline" style="font-size: 36px;padding-top: 10px;">Change Contact Number</h1>
                         <hr style="color: rgb(0,0,0);background: #000000;">
-                        <form style="padding-bottom: 10px;">
+                        <form action="" method="post" style="padding-bottom: 10px;">
+                            {%  csrf_token %}
                             <div class="form-group"><label>Current Mobile Number</label>
                                 <div class="input-group">
-                                    <div class="input-group-prepend"><span class="input-group-text">+880</span></div><input class="form-control" type="tel">
+                                    <div class="input-group-prepend"><span class="input-group-text">+880</span></div><input class="form-control" name="num1" value="{{ pnr }}" type="tel" maxlength="10" minlength="10" pattern="\d*" title="Input can be only numbers" required>
                                     <div class="input-group-append"></div>
                                 </div>
                             </div>
                             <div class="form-group"><label>New Mobile Number</label>
                                 <div class="input-group">
-                                    <div class="input-group-prepend"><span class="input-group-text">+880</span></div><input class="form-control" type="tel">
+                                    <div class="input-group-prepend"><span class="input-group-text">+880</span></div><input class="form-control" name="num2" type="tel" maxlength="10" minlength="10" pattern="\d*" title="Input can be only numbers" required>
                                     <div class="input-group-append"></div>
                                 </div>
-                            </div><button class="btn btn-primary border rounded" type="button" style="margin-bottom: 10px;width: auto;background: rgb(104,171,80);color: rgb(0,0,0);">Send Verification Code</button>
-                            <div class="form-group"><label>Verification Code</label><input class="form-control" type="password" placeholder="Code"></div>
-                            <div class="form-group"><label>Password</label><input class="form-control" type="password" placeholder="Password"></div>
+                            </div>
+                            <button class="btn btn-primary border rounded" name="btn1" type="submit" style="margin-bottom: 10px;width: auto;background: rgb(104,171,80);color: rgb(0,0,0);">Send Verification Code</button>
+                        <hr style="background: rgba(0,0,0,0.5);color: rgb(0,0,0);margin-bottom: 32px;"><button class="btn btn-primary border rounded" name="btn2" type="button" data-toggle="modal" data-target="#exampleModalCenter" style="margin-bottom: 35px;width: 720px;background: rgb(104,171,80);color: rgb(0,0,0);">Verify Code and Change Contact Number</button>
                         </form>
-                        <hr style="background: rgba(0,0,0,0.5);color: rgb(0,0,0);margin-bottom: 32px;"><button class="btn btn-primary border rounded" type="button" style="margin-bottom: 35px;width: 720px;background: rgb(104,171,80);color: rgb(0,0,0);">Verify Code and Change Contact Number</button></div>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+        {%  csrf_token %}
+        <div class="form-group">
+            <label>Enter Verification Code:</label>
+            <input type="password" name="otpin" class="form-control" id="exampleInputPassword1" placeholder="OTP" pattern="\d*" title="Input can be only numbers" maxlength="4" minlength="4" required>
+         </div>
+            <div class="form-group">
+            <label>Enter Password:</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+         </div>
+            <button type="submit" name="btn3" class="btn btn-primary" style="margin-top: 5px; width:100%; background: linear-gradient(white, rgb(81,171,90) 4%), rgb(81,171,90);filter: brightness(102%);">Submit</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="assets/js/theme.js"></script>
 </body>
+
 <script>
 function logout() {
             window.location.href = "{% url 'login' %}" +"?logged_out="+"1";
           }
 
 </script>
+<script>
+    setTimeout(function(){
+        document.getElementById('LOADING').style.display = 'none';
+    }, 4000);
+    </script>
+
 
 </html>

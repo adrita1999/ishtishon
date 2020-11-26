@@ -45,7 +45,7 @@ urlpatterns = [
     path('card_payment',rs_views.card,name= 'card_payment'),
     path('nexus_payment',rs_views.nexus,name= 'nexus_payment'),
     path('rocket_payment',rs_views.rocket,name= 'rocket_payment'),
-
+    path('Ticket',rs_views.pdf,name='ticket'),
 
     #hr delete hoyna
 

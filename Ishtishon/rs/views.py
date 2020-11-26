@@ -17,6 +17,14 @@ from django.template.loader import render_to_string
 
 from .models import Trains
 from django.db import connection
+from django.http import HttpResponse
+from django.views.generic import View
+from io import BytesIO
+from django.http import HttpResponse
+from django.template.loader import get_template
+
+from xhtml2pdf import pisa
+
 
 global is_logged_in
 global details
@@ -30,6 +38,38 @@ def check_pw_hash(password,hash):
     if make_pw_hash(password)==hash:
         return True
     return False
+
+def render_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html  = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None
+class GeneratePDF(View):
+    def get(self, request, *args, **kwargs):
+        template = get_template('ticket.html')
+        context = {
+            "invoice_id": 123,
+            "customer_name": "John Cooper",
+            "amount": 1399.99,
+            "today": "Today",
+        }
+        html = template.render(context)
+        pdf = render_to_pdf('ticket.html', context)
+        if pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            filename = "Invoice_%s.pdf" %("12341231")
+            content = "inline; filename='%s'" %(filename)
+            download = request.GET.get("download")
+            if download:
+                content = "attachment; filename='%s'" %(filename)
+            response['Content-Disposition'] = content
+            return response
+        return HttpResponse("Not found")
+
+
 
 def list_trains(request):
     if request.method == "POST":
@@ -300,7 +340,7 @@ def login(request):
                 #user = authenticate(request, username=username, password=password)
 
                 cursor1 = connection.cursor()
-                sql1 = "SELECT FIRST_NAME,LAST_NAME,DOB,GENDER,NID_NO,HOUSE_NO,ROAD_NO,ZIP_CODE,CITY,CONTACT_NO,USER_ID FROM R_USER WHERE EMAIL_ADD=%s;"
+                sql1 = "SELECT FIRST_NAME,LAST_NAME,DOB,GENDER,NID_NO,HOUSE_NO,ROAD_NO,ZIP_CODE,CITY,CONTACT_NO,USER_ID,PASSWORD FROM R_USER WHERE EMAIL_ADD=%s;"
                 cursor1.execute(sql1, [mail])
                 result1 = cursor1.fetchall()
                 cursor1.close()
@@ -319,8 +359,9 @@ def login(request):
                     request.session['city'] = r[8]
                     request.session['contact'] = r[9]
                     request.session['user_id'] = r[10]
+                    request.session['password'] = r[11]
 
-                #request.session['fullname']=fullname;
+                request.session['fullname']=fullname;
                 return redirect("/"+"?user="+fullname)
             else:
                 print(make_pw_hash(ps))
@@ -365,7 +406,7 @@ def contactus(request):
 def updateinfo(request):
     if is_logged_in == 0:
         return redirect("/login" + "?notdash_logged_in=" + str(is_logged_in))
-
+    request.session["numflag"] = ""
     mail = request.session.get('usermail')
     contact = request.session.get('contact')
     first=request.session.get('first')
@@ -626,6 +667,7 @@ def changenum(request):
     city = request.session.get('city')
     contact = request.session.get('contact')
     nid = request.session.get('nid')
+    hashps=request.session.get('password')
     fullname = first + " " + last
     address = ""
     if (house):
@@ -655,7 +697,66 @@ def changenum(request):
                 address = city
     slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
-    return render(request, 'changenum.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
+
+    if request.method == "POST" and 'btn1' in request.POST:
+        num1 = request.POST["num1"]
+        num2 = request.POST["num2"]
+        number1='+880'+str(num1)
+        dbnum=request.session.get('contact')
+        if number1 != dbnum:
+            msg = "Current number does not match. Try again. "
+            return render(request, 'changenum.html', {"status": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
+        request.session["tempnum"] = str(num2)
+        request.session["numflag"] = "done"
+        otp = random.randint(1000, 9999)
+        request.session["otp"] = str(otp)
+        print("otp= " + str(otp))
+        account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
+        auth_token = '17891e6b307b4a4fc2a65078525cad4a'
+        client = Client(account_sid, auth_token)
+
+        message = client.messages \
+            .create(
+            body='Your OTP is ' + str(otp),
+            from_='+12543235243',
+            to='+880' + str(num2)
+        )
+
+        print(message.sid)
+    if request.method == "POST" and 'btn3' in request.POST:
+        flag = request.session.get('numflag')
+        if flag == "":
+            msg = "Click 'Send Verification Code' first to get an OTP."
+            return render(request, 'changenum.html', {"status": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
+        vcode = request.POST["otpin"]
+        ps=request.POST["password"]
+        ps=make_pw_hash(ps)
+        if ps!=hashps:
+            msg = "Wrong password. Try again."
+            return render(request, 'changenum.html', {"status": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
+        uid = request.session.get('user_id')
+        tempnum= request.session.get('tempnum')
+        otp = request.session.get('otp')
+        if vcode == str(otp):
+            newnum='+880'+tempnum
+            cursor = connection.cursor()
+            sql = "UPDATE R_USER SET CONTACT_NO=%s WHERE USER_ID=TO_NUMBER(%s);"
+            cursor.execute(sql, [newnum,uid])
+            cursor.close()
+            request.session["contact"] =newnum
+            contact = request.session.get('contact')
+            slice_object = slice(4, 14, 1)
+            pnr = contact[slice_object]
+            msg = "Contact number has been updated successfully."
+            return render(request, 'changenum.html',
+                          {"status": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
+                           "pnr": pnr, "nid": nid, "password": hashps})
+        else:
+            print("otp milena")
+            msg = "Wrong OTP Entered."
+            return render(request, 'changenum.html', {"status": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
+
+    return render(request, 'changenum.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
 def prev(request):
     first = request.session.get('first')
     last = request.session.get('last')
@@ -743,9 +844,10 @@ def successful(request):
     cursor.execute(sql,[train_id])
     result = cursor.fetchall()
     cursor.close()
-
+    name=""
     for r in result:
         name = r[0]
+
 
     return render(request, 'successful.html',{"name":name,"train_id":train_id,"total_seats":request.session.get('total_seats'),
                                               "amount":request.session.get('cost'),"details":details})
@@ -1009,4 +1111,19 @@ def rocket(request):
 
     return render(request, 'rocket_payment.html',{'amount':amount})
 
+def pdf(request):
+   #all_student = Students.objects.all()
+    fullname=request.session.get('fullname')
+    trid=request.session.get('train_id')
+    print(fullname)
+    print(trid)
+    data = {'fullname': fullname,'train_id': trid}
+    template = get_template("ticket.html")
+    data_p = template.render(data)
+    response = BytesIO()
 
+    pdfPage = pisa.pisaDocument(BytesIO(data_p.encode("UTF-8")), response)
+    if not pdfPage.err:
+        return HttpResponse(response.getvalue(), content_type="application/pdf")
+    else:
+        return HttpResponse("Error Generating PDF")
