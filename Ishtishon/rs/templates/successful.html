@@ -69,6 +69,7 @@
                 </tr>
             </tbody>
         </table>
+        <button class="btn btn-primary" type="button" onclick="getid()" style="width: 400px;font-size: 16px;background: linear-gradient(white, rgb(81,171,90) 4%), rgb(81,171,90);filter: brightness(102%);">Download Ticket</button>
     </div><label style="font-size: 24px;margin-left: 50px;margin-bottom: 10px;"><strong>Please note</strong></label>
     <ul style="margin-left: 26px;margin-bottom: 10px;">
         <li style="font-size: 16px;">This ticket will be valid on production of Photo Identity Card of the passenger only</li>
@@ -86,6 +87,17 @@
 function logout() {
             window.location.href = "{% url 'login' %}" +"?logged_out="+"1";
           }
+
+</script>
+<script>
+
+    function getid() {
+
+            window.location.href = "{% url 'ticket' %}";
+            //window.location.href = "{% url 'ticket' %}"+"?download=1";
+          }
+
+
 
 </script>
 
