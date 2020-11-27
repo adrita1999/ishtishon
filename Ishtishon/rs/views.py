@@ -14,7 +14,7 @@ import hashlib
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.template.loader import render_to_string
-
+import datetime
 from .models import Trains
 from django.db import connection
 from django.http import HttpResponse
@@ -57,6 +57,8 @@ def list_trains(request):
         temp=int(child)+int(adult)
         if temp>4:
             return redirect("/" + "?max_seat_exceeded=1")
+        request.session["adult"] = str(adult)
+        request.session["child"] = str(child)
         request.session["total_seats"]=str(temp)
         request.session["doj"]=str(date)
         request.session["class"] = clas
@@ -329,7 +331,7 @@ def login(request):
 
                 fullname=""
                 for r in result1:
-                    fullname=r[0]
+                    #fullname=r[0]
                     request.session['first'] = r[0]
                     request.session['last'] = r[1]
                     request.session['dob'] = str(r[2])
@@ -342,7 +344,7 @@ def login(request):
                     request.session['contact'] = r[9]
                     request.session['user_id'] = r[10]
                     request.session['password'] = r[11]
-
+                fullname=request.session.get('first')+ ' ' + request.session.get("last")
                 request.session['fullname']=fullname;
                 return redirect("/"+"?user="+fullname)
             else:
@@ -368,6 +370,16 @@ def login(request):
 def seatselection(request):
     id=request.GET.get('id');
     request.session["train_id"]=id
+    fro=request.session.get('from')
+    cursor0 = connection.cursor()
+    sql0 = "SELECT (SELECT NAME FROM TRAIN T WHERE T.TRAIN_ID=TT.TRAIN_ID),TT.DEPARTURE_TIME,TO_CHAR(TO_DATE(TT.DEPARTURE_TIME,'HH24:MI')-(1/1440*15),'HH24:MI') FROM TRAIN_TIMETABLE TT WHERE TT.TRAIN_ID=TO_NUMBER(%s) AND STATION_ID=(SELECT STATION_ID FROM STATION WHERE NAME=%s);"
+    cursor0.execute(sql0, [id, fro])
+    result0 = cursor0.fetchall();
+    cursor0.close()
+    for r in result0:
+        request.session["train_name"] = r[0]
+        request.session["dep_time"]= r[1]
+        request.session["last_time"] = r[2]
     clas = request.session.get('class')
     doj = request.session.get('doj')
     cursor = connection.cursor()
@@ -865,7 +877,7 @@ def successful(request):
 
 
     return render(request, 'successful.html',{"name":name,"train_id":train_id,"total_seats":request.session.get('total_seats'),
-                                              "amount":request.session.get('cost'),"details":details})
+                                              "amount":request.session.get('cost'),"from":request.session.get('from'),"to":request.session.get('to'),"class":request.session.get('class')})
 def payment_selection(request):
     seat_nos=request.GET.get('seat_nos')
 
@@ -962,6 +974,19 @@ def bkash(request):
                 sql3 = "INSERT INTO BOOKED_SEAT VALUES(TO_NUMBER(%s),TO_NUMBER(%s),NVL((SELECT (MAX(RESERVATION_ID)) FROM RESERVATION),1),%s,TO_DATE(%s,'YYYY-MM-DD'));"
                 cursor3.execute(sql3, [tr, seat, cls, doj])
             cursor3.close()
+
+            cursor4 = connection.cursor()
+            sql4 = " SELECT TO_CHAR(SYSDATE,'DD-MM-YYYY'),TO_CHAR(SYSDATE,'HH24:MI') FROM DUAL;"
+            cursor4.execute(sql4)
+            result4 = cursor4.fetchall()
+            cursor4.close()
+
+            for r in result4:
+                idate=r[0]
+                itime=r[1]
+            request.session["idate"]=idate
+            request.session["itime"] = itime
+
             return redirect("/successful")
         if vcode != "" and vcode != str(otp):
             print("otp milena")
@@ -1011,6 +1036,19 @@ def card(request):
             sql3 = "INSERT INTO BOOKED_SEAT VALUES(TO_NUMBER(%s),TO_NUMBER(%s),NVL((SELECT (MAX(RESERVATION_ID)) FROM RESERVATION),1),%s,TO_DATE(%s,'YYYY-MM-DD'));"
             cursor3.execute(sql3, [tr, seat, cls, doj])
         cursor3.close()
+
+        cursor4 = connection.cursor()
+        sql4 = " SELECT TO_CHAR(SYSDATE,'DD-MM-YYYY'),TO_CHAR(SYSDATE,'HH24:MI') FROM DUAL;"
+        cursor4.execute(sql4)
+        result4 = cursor4.fetchall()
+        cursor4.close()
+
+        for r in result4:
+            idate = r[0]
+            itime = r[1]
+        request.session["idate"] = idate
+        request.session["itime"] = itime
+
         return  redirect("/successful")
         #print(request.POST);
 
@@ -1052,6 +1090,18 @@ def nexus(request):
             sql3 = "INSERT INTO BOOKED_SEAT VALUES(TO_NUMBER(%s),TO_NUMBER(%s),NVL((SELECT (MAX(RESERVATION_ID)) FROM RESERVATION),1),%s,TO_DATE(%s,'YYYY-MM-DD'));"
             cursor3.execute(sql3, [tr, seat, cls, doj])
         cursor3.close()
+
+        cursor4 = connection.cursor()
+        sql4 = " SELECT TO_CHAR(SYSDATE,'DD-MM-YYYY'),TO_CHAR(SYSDATE,'HH24:MI') FROM DUAL;"
+        cursor4.execute(sql4)
+        result4 = cursor4.fetchall()
+        cursor4.close()
+
+        for r in result4:
+            idate = r[0]
+            itime = r[1]
+        request.session["idate"] = idate
+        request.session["itime"] = itime
 
         return redirect("/successful")
     return render(request, 'nexus_payment.html',{'amount':amount})
@@ -1119,6 +1169,19 @@ def rocket(request):
                 sql3 = "INSERT INTO BOOKED_SEAT VALUES(TO_NUMBER(%s),TO_NUMBER(%s),NVL((SELECT (MAX(RESERVATION_ID)) FROM RESERVATION),1),%s,TO_DATE(%s,'YYYY-MM-DD'));"
                 cursor3.execute(sql3, [tr, seat, cls, doj])
             cursor3.close()
+
+            cursor4 = connection.cursor()
+            sql4 = " SELECT TO_CHAR(SYSDATE,'DD-MM-YYYY'),TO_CHAR(SYSDATE,'HH24:MI') FROM DUAL;"
+            cursor4.execute(sql4)
+            result4 = cursor4.fetchall()
+            cursor4.close()
+
+            for r in result4:
+                idate = r[0]
+                itime = r[1]
+            request.session["idate"] = idate
+            request.session["itime"] = itime
+
             return redirect("/successful")
         if vcode != "" and vcode != str(otp):
             print("otp milena")
@@ -1129,11 +1192,36 @@ def rocket(request):
 
 def pdf(request):
    #all_student = Students.objects.all()
-    fullname=request.session.get('fullname')
+    first=request.session.get('first').lower()
+    first=first.capitalize()
+    last = request.session.get('last').lower()
+    last = last.capitalize()
+    fullname=first+' '+last
+    idate = request.session.get('idate')
+    itime=request.session.get('itime')
+    issue=idate+' '+itime
+    doj=request.session.get('doj')
+    doj = str(doj)
+    doj = datetime.datetime.strptime(doj, '%Y-%m-%d').strftime('%d-%m-%Y')
+    doj=str(doj)
+    dtime=request.session.get('dep_time')
+    journey=doj+ ' '+dtime
     trid=request.session.get('train_id')
-    print(fullname)
-    print(trid)
-    data = {'fullname': fullname,'train_id': trid}
+    trname=request.session.get('train_name')
+    train=trid+' '+trname
+    fro=request.session.get('from')
+    to=request.session.get('to')
+    clas=request.session.get('class')
+    coach='UMA'
+    range=request.session.get('seat_nos')
+    tot=request.session.get('total_seats')
+    adult=request.session.get('adult')
+    child=request.session.get('child')
+    fare='BDT '+ str(request.session.get('cost'))
+    last_time=request.session.get('last_time')
+    collect=doj+ ' '+last_time
+    pnr= request.session.get('pnr')
+    data = {'fullname': fullname,'issue':issue,'journey':journey,'train' :train,'from':fro,'to':to,'class':clas,'coach':coach,'range':range,'total':tot,'adult':adult,'child':child,'fare':fare,'collect':collect,'pnr':pnr}
     template = get_template("ticket.html")
     data_p = template.render(data)
     #pdf = render_to_pdf('ticket.html', data)

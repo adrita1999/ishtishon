@@ -12,7 +12,7 @@
     <div>
 
         <h1 >Online Ticket</h1>
-        <p>Dear</p>
+        <p>Dear {{ fullname }},</p>
         <p>Your request to book e-ticket for your journey was successful. Your ticket was booked in your originating station (the station you mentioned as "From Station") using your cellphone (mobile) number . The details of your e-ticket are as below:-</p>
         <h1><strong>This Ticket will be valid on production of Photo Identity Card of the Passenger.</strong></h1>
             <h1 >Journey Information</h1>
@@ -21,59 +21,59 @@
                     <tbody>
                         <tr>
                             <td >Issue Date &amp; Time</td>
-                            <td>Cell 2</td>
+                            <td>{{ issue }}</td>
                         </tr>
                         <tr>
                             <td>Journey Date and Departure Time</td>
-                            <td>Cell 4</td>
+                            <td>{{journey}}</td>
                         </tr>
                         <tr>
                             <td>Train Number and Name</td>
-                            <td>Cell 4</td>
+                            <td>{{train}}</td>
                         </tr>
                         <tr>
                             <td>Originating Station (From Station)</td>
-                            <td>Cell 4</td>
+                            <td>{{from}}</td>
                         </tr>
                         <tr>
                             <td>Destination Station (To Station)</td>
-                            <td>Cell 2</td>
+                            <td>{{to}}</td>
                         </tr>
                         <tr>
                             <td>Class Name</td>
-                            <td>Cell 4</td>
+                            <td>{{class}}</td>
                         </tr>
                         <tr>
                             <td>Coach Name</td>
-                            <td>Cell 4</td>
+                            <td>{{coach}}</td>
                         </tr>
                         <tr>
                             <td>Seat Range</td>
-                            <td>Cell 4</td>
+                            <td>{{range}}</td>
                         </tr>
                         <tr>
                             <td>No of Seats</td>
-                            <td>Cell 2</td>
+                            <td>{{total}}</td>
                         </tr>
                         <tr>
                             <td>No of Adult Passenger(s)</td>
-                            <td>Cell 4</td>
+                            <td>{{adult}}</td>
                         </tr>
                         <tr>
                             <td>No of Child Passenger(s)</td>
-                            <td>Cell 4</td>
+                            <td>{{child}}</td>
                         </tr>
                         <tr>
                             <td>FARE</td>
-                            <td>Cell 4</td>
+                            <td>{{fare}}</td>
                         </tr>
                         <tr>
                             <td>VAT</td>
-                            <td>Cell 4</td>
+                            <td>--</td>
                         </tr>
                         <tr>
                             <td>TOTAL FARE</td>
-                            <td>Cell 4</td>
+                            <td>--</td>
                         </tr>
                     </tbody>
                 </table>
@@ -84,11 +84,11 @@
                     <tbody>
                         <tr>
                             <td >Last time of collection of printed tickets</td>
-                            <td>Cell 2</td>
+                            <td>{{collect}}</td>
                         </tr>
                         <tr>
                             <td>Cellphone (Mobile) Number</td>
-                            <td>Cell 4</td>
+                            <td>{{pnr}}</td>
                         </tr>
                     </tbody>
                 </table>

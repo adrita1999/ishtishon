@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/css/Toggle-Switches.css">
 </head>
 
-<body>
+<body style="padding: 10px;margin: 5px;">
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(118,35,35);padding: 18.2px 0px;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%);">
         <div class="container"><a class="navbar-brand logo" href="#" style="text-align: left;background: rgba(255,255,255,0);color: rgb(0,0,0);"><strong>Railsheba</strong></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="navbar-toggler-icon" style="filter: brightness(0%);"></span></button>
             <div
@@ -33,9 +33,9 @@
     </nav>
     <div style="height: 50px;margin-top: 100px;margin-left: 50px;"><label style="height: 50px;font-size: 36px;margin-bottom: 0px;"><strong>Your request to book e-ticket for your journey was successful!!</strong></label><i class="icon ion-android-happy" style="margin-left: 8px;font-size: 36px;"></i></div>
     <div style="height: 30px;margin-left: 50px;margin-top: 10px;"><label style="font-size: 24px;margin-top: 0px;margin-bottom: 0px;"><strong>** </strong>A copy of your e-ticket has been sent to the provided e-mail address</label></div>
-    <div style="height: 50px;margin-left: 50px;margin-top: 20px;"><label style="width: 100%;background: rgb(104,171,80);margin-top: 0px;font-size: 24px;">Journey Information</label></div>
-    <div class="table-responsive" style="margin-left: 38px;margin-top: 10px;">
-        <table class="table">
+    <div style="height: 50px;margin-left: 50px;margin-top: 20px;"><label style="padding-left: 10px;width: 95%;background: rgb(81,171,90);margin-top: 0px;font-size: 24px;filter: brightness(102%);">Journey Information</label></div>
+    <div class="table-responsive" style="margin-left: 38px;margin-top: 10px;margin-right:50px;padding: 15px;">
+        <table class="table" style="width:90%;margin-right:50px;">
             <thead>
                 <tr>
                     <th>Train ID</th>
@@ -49,15 +49,15 @@
                 </tr>
                 <tr>
                     <td><strong>Originating Station(From Station)</strong></td>
-                    <td><strong>{{ details.from }}</strong></td>
+                    <td><strong>{{from }}</strong></td>
                 </tr>
                 <tr>
                     <td><strong>Destination Station(To Station)</strong></td>
-                    <td><strong>{{ details.to }}</strong></td>
+                    <td><strong>{{to }}</strong></td>
                 </tr>
                 <tr>
                     <td><strong>Class Name</strong></td>
-                    <td><strong>{{ details.class }}</strong></td>
+                    <td><strong>{{class }}</strong></td>
                 </tr>
                 <tr>
                     <td><strong>No. of total seats</strong></td>
@@ -69,7 +69,7 @@
                 </tr>
             </tbody>
         </table>
-        <button class="btn btn-primary" type="button" onclick="getid()" style="width: 400px;font-size: 16px;background: linear-gradient(white, rgb(81,171,90) 4%), rgb(81,171,90);filter: brightness(102%);">Download Ticket</button>
+        <button class="btn btn-primary" type="button" onclick="getid()" style="margin-left:15px;margin-bottom: 20px;margin-top: 10px; width: 400px;font-size: 16px;color: rgb(0,0,0); background: rgb(81,171,90);filter: brightness(102%);">Download Ticket</button>
     </div><label style="font-size: 24px;margin-left: 50px;margin-bottom: 10px;"><strong>Please note</strong></label>
     <ul style="margin-left: 26px;margin-bottom: 10px;">
         <li style="font-size: 16px;">This ticket will be valid on production of Photo Identity Card of the passenger only</li>
