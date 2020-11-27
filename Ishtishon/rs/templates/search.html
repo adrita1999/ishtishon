@@ -26,7 +26,10 @@
         <label id="LOADING3" style="margin-top: 67px;margin-left: 1070px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>You are already logged in</strong></label>
         {% endif %}
         {% if request.GET.already_logged_in == '1' %}
-            <label id="LOADING4" style="margin-top: 67px;margin-left: 1070px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>Please log out first to register</strong></label>
+            <label id="LOADING4" style="margin-top: 67px;margin-left: 1070px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>Please log out first to register.</strong></label>
+        {% endif %}
+           {% if request.GET.max_seat_exceeded == '1' %}
+            <label id="LOADING5" style="margin-top: 67px;margin-left: 1070px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>Maximum 4 seats can be issued.</strong></label>
         {% endif %}
         <form action="{% url 'train' %}" method="post" style="text-align: right;border-style: none;border-right-style: none;background: rgba(30,40,51,0.88);width:440px;max-width: 440px">
             {%  csrf_token %}
@@ -57,9 +60,10 @@
                     <option style="color: #000000">S_CHAIR</option>
                     <option style="color: #000000">SHOVAN</option>
                 </select>
-            </div><input class="form-control" type="date" name= "date" style="opacity: 1;width: 178px;background: rgba(56,66,74,0);color: rgb(246,247,248);filter: brightness(200%) contrast(104%);padding-left: 7px"></div><small class="form-text text-left text-muted" style="color: rgb(248,249,250);font-size: 16px;filter: brightness(200%) contrast(200%);margin-left: 10px">Passengers</small>
+            </div><input class="form-control" type="date" name= "date" min="{{ date }}" max="{{ lastdate }}" style="opacity: 1;width: 178px;background: rgba(56,66,74,0);color: rgb(246,247,248);filter: brightness(200%) contrast(104%);padding-left: 7px"></div><small class="form-text text-left text-muted" style="color: rgb(248,249,250);font-size: 16px;filter: brightness(200%) contrast(200%);margin-left: 10px">Passengers</small>
     <input
         class="form-control float-right" type="text" name="child" placeholder="Child" style="width: 178px;filter: brightness(200%) contrast(200%);padding: 5px"><input class="form-control" type="text" name="adult" placeholder="Adult" style="width: 178px;filter: brightness(200%) contrast(200%);">
+            <div class="form-group"> <label class="float-left" style="text-align: left;margin-top: 8px; color: rgba(248,249,250,0.8); font-size: 14px ">*Maximum 4 seats can be issued</label></div>
         <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background: rgb(104,171,80);color: rgb(0,0,0);">Find</button></div>
         </form>
         </div>
@@ -114,6 +118,11 @@ function logout() {
 <script>
     setTimeout(function(){
         document.getElementById('LOADING4').style.display = 'none';
+    }, 4000);
+    </script>
+<script>
+    setTimeout(function(){
+        document.getElementById('LOADING5').style.display = 'none';
     }, 4000);
     </script>
 

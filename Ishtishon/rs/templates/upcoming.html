@@ -95,7 +95,10 @@
                         <hr style="color: rgb(0,0,0);background: #000000;">
                         <div class="table-responsive" style="background: rgb(245,255,241);">
                             <table class="table table-striped">
+                                {% if record %}
+                                {% else %}
                                 <caption style="padding-left: 12px;">No Record Available!!!</caption>
+                                {% endif %}
                                 <thead>
                                     <tr style="background: rgb(104,171,80);">
                                         <th>SL</th>
@@ -103,10 +106,23 @@
                                         <th>Station From</th>
                                         <th>Station To</th>
                                         <th>Ticket Issue Time</th>
-                                        <th>Departure Time</th>
+                                        <th>Date of Journey</th>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                {% if record %}
+                                    {% for r in record %}
+                                <tr>
+                                    <td >{{r.sl}}</td>
+                                    <td >{{r.trname}}</td>
+                                    <td >{{r.from}}</td>
+                                    <td >{{r.to}}</td>
+                                    <td >{{r.dor}}</td>
+                                    <td >{{r.doj}}</td>
+                                </tr>
+                                    {% endfor %}
+                                {% endif %}
+                                </tbody>
                             </table>
                         </div>
                         <hr style="background: rgba(0,0,0,0.5);color: rgb(0,0,0);margin-bottom: 32px;">

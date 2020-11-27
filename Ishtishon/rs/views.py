@@ -55,6 +55,8 @@ def list_trains(request):
         child = request.POST["child"]
         clas=request.POST["class"]
         temp=int(child)+int(adult)
+        if temp>4:
+            return redirect("/" + "?max_seat_exceeded=1")
         request.session["total_seats"]=str(temp)
         request.session["doj"]=str(date)
         request.session["class"] = clas
@@ -203,11 +205,20 @@ def homepage(request):
         NAME=r[0]
         row={'NAME':NAME}
         dict.append(row)
+
+    cursor2 = connection.cursor()
+    sql2 = " SELECT TO_CHAR(SYSDATE,'YYYY-MM-DD'),TO_CHAR(SYSDATE+10,'YYYY-MM-DD') FROM DUAL;"
+    cursor2.execute(sql2)
+    result2 = cursor2.fetchall()
+    cursor2.close()
+    for r in result2:
+        date = r[0]
+        lastdate=r[1]
     if request.method=="GET":
-        return render(request, 'search.html', {'names': dict})
+        return render(request, 'search.html', {'names': dict, 'date':date, 'lastdate':lastdate})
         #print("data= ",request.POST)
     else:
-        return render(request,'search.html',{'names':dict})
+        return render(request,'search.html',{'names':dict,'date':date, 'lastdate':lastdate})
 
 def registration(request):
     if is_logged_in == 1:
@@ -767,7 +778,23 @@ def prev(request):
                 address = city
     slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
-    return render(request, 'prev.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
+
+    cursor = connection.cursor()
+    sql = "SELECT (SELECT T.NAME FROM TRAIN T WHERE T.TRAIN_ID=R.TRAIN_ID),R.FROM_STATION,R.TO_STATION,TO_CHAR(R.DATE_OF_JOURNEY,'DD-MON-YYYY') FROM RESERVATION R WHERE CHECKBEFORE(R.DATE_OF_JOURNEY)=1 ORDER BY R.DATE_OF_JOURNEY;"
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    dict_result=[]
+    i=1
+    for r in result:
+        trname=r[0]
+        fro=r[1]
+        to=r[2]
+        doj=r[3]
+        row={'sl':i,'trname':trname,'from':fro,'to':to,'doj':doj}
+        dict_result.append(row)
+        i=i+1
+
+    return render(request, 'prev.html',{"record":dict_result,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 def upcoming(request):
     first = request.session.get('first')
     last = request.session.get('last')
@@ -807,7 +834,24 @@ def upcoming(request):
                 address = city
     slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
-    return render(request, 'upcoming.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
+
+    cursor = connection.cursor()
+    sql = "SELECT (SELECT T.NAME FROM TRAIN T WHERE T.TRAIN_ID=R.TRAIN_ID),R.FROM_STATION,R.TO_STATION,TO_CHAR(R.DATE_OF_RESERVATION,'HH24:MI, DD-MON-YYYY'),TO_CHAR(R.DATE_OF_JOURNEY,'DD-MON-YYYY') FROM RESERVATION R WHERE CHECKAFTER(R.DATE_OF_JOURNEY)=1 ORDER BY R.DATE_OF_JOURNEY;"
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    dict_result = []
+    i = 1
+    for r in result:
+        trname = r[0]
+        fro = r[1]
+        to = r[2]
+        dor = r[3]
+        doj= r[4]
+        row = {'sl': i, 'trname': trname, 'from': fro, 'to': to, 'dor':dor,'doj': doj}
+        dict_result.append(row)
+        i = i + 1
+
+    return render(request, 'upcoming.html',{"record":dict_result,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 def successful(request):
     train_id=request.session.get('train_id')
     cursor=connection.cursor()
@@ -836,6 +880,7 @@ def payment_selection(request):
         out=""
         total_seats=int(total_seats)
         result=cursor.callproc('SEATNOS',[total_seats,train_id,clas,doj,out])
+        print(result)
         print(result[4])
         request.session["seat_nos"] = result[4]
         return render(request, 'payment selection.html', {'amount': amount})
