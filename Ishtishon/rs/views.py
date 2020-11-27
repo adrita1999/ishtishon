@@ -324,7 +324,7 @@ def login(request):
                 #user = authenticate(request, username=username, password=password)
 
                 cursor1 = connection.cursor()
-                sql1 = "SELECT FIRST_NAME,LAST_NAME,DOB,GENDER,NID_NO,HOUSE_NO,ROAD_NO,ZIP_CODE,CITY,CONTACT_NO,USER_ID,PASSWORD FROM R_USER WHERE EMAIL_ADD=%s;"
+                sql1 = "SELECT FIRST_NAME,LAST_NAME,DOB,GENDER,NID_NO,HOUSE_NO,ROAD_NO,ZIP_CODE,CITY,CONTACT_NO,USER_ID,PASSWORD,SUBSTR(CONTACT_NO,5) FROM R_USER WHERE EMAIL_ADD=%s;"
                 cursor1.execute(sql1, [mail])
                 result1 = cursor1.fetchall()
                 cursor1.close()
@@ -344,6 +344,7 @@ def login(request):
                     request.session['contact'] = r[9]
                     request.session['user_id'] = r[10]
                     request.session['password'] = r[11]
+                    request.session['pnr'] = r[12]
                 fullname=request.session.get('first')+ ' ' + request.session.get("last")
                 request.session['fullname']=fullname;
                 return redirect("/"+"?user="+fullname)
@@ -444,6 +445,7 @@ def updateinfo(request):
                 address = city
     slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
+    request.session["pnr"]=pnr
     #return render(request, 'updateinfo.html',{"first":first,"last":last,"dob":dob,"gender":gender,"nid":nid,"house":house,"road":road,"zip":zip,"city":city,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr})
     if request.method == "POST":
         first=request.POST["first"]
@@ -516,6 +518,7 @@ def updateinfo(request):
                     address = city
         slice_object = slice(4, 14, 1)
         pnr = contact[slice_object]
+        request.session["pnr"] = pnr
         response='Profile updated successfully'
         return render(request, 'updateinfo.html',{"status":response,"first":first,"last":last,"dob":dob,"gender":gender,"nid":nid,"house":house,"road":road,"zip":zip,"city":city,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr})
 
@@ -575,6 +578,7 @@ def changepass(request):
                 address = city
     slice_object = slice(4, 14, 1)
     pnr=contact[slice_object]
+    request.session["pnr"] = pnr
 
     if request.method == "POST":
         ps = request.POST["pass"]
@@ -649,6 +653,7 @@ def changemail(request):
                 address = city
     slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
+    request.session["pnr"] = pnr
     return render(request, 'changemail.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 
 def changenum(request):
@@ -691,6 +696,7 @@ def changenum(request):
                 address = city
     slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
+    request.session["pnr"] = pnr
 
     if request.method == "POST" and 'btn1' in request.POST:
         num1 = request.POST["num1"]
@@ -741,6 +747,7 @@ def changenum(request):
             contact = request.session.get('contact')
             slice_object = slice(4, 14, 1)
             pnr = contact[slice_object]
+            request.session["pnr"] = pnr
             msg = "Contact number has been updated successfully."
             return render(request, 'changenum.html',
                           {"status": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
@@ -790,6 +797,7 @@ def prev(request):
                 address = city
     slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
+    request.session["pnr"] = pnr
     id= request.session.get('user_id')
 
     cursor = connection.cursor()
@@ -847,6 +855,7 @@ def upcoming(request):
                 address = city
     slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
+    request.session["pnr"] = pnr
     id = request.session.get('user_id')
     cursor = connection.cursor()
     sql = "SELECT (SELECT T.NAME FROM TRAIN T WHERE T.TRAIN_ID=R.TRAIN_ID),R.FROM_STATION,R.TO_STATION,TO_CHAR(R.DATE_OF_RESERVATION,'HH24:MI, DD-MON-YYYY'),TO_CHAR(R.DATE_OF_JOURNEY,'DD-MON-YYYY') FROM RESERVATION R WHERE CHECKAFTER(R.DATE_OF_JOURNEY)=1 AND R.USER_ID=TO_NUMBER(%s) ORDER BY R.DATE_OF_JOURNEY;"
