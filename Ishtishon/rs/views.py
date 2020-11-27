@@ -73,7 +73,7 @@ def list_trains(request):
         cursor.close()
 
         cursor1 = connection.cursor()
-        sql1 = "select (COST*%s+COST*%s*0.5) FROM COST WHERE STATION_ID=(SELECT STATION_ID from STATION where NAME=%s) AND TO_STATION_ID=(SELECT STATION_ID from STATION where NAME=%s)"
+        sql1 = "select TRUNC(COST*%s+COST*%s*0.5) FROM COST WHERE STATION_ID=(SELECT STATION_ID from STATION where NAME=%s) AND TO_STATION_ID=(SELECT STATION_ID from STATION where NAME=%s)"
         cursor1.execute(sql1, [adult,child,fro, to])
         result1 = cursor1.fetchall()
         cursor1.close()
@@ -706,7 +706,7 @@ def changenum(request):
         request.session["otp"] = str(otp)
         print("otp= " + str(otp))
         account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
-        auth_token = '17891e6b307b4a4fc2a65078525cad4a'
+        auth_token = '975807bfb5da380c2fb27497280bb732'
         client = Client(account_sid, auth_token)
 
         message = client.messages \
@@ -790,10 +790,11 @@ def prev(request):
                 address = city
     slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
+    id= request.session.get('user_id')
 
     cursor = connection.cursor()
-    sql = "SELECT (SELECT T.NAME FROM TRAIN T WHERE T.TRAIN_ID=R.TRAIN_ID),R.FROM_STATION,R.TO_STATION,TO_CHAR(R.DATE_OF_JOURNEY,'DD-MON-YYYY') FROM RESERVATION R WHERE CHECKBEFORE(R.DATE_OF_JOURNEY)=1 ORDER BY R.DATE_OF_JOURNEY;"
-    cursor.execute(sql)
+    sql = "SELECT (SELECT T.NAME FROM TRAIN T WHERE T.TRAIN_ID=R.TRAIN_ID),R.FROM_STATION,R.TO_STATION,TO_CHAR(R.DATE_OF_JOURNEY,'DD-MON-YYYY') FROM RESERVATION R WHERE CHECKBEFORE(R.DATE_OF_JOURNEY)=1 AND R.USER_ID=TO_NUMBER(%s) ORDER BY R.DATE_OF_JOURNEY;"
+    cursor.execute(sql,[id])
     result = cursor.fetchall()
     dict_result=[]
     i=1
@@ -846,10 +847,10 @@ def upcoming(request):
                 address = city
     slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
-
+    id = request.session.get('user_id')
     cursor = connection.cursor()
-    sql = "SELECT (SELECT T.NAME FROM TRAIN T WHERE T.TRAIN_ID=R.TRAIN_ID),R.FROM_STATION,R.TO_STATION,TO_CHAR(R.DATE_OF_RESERVATION,'HH24:MI, DD-MON-YYYY'),TO_CHAR(R.DATE_OF_JOURNEY,'DD-MON-YYYY') FROM RESERVATION R WHERE CHECKAFTER(R.DATE_OF_JOURNEY)=1 ORDER BY R.DATE_OF_JOURNEY;"
-    cursor.execute(sql)
+    sql = "SELECT (SELECT T.NAME FROM TRAIN T WHERE T.TRAIN_ID=R.TRAIN_ID),R.FROM_STATION,R.TO_STATION,TO_CHAR(R.DATE_OF_RESERVATION,'HH24:MI, DD-MON-YYYY'),TO_CHAR(R.DATE_OF_JOURNEY,'DD-MON-YYYY') FROM RESERVATION R WHERE CHECKAFTER(R.DATE_OF_JOURNEY)=1 AND R.USER_ID=TO_NUMBER(%s) ORDER BY R.DATE_OF_JOURNEY;"
+    cursor.execute(sql,[id])
     result = cursor.fetchall()
     dict_result = []
     i = 1
@@ -922,7 +923,7 @@ def bkash(request):
         request.session["otp"] = str(otp)
         print("otp= "+str(otp))
         account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
-        auth_token = '17891e6b307b4a4fc2a65078525cad4a'
+        auth_token = '975807bfb5da380c2fb27497280bb732'
         client = Client(account_sid, auth_token)
 
         message = client.messages \
@@ -1117,7 +1118,7 @@ def rocket(request):
         request.session["otp"] = str(otp)
         print("otp= "+str(otp))
         account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
-        auth_token = '17891e6b307b4a4fc2a65078525cad4a'
+        auth_token = '975807bfb5da380c2fb27497280bb732'
         client = Client(account_sid, auth_token)
 
         message = client.messages \
