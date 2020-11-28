@@ -1,6 +1,8 @@
 .contact-clean {
   background: #f1f7fc;
   padding: 80px 0;
+  animation-name:jump;
+  animation-duration:2s;
 }
 
 @media (max-width:767px) {
@@ -8,6 +10,7 @@
     padding: 20px 0;
   }
 }
+
 
 .contact-clean form {
   max-width: 480px;

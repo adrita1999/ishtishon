@@ -188,15 +188,6 @@ def list_stations(request):
 
 
 def homepage(request):
-
-    """email=EmailMessage(
-        'subject',
-        'body',
-        settings.EMAIL_HOST_USER,
-        ['adrita_99@yahoo.com'],
-    )
-    email.fail_silently=False
-    email.send()"""
     cursor = connection.cursor()
     sql="SELECT NAME FROM STATION"
     cursor.execute(sql)
@@ -369,7 +360,10 @@ def login(request):
             return render(request, 'login.html')
 
 def seatselection(request):
-    id=request.GET.get('id');
+    if(request.GET.get('id')):
+        id=request.GET.get('id')
+    else :
+        id=request.GET.get('not_equal')
     request.session["train_id"]=id
     fro=request.session.get('from')
     cursor0 = connection.cursor()
@@ -875,6 +869,22 @@ def upcoming(request):
 
     return render(request, 'upcoming.html',{"record":dict_result,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 def successful(request):
+    first=request.session.get('first')
+    first=first.capitalize()
+    last=request.session.get('last')
+    last=last.capitalize()
+    full=first+' '+last
+    mail = request.session.get('usermail')
+    #print(mail)
+    template=render_to_string('email.html',{"name":full})
+    email = EmailMessage(
+        'Confirmation of e-ticket booking',
+        template,
+        settings.EMAIL_HOST_USER,
+        [mail],
+    )
+    email.fail_silently = False
+    email.send()
     train_id=request.session.get('train_id')
     cursor=connection.cursor()
     sql="SELECT NAME FROM TRAIN WHERE TRAIN_ID=%s;"
@@ -911,11 +921,12 @@ def payment_selection(request):
         print(total_seats)
         seat_nos=seat_nos[1:]
         print(seat_nos)
+        id=request.session.get('train_id')
         request.session["seat_nos"] = seat_nos
         seat_list=seat_nos.split()
         print(seat_list)
         if(int(total_seats)!=len(seat_list)):
-            return redirect("/seat_selection" + "?not_equal=" + str('1'))
+            return redirect("/seat_selection" + "?not_equal=" +id)
 
 
         #print(seat_list)
