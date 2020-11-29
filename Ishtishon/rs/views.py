@@ -985,8 +985,8 @@ def bkash(request):
             tr = request.session.get('train_id')
             id = request.session.get('user_id')
             cursor2 = connection.cursor()
-            sql2 = "INSERT INTO RESERVATION VALUES(NVL((SELECT (MAX(RESERVATION_ID)+1) FROM RESERVATION),1),SYSDATE,TO_DATE(%s,'YYYY-MM-DD'),TO_NUMBER(%s),TO_NUMBER(%s),%s,%s,%s,TO_NUMBER(%s),TO_NUMBER(%s),NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1));"
-            cursor2.execute(sql2, [doj, adult,child, cls, fro, to, tr, id])
+            sql2 = "INSERT INTO RESERVATION VALUES(NVL((SELECT (MAX(RESERVATION_ID)+1) FROM RESERVATION),1),SYSDATE,TO_DATE(%s,'YYYY-MM-DD'),TO_NUMBER(%s),TO_NUMBER(%s),%s,%s,%s,TO_NUMBER(%s),NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1));"
+            cursor2.execute(sql2, [doj, adult,child, cls, fro, to, id])
             cursor2.close()
             seat_nos = request.session.get('seat_nos')
             seat_list = seat_nos.split()
@@ -1055,8 +1055,8 @@ def card(request):
         tr = request.session.get('train_id')
         id = request.session.get('user_id')
         cursor2 = connection.cursor()
-        sql2 = "INSERT INTO RESERVATION VALUES(NVL((SELECT (MAX(RESERVATION_ID)+1) FROM RESERVATION),1),SYSDATE,TO_DATE(%s,'YYYY-MM-DD'),TO_NUMBER(%s),TO_NUMBER(%s),%s,%s,%s,TO_NUMBER(%s),TO_NUMBER(%s),NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1));"
-        cursor2.execute(sql2, [doj, adult, child,cls, fro,to,tr,id])
+        sql2 = "INSERT INTO RESERVATION VALUES(NVL((SELECT (MAX(RESERVATION_ID)+1) FROM RESERVATION),1),SYSDATE,TO_DATE(%s,'YYYY-MM-DD'),TO_NUMBER(%s),TO_NUMBER(%s),%s,%s,%s,TO_NUMBER(%s),NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1));"
+        cursor2.execute(sql2, [doj, adult, child,cls, fro,to,id])
         cursor2.close()
         seat_nos = request.session.get('seat_nos')
         seat_list = seat_nos.split()
@@ -1111,8 +1111,8 @@ def nexus(request):
         tr = request.session.get('train_id')
         id = request.session.get('user_id')
         cursor2 = connection.cursor()
-        sql2 = "INSERT INTO RESERVATION VALUES(NVL((SELECT (MAX(RESERVATION_ID)+1) FROM RESERVATION),1),SYSDATE,TO_DATE(%s,'YYYY-MM-DD'),TO_NUMBER(%s),TO_NUMBER(%s),%s,%s,%s,TO_NUMBER(%s),TO_NUMBER(%s),NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1));"
-        cursor2.execute(sql2, [doj, adult,child, cls, fro, to, tr, id])
+        sql2 = "INSERT INTO RESERVATION VALUES(NVL((SELECT (MAX(RESERVATION_ID)+1) FROM RESERVATION),1),SYSDATE,TO_DATE(%s,'YYYY-MM-DD'),TO_NUMBER(%s),TO_NUMBER(%s),%s,%s,%s,TO_NUMBER(%s),NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1));"
+        cursor2.execute(sql2, [doj, adult,child, cls, fro, to, id])
         cursor2.close()
         seat_nos = request.session.get('seat_nos')
         seat_list = seat_nos.split()
@@ -1192,8 +1192,8 @@ def rocket(request):
             tr = request.session.get('train_id')
             id = request.session.get('user_id')
             cursor2 = connection.cursor()
-            sql2 = "INSERT INTO RESERVATION VALUES(NVL((SELECT (MAX(RESERVATION_ID)+1) FROM RESERVATION),1),SYSDATE,TO_DATE(%s,'YYYY-MM-DD'),TO_NUMBER(%s),TO_NUMBER(%s),%s,%s,%s,TO_NUMBER(%s),TO_NUMBER(%s),NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1));"
-            cursor2.execute(sql2, [doj, adult,child, cls, fro, to, tr, id])
+            sql2 = "INSERT INTO RESERVATION VALUES(NVL((SELECT (MAX(RESERVATION_ID)+1) FROM RESERVATION),1),SYSDATE,TO_DATE(%s,'YYYY-MM-DD'),TO_NUMBER(%s),TO_NUMBER(%s),%s,%s,%s,TO_NUMBER(%s),NVL((SELECT MAX(PAYMENT_ID) FROM PAYMENT),1));"
+            cursor2.execute(sql2, [doj, adult,child, cls, fro, to, id])
             cursor2.close()
             seat_nos = request.session.get('seat_nos')
             seat_list = seat_nos.split()
