@@ -30,24 +30,45 @@
         </div>
     </nav>
 <fieldset style="padding-top: 100px;">
-<div class="flex-grow-1 flex-shrink-1 flex-fill" style="height: 100px;background: url(&quot;assets/img/train6.jpg&quot;) center / cover repeat, rgba(0,153,89,0.52);opacity: 1;filter: brightness(98%) contrast(107%);border-radius: 10px;margin-bottom: 10px;width: 1566px;">
-            <div class="container flex-grow-1 flex-shrink-1 flex-fill" style="background: rgba(33,37,41,0.81);width: 1566px;height: 100px;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;max-width: none;"><i class="icon ion-location" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i><label style="background: rgba(255,255,255,0);color: #ffffff;">From</label><i class="icon ion-location"
-                    style="width: 20px;height: 20px;margin-right: 5px;margin-left: 200px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i><label style="margin-left: 5px;color: rgb(255,255,255);">To</label><i class="fa fa-calendar-times-o" style="margin-left: 200px;margin-right: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>
-                <label
-                    style="color: rgb(255,255,255);">Date</label><i class="fa fa-train" style="margin-left: 200px;margin-right: 5px;color: rgb(255,255,255);"></i><label style="color: rgb(255,255,255);">Class</label><i class="icon ion-person" style="margin-right: 5px;margin-left: 190px;color: rgb(255,255,255);"></i>
-                    <label
-                        style="color: rgb(255,255,255);">Adult</label><i class="fa fa-child" style="margin-left: 190px;margin-right: 0px;color: rgb(255,255,255);"></i><label style="color: rgb(255,255,255);">Child</label>
-                        <div style="height: 30px;background: rgba(0,153,81,0.03);width: 100%;"><label style="margin-left: 5px;color: rgb(255,255,255);">{{ details.from}}</label><label style="margin-left: 190px;color: rgb(255,255,255);">{{details.to}}</label><label style="margin-left: 190px;color: rgb(255,255,255);">{{details.date}}</label><label style="margin-left: 190px;color: rgb(255,255,255);">{{details.class}}</label>
-                            <label
-                                style="margin-left: 190px;color: rgb(255,255,255);">{{details.adult}}</label><label style="margin-left: 190px;color: rgb(255,255,255);">{{details.child}}</label></div>
-                <div><a href="http://127.0.0.1:8000/" style="color:#f0f0f0;"><u>Change</u></a></div>
-            </div>
-
+<div style="padding-top: 0px;">
+        <div class="container" style="background: url(&quot;assets/img/train6.jpg&quot;) center / cover no-repeat;">
+            <section style="padding-top: 25px;background: rgba(0,0,0,0.85);padding-right: 20px;padding-left: 20px;">
+                <div class="row" style="padding-left: 10px;">
+                    <div class="col">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="icon ion-location" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>From:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);">{{details.from}}</p>
+                        <a href="http://127.0.0.1:8000/" style="color:#f0f0f0;margin-bottom: 20px"><u>Change</u></a>
+                    </div>
+                    <div class="col" style="margin-bottom: 10px">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="icon ion-location" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>To</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 10px;">{{details.to}}</p>
+                    </div>
+                    <div class="col">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="fa fa-calendar-times-o" style="margin-right: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>Date:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 10px;">{{details.date}}</p>
+                    </div>
+                    </div>
+                <div class="row" style="padding-left: 10px;padding-bottom: 10px;">
+                    <div class="col">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="fa fa-train" style="margin-right: 5px;color: rgb(255,255,255);"></i>Class:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{details.class}}</p>
+                    </div>
+                    <div class="col">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="icon ion-person" style="margin-right: 5px;color: rgb(255,255,255);"></i>Adult:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{details.adult}}</p>
+                    </div>
+                    <div class="col">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="fa fa-child" style="margin-right: 5px;color: rgb(255,255,255);"></i>Child:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{details.child}}</p>
+                    </div>
+                </div>
+            </section>
         </div>
+    </div>
 </fieldset>
-<div style="height: 50px; margin-left:50px;"><label style="width: 1450px;background: rgb(104,171,80);height: 50px;padding-top: 5px;padding-left:5px;color: #212529;font-size: 24px;"><strong>Results :</strong></label></div>
+<div style="height: 50px; margin-left:185px;margin-top: 10px"><label style="width: 1145px;background: rgb(104,171,80);height: 50px;padding-top: 5px;padding-left:5px;color: #212529;font-size: 24px;"><strong>Results :</strong></label></div>
 {% if trains %}
-<table class="table table-striped table-sm"  style="width:95%;margin-left: 50px;margin-top: 20px ;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%)">
+<table class="table table-striped table-sm"  style="width:1145px;margin-left: 185px;margin-top: 20px ;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%)">
     <tr>
         <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">TRAIN ID</th>
         <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">NAME</th>
@@ -81,7 +102,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" style="margin-left:10px;padding-top: 0px" width="1em" height="2em" font-size="50px" viewBox="0 0 24 24" fill="none"><path d="M9 11C9.55228 11 10 10.5523 10 10C10 9.44772 9.55228 9 9 9C8.44772 9 8 9.44772 8 10C8 10.5523 8.44772 11 9 11Z" fill="currentColor"></path><path d="M14 17C14 15.8954 13.1046 15 12 15C10.8954 15 10 15.8954 10 17H8C8 14.7909 9.79086 13 12 13C14.2091 13 16 14.7909 16 17H14Z" fill="currentColor"></path><path d="M16 10C16 10.5523 15.5523 11 15 11C14.4477 11 14 10.5523 14 10C14 9.44772 14.4477 9 15 9C15.5523 9 16 9.44772 16 10Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z" fill="currentColor"></path></svg>
 {% endif %}
     {% if request.GET.name|slice:":1" == '1' %}
-        <table id="myDIV" class="table table-striped table-sm" style="width:95%;border:2px; margin-left: 50px;margin-top: 20px ;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%)">
+        <table id="myDIV" class="table table-striped table-sm" style="width:1145px;border:2px; margin-left: 185px;margin-top: 20px ;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%)">
 
          <th width="350px" style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;"> CLASS </th>
         <th  width="350px" style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;"> AVAILABLE SEATS </th>

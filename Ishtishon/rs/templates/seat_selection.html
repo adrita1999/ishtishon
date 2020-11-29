@@ -33,32 +33,54 @@
         </div>
     </nav>
 
-    <fieldset style="padding-top: 100px;">
-        <div class="flex-grow-1 flex-shrink-1 flex-fill" style="height: 100px;background: url(&quot;assets/img/train6.jpg&quot;) center / cover repeat, rgba(0,153,89,0.52);opacity: 1;filter: brightness(98%) contrast(107%);border-radius: 10px;margin-bottom: 10px;width: 1566px;">
-            <div class="container flex-grow-1 flex-shrink-1 flex-fill" style="background: rgba(33,37,41,0.81);width: 1566px;height: 100px;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;max-width: none;"><i class="icon ion-location" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i><label style="background: rgba(255,255,255,0);color: #ffffff;">From</label><i class="icon ion-location"
-                    style="width: 20px;height: 20px;margin-right: 5px;margin-left: 200px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i><label style="margin-left: 5px;color: rgb(255,255,255);">To</label><i class="fa fa-calendar-times-o" style="margin-left: 200px;margin-right: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>
-                <label
-                    style="color: rgb(255,255,255);">Date</label><i class="fa fa-train" style="margin-left: 200px;margin-right: 5px;color: rgb(255,255,255);"></i><label style="color: rgb(255,255,255);">Class</label><i class="icon ion-person" style="margin-right: 5px;margin-left: 190px;color: rgb(255,255,255);"></i>
-                    <label
-                        style="color: rgb(255,255,255);">Adult</label><i class="fa fa-child" style="margin-left: 190px;margin-right: 0px;color: rgb(255,255,255);"></i><label style="color: rgb(255,255,255);">Child</label>
-                        <div style="height: 50px;background: rgba(0,153,81,0.03);width: 100%;"><label style="margin-left: 5px;color: rgb(255,255,255);">Label</label><label style="margin-left: 210px;color: rgb(255,255,255);">Label</label><label style="margin-left: 205px;color: rgb(255,255,255);">Label</label><label style="margin-left: 215px;color: rgb(255,255,255);">Label</label>
-                            <label
-                                style="margin-left: 205px;color: rgb(255,255,255);">Label</label><label style="margin-left: 205px;color: rgb(255,255,255);">Label</label></div>
-            </div>
+    <fieldset style="padding-top: 95px;">
+    <div style="padding-top: 0px;">
+        <div class="container" style="background: url(&quot;assets/img/train6.jpg&quot;) center / cover no-repeat;">
+            <section style="padding-top: 25px;background: rgba(0,0,0,0.85);padding-right: 20px;padding-left: 20px;">
+                <div class="row" style="padding-left: 10px;">
+                    <div class="col">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="icon ion-location" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>From:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{from}}</p>
+                    </div>
+                    <div class="col" style="margin-bottom: 10px">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="icon ion-location" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>To</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{to}}</p>
+                    </div>
+                    <div class="col">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="fa fa-calendar-times-o" style="margin-right: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>Date:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{date}}</p>
+                    </div>
+                    </div>
+                <div class="row" style="padding-left: 10px;padding-bottom: 10px;">
+                    <div class="col">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="fa fa-train" style="margin-right: 5px;color: rgb(255,255,255);"></i>Class:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{class}}</p>
+                    </div>
+                    <div class="col">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="icon ion-person" style="margin-right: 5px;color: rgb(255,255,255);"></i>Adult:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{adult}}</p>
+                    </div>
+                    <div class="col">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="fa fa-child" style="margin-right: 5px;color: rgb(255,255,255);"></i>Child:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{child}}</p>
+                    </div>
+                </div>
+            </section>
         </div>
-        <div class="toggle" style="margin-left: 24px;"><input type="radio" id="cond_new" data-toggle="collapse" data-target="#collapseExample.show" aria-expanded="false" aria-controls="collapseExample" name="bike_cond" checked="checked"><label for="cond_new">Auto</label><input type="radio" id="cond_used" name="bike_cond" data-toggle="collapse" data-target="#collapseExample:not(.show)" aria-expanded="false" aria-controls="collapseExample"><label for="cond_used">Manual</label>
+    </div>
+        <div class="toggle" style="margin-left: 185px;margin-top: 10px"><input onclick="large()" type="radio" id="cond_new" data-toggle="collapse" data-target="#collapseExample.show" aria-expanded="false" aria-controls="collapseExample" name="bike_cond" checked="checked"><label for="cond_new">Auto</label><input onclick="small()" type="radio" id="cond_used" name="bike_cond" data-toggle="collapse" data-target="#collapseExample:not(.show)" aria-expanded="false" aria-controls="collapseExample"><label for="cond_used">Manual</label>
         {% if request.GET.not_equal %}
      <label id="LOADING" style="margin-top: 0px;margin-left: 620px;width: 850px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white;font-size: 16px; "><strong>Selected seat numbers don't match with the number of passengers</strong></label>
     {% endif %}
         </div>
     </fieldset>
-    <div style="height: 100px; margin-left:100px;"><label style="width: 1400px;background: #bec5ba;">Passenger Details</label>
-        <div style="height: 24px;"><label>Name:</label><label style="margin-left: 700px;">Mobile:</label></div>
-        <div style="height: 24px;"><label>Email:</label><label style="margin-left: 702px;">Address:</label></div>
+    <div style="height: 100px; margin-left:185px;"><label style="width: 1145px;background: #bec5ba;">Passenger Details</label>
+        <div style="height: 24px;"><label style="width: 400px">Name:  {{ full }}</label><label style="margin-left: 300px;">Mobile:  {{ mobile }}</label></div>
+        <div style="height: 24px;"><label style="width: 400px">Email:  {{ mail }}</label><label style="margin-left: 300px;">Address:  {{ address }}</label></div>
     </div>
-    <div style="height: 1010.4px;">
+    <div id="height1" style="height: 350px;">
         <div class="float-left" style="height: 1010.4px;">
-            <div class="container collapse" id="collapseExample" style="margin-left: 80px">
+            <div class="container collapse" id="collapseExample" style="margin-left: 165px;">
                 <div class="table-responsive" style="width: 100%;padding: 0px;">
                     <table class="table">
                         <thead>
@@ -618,17 +640,17 @@
                 </div>
             </div>
         </div>
-        <div class="float-left" style="width: 720px;height: 300px;margin-left: 100px;"><label style="width: 1400px;background: #bec5ba;">&nbsp;Ticket Details</label>
-            <div style="height: 24px;"><label>&nbsp;Train name:</label></div>
-            <div style="height: 24px;"><label>&nbsp;Adult:</label></div>
-            <div style="height: 24px;"><label>&nbsp;Child:</label></div>
-            <div style="height: 24px;"><label>&nbsp;Total cost:</label></div>
-            <div style="height: 24px;"><label style="width: 1400px;background: #bec5ba;margin-top: 10px;">&nbsp;Review the Rules and Restrictions</label></div>
+        <div class="float-left" id="div1" style="width: 620px;height: 300px;margin-left: 185px;"><label id="label1" style="width: 1145px;background: #bec5ba;">&nbsp;Ticket Details</label>
+            <div style="height: 24px;"><label>&nbsp;Train name:  {{ train_name }}</label></div>
+            <div style="height: 24px;"><label>&nbsp;Adult:  {{ adult }}</label></div>
+            <div style="height: 24px;"><label>&nbsp;Child:  {{ child }}</label></div>
+            <div style="height: 24px;"><label>&nbsp;Total cost:  {{ cost }} BDT</label></div>
+            <div style="height: 24px;"><label id="label2" style="width: 1145px;background: #bec5ba;margin-top: 10px;">&nbsp;Review the Rules and Restrictions</label></div>
             <ul style="margin-top: 22px;padding-left: 15px;">
                 <li>Terms and conditions are applicable</li>
                 <li style="width: 520px;">Tickets are non-transferable and name changes are not allowed</li>
             </ul>
-            <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#exampleModalScrollable" style="border-radius: 0px;background: rgb(0,153,70);margin-left: 10px">Buy ticket</button></div>
+            <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#exampleModalScrollable" style="border-radius: 0px;background: rgb(0,153,70);margin-left: 20px;margin-top: 20px">Buy ticket</button></div>
     </div>
 
    <!-- Modal -->
@@ -705,6 +727,25 @@
 <script>
 function logout() {
             window.location.href = "{% url 'login' %}" +"?logged_out="+"1";
+          }
+
+</script>
+<script>
+function small() {
+            document.getElementById("label1").style.width="535px";
+            document.getElementById("label2").style.width="535px";
+            document.getElementById("div1").style.width="535px";
+            document.getElementById("height1").style.height="1010.4px";
+          }
+
+</script>
+<script>
+function large() {
+            document.getElementById("label1").style.width="1145px";
+            document.getElementById("label2").style.width="1145px";
+            document.getElementById("height1").style.height="350px";
+            document.getElementById("div1").style.width="620px";
+
           }
 
 </script>

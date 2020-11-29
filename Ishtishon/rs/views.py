@@ -376,7 +376,41 @@ def seatselection(request):
         request.session["dep_time"]= r[1]
         request.session["last_time"] = r[2]
     clas = request.session.get('class')
+    adult=request.session.get('adult')
+    child=request.session.get('child')
+    date=request.session.get('doj')
+    fro=request.session.get('from')
+    to=request.session.get('to')
+    house = request.session.get('house')
+    road = request.session.get('road')
+    zip = request.session.get('zip')
+    city = request.session.get('city')
     doj = request.session.get('doj')
+    if (house):
+        if (road):
+            if (zip):
+                address = "House no: " + house + ", Road no: " + road + ", " + city + "-" + zip
+            else:
+                address = "House no: " + house + ", Road no: " + road + ", " + city
+        else:
+            if (zip):
+                address = "House no: " + house + ", " + city + "-" + zip
+            else:
+                address = "House no: " + house + ", " + city
+    else:
+        if (road):
+            if (zip):
+                address = "Road no: " + road + ", " + city + "-" + zip
+
+            else:
+                address = "Road no: " + road + ", " + city
+
+        else:
+            if (zip):
+                address = city + "-" + zip
+
+            else:
+                address = city
     cursor = connection.cursor()
     sql="SELECT SEAT_NO FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS=%s AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
     cursor.execute(sql,[id,clas,doj])
@@ -388,7 +422,8 @@ def seatselection(request):
         booked_seats.append(seat_no)
 
     print(booked_seats)
-    return render(request, 'seat_selection.html',{'booked_seats':booked_seats})
+    return render(request, 'seat_selection.html',{'booked_seats':booked_seats,'from':fro,'to':to,'date':date,'class':clas,'adult':adult,'child':child,'train_name':request.session.get('train_name'),'cost':request.session.get('cost'),
+                                                  'mail':request.session.get('usermail'),'mobile':request.session.get('contact'),'full':request.session.get('first')+' '+request.session.get('last'),'address':address})
 def contactus(request):
     return render(request, 'contactus.html')
 
