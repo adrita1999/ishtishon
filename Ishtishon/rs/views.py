@@ -912,7 +912,6 @@ def payment_selection(request):
         out=""
         total_seats=int(total_seats)
         result=cursor.callproc('SEATNOS',[total_seats,train_id,clas,doj,out])
-        print(result)
         print(result[4])
         request.session["seat_nos"] = result[4]
         return render(request, 'payment selection.html', {'amount': amount})
@@ -1026,6 +1025,13 @@ def card(request):
         name=request.POST["name"]
         cvv=request.POST["cvv"]
         date = request.POST["date"]
+        cursor5 = connection.cursor()
+        flag=cursor5.callfunc('CHECKEXP',int,[date])
+        cursor5.close()
+        print(flag)
+        if flag == 1:
+            print("hereeeeeeeee")
+            return redirect("/card_payment" + "?date=" + str(1))
         cursor=connection.cursor()
         sql="INSERT INTO PAYMENT VALUES(NVL((SELECT MAX(PAYMENT_ID)+1 FROM PAYMENT),1),%s,SYSDATE);"
         cursor.execute(sql,[amount])
