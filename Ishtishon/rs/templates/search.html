@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <div class="login-dark" style="background: url(&quot;assets/img/train6.jpg&quot;);color: #d9ebfb;padding: 10px;">
+    <div class="login-dark" style="background: url(&quot;assets/img/train6.jpg&quot;);color: #d9ebfb;padding: 10px;width: 100%">
         {% if request.GET.not_logged_in == '0' %}
         <label id="LOADING" style="margin-top: 67px;margin-left: 1070px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>Please log in first to search trains.</strong></label>
             {% endif %}
@@ -32,7 +32,7 @@
            {% if request.GET.max_seat_exceeded == '1' %}
             <label id="LOADING5" style="margin-top: 67px;margin-left: 1070px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>Maximum 4 seats can be issued.</strong></label>
         {% endif %}
-        <form action="{% url 'train' %}" method="post" style="text-align: right;border-style: none;border-right-style: none;background: rgba(30,40,51,0.88);width:440px;max-width: 440px">
+        <form action="{% url 'train' %}" method="post" style="text-align: right;border-style: none;border-right-style: none;background: rgba(30,40,51,0.88);width:440px;max-width: 440px;margin-left: 350px">
             {%  csrf_token %}
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="icon ion-search" style="color: rgb(104,171,80);"></i></div><small class="form-text text-light" style="width: 120px;text-align: left;font-size: 16px;margin-left: 10px">Route</small>
@@ -84,7 +84,7 @@
             </div>
         </nav>
 
-        <p class="slide-right">Welcome to Ishtishon </p>
+
         <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"><img src="assets/img/1.png"><img src="assets/img/2.png"><img src="assets/img/3.png"><img src="assets/img/4.png"><img src="assets/img/5.png"><img src="assets/img/6.png"></main>
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
