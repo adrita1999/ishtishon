@@ -29,6 +29,11 @@
         </div>
         </div>
     </nav>
+    {% if statusgreen %}
+        <label id="LOADING" style="margin-top: 75px;margin-left: 1050px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>{{ statusgreen }}</strong></label>
+        {% elif statusred %}
+        <label id="LOADING2" style="margin-top: 75px;margin-left: 1050px;width: 450px;height: 35px;background: red;text-align: left;padding-left: 5px;color: white"><strong>{{ statusred }}</strong></label>
+            {% endif %}
     <div style="padding-top: 95px;">
         <div class="container" style="background: url(&quot;assets/img/train6.jpg&quot;) center / cover no-repeat;">
             <section style="padding-top: 25px;background: rgba(0,0,0,0.85);padding-right: 20px;padding-left: 20px;">
@@ -93,9 +98,10 @@
                     <div style="padding-left: 10px;padding-top: 10px;padding-right: 0px;"><i class="fa fa-envelope-o" style="padding-right: 10px;font-size: 36px;"></i>
                         <h1 class="d-inline" style="font-size: 36px;padding-top: 10px;">Change E-mail</h1>
                         <hr style="color: rgb(0,0,0);background: #000000;">
-                        <form style="padding-bottom: 10px;">
-                            <div class="form-group"><label>Current E-mail</label><input class="form-control" type="email" placeholder="E-mail"></div>
-                            <div class="form-group"><label>New E-mail</label><input class="form-control" type="email" placeholder="New E-mail"></div>
+                        <form method="post" action="" style="padding-bottom: 10px;">
+                            {%  csrf_token %}
+                            <div class="form-group"><label>Current E-mail</label><input name="currentmail" class="form-control" type="email" placeholder="E-mail"></div>
+                            <div class="form-group"><label>New E-mail</label><input name="newmail" class="form-control" type="email" placeholder="New E-mail"></div>
                             <button class="btn btn-primary border rounded" name="btn1" type="submit" style="margin-bottom: 10px;width: auto;background: rgb(104,171,80);color: rgb(0,0,0);">Send Verification Code</button>
                         <hr style="background: rgba(0,0,0,0.5);color: rgb(0,0,0);margin-bottom: 32px;"><button class="btn btn-primary border rounded" name="btn2" type="button" data-toggle="modal" data-target="#exampleModalCenter" style="margin-bottom: 35px;width: 720px;background: rgb(104,171,80);color: rgb(0,0,0);">Verify Code and Change E-mail</button>
                     </form>
@@ -119,7 +125,7 @@
         {%  csrf_token %}
         <div class="form-group">
             <label>Enter Verification Code:</label>
-            <input type="password" name="otpin" class="form-control" id="exampleInputPassword1" placeholder="OTP" pattern="\d*" title="Input can be only numbers" maxlength="4" minlength="4" required>
+            <input type="password" name="otpin" class="form-control" id="exampleInputPassword1" placeholder="OTP" pattern="\d*" title="Input can be only numbers" maxlength="6" minlength="6" required>
          </div>
             <div class="form-group">
             <label>Enter Password:</label>
@@ -143,4 +149,14 @@ function logout() {
           }
 
 </script>
+<script>
+    setTimeout(function(){
+        document.getElementById('LOADING').style.display = 'none';
+    }, 4000);
+    </script>
+<script>
+    setTimeout(function(){
+        document.getElementById('LOADING2').style.display = 'none';
+    }, 4000);
+    </script>
 </html>
