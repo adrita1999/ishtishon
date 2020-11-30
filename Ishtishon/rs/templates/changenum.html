@@ -30,8 +30,10 @@
         </div>
         </div>
     </nav>
-        {% if status %}
-        <label id="LOADING" style="margin-top: 75px;margin-left: 1050px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>{{ status }}</strong></label>
+        {% if statusgreen %}
+        <label id="LOADING" style="margin-top: 75px;margin-left: 1050px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>{{ statusgreen }}</strong></label>
+        {% elif statusred %}
+        <label id="LOADING2" style="margin-top: 75px;margin-left: 1050px;width: 450px;height: 35px;background: red;text-align: left;padding-left: 5px;color: white"><strong>{{ statusred }}</strong></label>
             {% endif %}
     <div style="padding-top: 95px;">
         <div class="container" style="background: url(&quot;assets/img/train6.jpg&quot;) center / cover no-repeat;">
@@ -163,6 +165,11 @@ function logout() {
 <script>
     setTimeout(function(){
         document.getElementById('LOADING').style.display = 'none';
+    }, 4000);
+    </script>
+<script>
+    setTimeout(function(){
+        document.getElementById('LOADING2').style.display = 'none';
     }, 4000);
     </script>
 

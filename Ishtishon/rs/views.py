@@ -22,6 +22,7 @@ from django.views.generic import View
 from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import get_template
+from random import randint
 
 from xhtml2pdf import pisa
 
@@ -129,6 +130,8 @@ def list_trains(request):
         st=request.session.get('cost')
         name=request.GET.get('name')
         snigdha_fare=request.session.get('snigdha_fare')
+
+        doj=request.session.get('doj')
         id=name[1:4]
         print(id);
         snigdha=""
@@ -136,21 +139,21 @@ def list_trains(request):
         shovan=""
         available_seats=[]
         cursor=connection.cursor()
-        sql="SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SNIGDHA' AND DATE_OF_JOURNEY= TO_DATE('15-11-2020','DD-MM-YYYY');"
-        cursor.execute(sql,[id])
+        sql="SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SNIGDHA' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
+        cursor.execute(sql,[id,doj])
         result=cursor.fetchall()
         for r in result:
             snigdha=r[0];
 
         cursor1 = connection.cursor()
-        sql1 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='S_CHAIR' AND DATE_OF_JOURNEY= TO_DATE('15-11-2020','DD-MM-YYYY');"
-        cursor1.execute(sql1, [id])
+        sql1 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='S_CHAIR' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
+        cursor1.execute(sql1, [id,doj])
         result1 = cursor1.fetchall()
         for r1 in result1:
             s_chair=r1[0];
         cursor2 = connection.cursor()
-        sql2 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SHOVAN' AND DATE_OF_JOURNEY= TO_DATE('15-11-2020','DD-MM-YYYY');"
-        cursor2.execute(sql2, [id])
+        sql2 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SHOVAN' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
+        cursor2.execute(sql2, [id,doj])
         result2 = cursor2.fetchall()
         for r2 in result2:
             shovan=r2[0];
@@ -431,6 +434,7 @@ def updateinfo(request):
     if is_logged_in == 0:
         return redirect("/login" + "?notdash_logged_in=" + str(is_logged_in))
     request.session["numflag"] = ""
+    request.session["mailflag"] = ""
     mail = request.session.get('usermail')
     contact = request.session.get('contact')
     first=request.session.get('first')
@@ -653,6 +657,7 @@ def changemail(request):
     city = request.session.get('city')
     contact = request.session.get('contact')
     nid = request.session.get('nid')
+    hashps = request.session.get('password')
     fullname = first + " " + last
     address = ""
     if (house):
@@ -683,6 +688,83 @@ def changemail(request):
     slice_object = slice(4, 14, 1)
     pnr = contact[slice_object]
     request.session["pnr"] = pnr
+    if request.method == "POST" and 'btn1' in request.POST:
+
+        currentmail = request.POST["currentmail"]
+        out=""
+        newmail = request.POST["newmail"]
+        cursor1=connection.cursor()
+        result=cursor1.callproc('CHECKMAIL',[newmail,out])
+        print(result[1])
+        if(result[1]=='true'):
+            msg = "This e-mail already exists!"
+            return render(request, 'changemail.html',
+                          {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
+                           "pnr": pnr, "nid": nid})
+        request.session['newmail']=newmail
+        if currentmail == request.session.get('usermail'):
+            verification = randint(100000, 999999)
+            request.session['veri']=str(verification)
+            #print(str(verification))
+            first = request.session.get('first')
+            first = first.capitalize()
+            last = request.session.get('last')
+            last = last.capitalize()
+            full = first + ' ' + last
+            mail = newmail
+            template = render_to_string('verificationemmail.html', {"name": full,'code':str(verification)})
+            email = EmailMessage(
+                'Verification code for changing email address',
+                template,
+                settings.EMAIL_HOST_USER,
+                [mail],
+            )
+            email.fail_silently = False
+            email.send()
+            request.session['mailflag']="ok"
+        else:
+            msg="Current e-mail does not match.Try Again!"
+            return render(request, 'changemail.html',
+                          {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
+                           "pnr": pnr, "nid": nid})
+
+    if request.method == "POST" and 'btn3' in request.POST:
+        flag = request.session.get('mailflag')
+        if flag=="":
+            msg = "Click 'Send Verification Code' first to get a code."
+            return render(request, 'changemail.html',
+                          {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
+                           "pnr": pnr, "nid": nid,})
+        code=request.POST["otpin"]
+        print(code)
+        print(request.session.get('veri'))
+        ps = request.POST["password"]
+        ps = make_pw_hash(ps)
+        if ps != hashps:
+            print('here1')
+            msg = "Wrong password. Try again."
+            return render(request, 'changemail.html',
+                          {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
+                           "pnr": pnr, "nid": nid})
+        if code!=request.session.get('veri'):
+            print('here2')
+            msg="Wrong Verification Code Entered."
+            return render(request, 'changemail.html',
+                          {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
+                           "pnr": pnr, "nid": nid})
+        uid = request.session.get('user_id')
+        newmail=request.session.get('newmail')
+        cursor=connection.cursor()
+        sql = "UPDATE R_USER SET EMAIL_ADD=%s WHERE USER_ID=TO_NUMBER(%s);"
+        cursor.execute(sql, [newmail, uid])
+        cursor.close()
+        request.session['usermail']=newmail
+        mail=request.session.get('usermail')
+        msg="E-mail changed successfully."
+        print('here3')
+        return render(request, 'changemail.html',
+                      {"statusgreen": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
+                       "pnr": pnr, "nid": nid})
 
     #btn1 first submit button jeta input nibe
     #btn3 second submit button jeta otp ar password input nibe
@@ -738,7 +820,7 @@ def changenum(request):
         dbnum=request.session.get('contact')
         if number1 != dbnum:
             msg = "Current number does not match. Try again. "
-            return render(request, 'changenum.html', {"status": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
+            return render(request, 'changenum.html', {"statusred": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
         request.session["tempnum"] = str(num2)
         request.session["numflag"] = "done"
         otp = random.randint(1000, 9999)
@@ -760,13 +842,13 @@ def changenum(request):
         flag = request.session.get('numflag')
         if flag == "":
             msg = "Click 'Send Verification Code' first to get an OTP."
-            return render(request, 'changenum.html', {"status": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
+            return render(request, 'changenum.html', {"statusred": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
         vcode = request.POST["otpin"]
         ps=request.POST["password"]
         ps=make_pw_hash(ps)
         if ps!=hashps:
             msg = "Wrong password. Try again."
-            return render(request, 'changenum.html', {"status": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
+            return render(request, 'changenum.html', {"statusred": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
         uid = request.session.get('user_id')
         tempnum= request.session.get('tempnum')
         otp = request.session.get('otp')
@@ -783,12 +865,12 @@ def changenum(request):
             request.session["pnr"] = pnr
             msg = "Contact number has been updated successfully."
             return render(request, 'changenum.html',
-                          {"status": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
+                          {"statusgreen": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
                            "pnr": pnr, "nid": nid, "password": hashps})
         else:
             print("otp milena")
             msg = "Wrong OTP Entered."
-            return render(request, 'changenum.html', {"status": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
+            return render(request, 'changenum.html', {"statusred": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
 
     return render(request, 'changenum.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
 def prev(request):
