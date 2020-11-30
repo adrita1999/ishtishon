@@ -1,0 +1,41 @@
+.btn {
+  margin: 10px;
+  padding: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  color: black;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+ }
+.btn-1 {
+    background: linear-gradient(90deg, var(--c1, #f6d365), var(--c2, #fda085) 51%, var(--c1, #f6d365)) var(--x, 0)/ 200%;
+  --c1: #f6d365;
+  --c2: #fda085;
+}
+.btn-2 {
+    background: linear-gradient(90deg, var(--c1, #f6d365), var(--c2, #fda085) 51%, var(--c1, #f6d365)) var(--x, 0)/ 200%;
+ --c1: #84fab0;
+  --c2: #8fd3f4;
+}
+.btn-3 {
+    background: linear-gradient(90deg, var(--c1, #f6d365), var(--c2, #fda085) 51%, var(--c1, #f6d365)) var(--x, 0)/ 200%;
+ --c1: #84fab0;
+  --c2: rgb(81,171,90);
+}
+.btn-4 {
+    background: linear-gradient(90deg, var(--c1, #f6d365), var(--c2, #fda085) 51%, var(--c1, #f6d365)) var(--x, 0)/ 200%;
+ --c1: rgb(81,171,90);
+  --c2: #8fd3f4;
+}
+
+.btn-6 {
+    background: #ddd;
+
+}
+.btn-1:hover { --x: 100%;color: black; }
+.btn-2:hover { --x: 100%;color: black; }
+.btn-3:hover { --x: 100%;color: black; }
+.btn-4:hover { --x: 100%;color: black; }
+.btn-6:hover { background: rgb(81,171,90) ;color: white; }
