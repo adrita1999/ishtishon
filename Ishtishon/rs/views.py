@@ -113,13 +113,33 @@ def list_trains(request):
                 st=re[0]*0.6
 
         dict_result = []
-
+        doj = request.session.get('doj')
         for r in result:
             TRAIN_ID = r[0]
             NAME = r[1]
             departure = r[2]
             arrival = r[3]
-            row = {'TRAIN_ID': TRAIN_ID, 'NAME': NAME, 'DEPARTURE_TIME': departure, 'ARRIVAL_TIME': arrival}
+            cursor = connection.cursor()
+            sql = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SNIGDHA' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
+            cursor.execute(sql, [TRAIN_ID, doj])
+            result = cursor.fetchall()
+            for r in result:
+                snigdha = r[0];
+            cursor1 = connection.cursor()
+            sql1 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='S_CHAIR' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
+            cursor1.execute(sql1, [TRAIN_ID, doj])
+            result1 = cursor1.fetchall()
+            for r1 in result1:
+                s_chair = r1[0];
+            cursor2 = connection.cursor()
+            sql2 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SHOVAN' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
+            cursor2.execute(sql2, [TRAIN_ID, doj])
+            result2 = cursor2.fetchall()
+            for r2 in result2:
+                shovan = r2[0];
+            row = {'TRAIN_ID': TRAIN_ID, 'NAME': NAME, 'DEPARTURE_TIME': departure, 'ARRIVAL_TIME': arrival,'snigdhaad':fare_list[0],
+                   'snigdhach':fare_list[1],'s_chairad':fare_list[2],'s_chairch':fare_list[3],'shovanad':fare_list[4],'shovanch':fare_list[5],
+                   'snigdhaseat':snigdha,'s_chairseat':s_chair,'shovanseat':shovan}
             dict_result.append(row)
         request.session['trains']=dict_result
         request.session['cost']=st
@@ -128,47 +148,8 @@ def list_trains(request):
     else:
         dict_result=request.session.get('trains')
         st=request.session.get('cost')
-        name=request.GET.get('name')
-        snigdha_fare=request.session.get('snigdha_fare')
-
-        doj=request.session.get('doj')
-        id=name[1:4]
-        print(id);
-        snigdha=""
-        s_chair=""
-        shovan=""
-        available_seats=[]
-        cursor=connection.cursor()
-        sql="SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SNIGDHA' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
-        cursor.execute(sql,[id,doj])
-        result=cursor.fetchall()
-        for r in result:
-            snigdha=r[0];
-
-        cursor1 = connection.cursor()
-        sql1 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='S_CHAIR' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
-        cursor1.execute(sql1, [id,doj])
-        result1 = cursor1.fetchall()
-        for r1 in result1:
-            s_chair=r1[0];
-        cursor2 = connection.cursor()
-        sql2 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SHOVAN' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
-        cursor2.execute(sql2, [id,doj])
-        result2 = cursor2.fetchall()
-        for r2 in result2:
-            shovan=r2[0];
-
-
-        row={'snigdha':snigdha,'s_chair':s_chair,'shovan':shovan}
-        available_seats.append(row)
-        print(available_seats)
         return render(request, 'list_trains.html',
-                      {'trains': dict_result, 'cost': str(st) + '' + ' BDT', 'details': details,'available_seats':available_seats,'snigdha_fare':snigdha_fare})
-
-
-
-
-
+                      {'trains': dict_result, 'cost': str(st) + '' + ' BDT', 'details': details})
 
 def list_stations(request):
 
