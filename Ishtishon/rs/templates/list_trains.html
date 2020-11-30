@@ -91,10 +91,30 @@
             {% else %}
             <a id="{{train.TRAIN_ID}}_{{train.NAME}}" onclick="getname(id)"  type="button" class="btn btn-primary" style="background: rgb(104,171,80)">Availability</a>
             {% endif %}
-
+<button class="btn btn-primary border rounded" name="btn2" type="button" data-toggle="modal" data-target="#{{ train.TRAIN_ID }}" style="margin-bottom: 35px;width: 720px;background: rgb(104,171,80);color: rgb(0,0,0);">modal</button>
 
 </div></td>
     </tr>
+        <!-- Modal -->
+<div class="modal fade" id="{{ train.TRAIN_ID }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         {{ train.TRAIN_ID }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
     {% endfor %}
 </table>
     {% else %}
