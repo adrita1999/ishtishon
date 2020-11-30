@@ -95,16 +95,43 @@
                         <hr style="color: rgb(0,0,0);background: #000000;">
                         <form style="padding-bottom: 10px;">
                             <div class="form-group"><label>Current E-mail</label><input class="form-control" type="email" placeholder="E-mail"></div>
-                            <div class="form-group"><label>New E-mail</label><input class="form-control" type="email" placeholder="New E-mail"></div><button class="btn btn-primary border rounded" type="button" style="margin-bottom: 10px;width: auto;background: rgb(104,171,80);color: rgb(0,0,0);">Send Verification Code</button>
-                            <div
-                                class="form-group"><label>Verification Code</label><input class="form-control" type="password" placeholder="Code"></div>
-                    <div class="form-group"><label>Password</label><input class="form-control" type="password" placeholder="Password"></div>
+                            <div class="form-group"><label>New E-mail</label><input class="form-control" type="email" placeholder="New E-mail"></div>
+                            <button class="btn btn-primary border rounded" name="btn1" type="submit" style="margin-bottom: 10px;width: auto;background: rgb(104,171,80);color: rgb(0,0,0);">Send Verification Code</button>
+                        <hr style="background: rgba(0,0,0,0.5);color: rgb(0,0,0);margin-bottom: 32px;"><button class="btn btn-primary border rounded" name="btn2" type="button" data-toggle="modal" data-target="#exampleModalCenter" style="margin-bottom: 35px;width: 720px;background: rgb(104,171,80);color: rgb(0,0,0);">Verify Code and Change E-mail</button>
                     </form>
-                    <hr style="background: rgba(0,0,0,0.5);color: rgb(0,0,0);margin-bottom: 32px;"><button class="btn btn-primary border rounded" type="button" style="margin-bottom: 35px;width: 720px;background: rgb(104,171,80);color: rgb(0,0,0);">Verify Code and Change E-mail</button></div>
+                    </div>
             </div>
         </div>
     </div>
     </div>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+        {%  csrf_token %}
+        <div class="form-group">
+            <label>Enter Verification Code:</label>
+            <input type="password" name="otpin" class="form-control" id="exampleInputPassword1" placeholder="OTP" pattern="\d*" title="Input can be only numbers" maxlength="4" minlength="4" required>
+         </div>
+            <div class="form-group">
+            <label>Enter Password:</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+         </div>
+            <button type="submit" name="btn3" class="btn btn-primary" style="margin-top: 5px; width:100%; background: linear-gradient(white, rgb(81,171,90) 4%), rgb(81,171,90);filter: brightness(102%);">Submit</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>

@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="text-center login-dark" style="background: url(&quot;assets/img/train6.jpg&quot;);color: rgb(0,0,0);width: 100%;">
+    <div class="text-center login-dark" style="background: url(&quot;assets/img/train6.jpg&quot;);color: rgb(0,0,0);width: 100%;height: 800px;">
         {% if status %}
         <label id="LOADING" style="margin-top: 75px;margin-left: 680px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>{{ status }}</strong></label>
             {% endif %}
@@ -24,7 +24,7 @@
     {% if request.GET.notdash_logged_in == '0' %}
         <label id="LOADING3" style="margin-top: 75px;margin-left: 680px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>Log in to see your dashboard</strong></label>
             {% endif %}
-        <form action="" method="post" style="text-align: right;border-style: none;border-right-style: none;background: rgba(30,40,51,0.88);">
+        <form action="" method="post" style="text-align: right;border-style: none;border-right-style: none;background: rgba(30,40,51,0.88);margin-top: 5px;">
             {%  csrf_token %}
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="icon ion-ios-locked-outline" style="color: rgb(104,171,80);"></i></div>
