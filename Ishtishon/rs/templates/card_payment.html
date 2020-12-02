@@ -22,12 +22,12 @@
     {% else %}
     <div class="contact-clean" style="background: url(&quot;assets/img/train6.jpg&quot;);padding-top: 150px;">
             {% endif %}
-        <form method="post" style="height: 550px;border-top-color: rgb(206,212,218);"><img src="assets/img/2.png"><img src="assets/img/1.png"><img src="assets/img/4.png">
+        <form method="post" style="height: 570px;border-top-color: rgb(206,212,218);"><img src="assets/img/2.png"><img src="assets/img/1.png"><img src="assets/img/4.png">
             {%  csrf_token %}
             <h2 class="text-center"></h2>
-            <div class="form-group"><input class="form-control" type="text" pattern="\d*" title="Must contain numercial digits only" maxlength="16" minlength="15" name="cardnumber" required placeholder="Card number"><input class="form-control" type="text" name="name" placeholder="Name on Card" required style="margin-top: 20px;"></div><small class="form-text text-muted" style="width: 200px;color: rgb(0,0,0);font-size: 16px;">Expiration date</small>
-            <input
-                class="form-control float-right" type="text" pattern="\d*" title="Must contain 3 numercial digits" required name ="cvv" maxlength="3" minlength="3" style="width: 198px;" placeholder="CVV">
+            <div style="margin-bottom: 0px" class="form-group"><label>Card Number</label><input class="form-control" type="text" pattern="\d*" title="Must contain numercial digits only" maxlength="16" minlength="15" name="cardnumber" required><label>Name on Card</label><input class="form-control" type="text" name="name" required ></div>
+            <label style="margin-top: 0px">Expiration Date</label><label style="margin-left: 95px">CVV</label><input
+                class="form-control float-right" type="text" pattern="\d*" title="Must contain 3 numercial digits" required name ="cvv" maxlength="3" minlength="3" style="width: 198px;">
                 <div class="form-group"><input class="form-control" type="date" required name="date" style="width: 198px;"></div><label style="width: 400px;">Amount: {{ amount }} BDT</label>
                 <div class="form-group" style="height: 60px;">
                     <div class="form-check"><input class="form-check-input" required name="check1" type="checkbox" id="formCheck-1" style="filter: brightness(101%);"><label class="form-check-label" for="formCheck-1">Save card and remember me</label></div>

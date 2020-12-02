@@ -51,7 +51,7 @@
             <div class="form-group"><label for="name">Gender</label>
                  <div class="input-group" >
                     <select class="form-control item" name="gender"  required="required" style="background: rgb(104,171,80);">
-                        <option disabled hidden="" selected="selected">Gender</option>
+                        <option  hidden="" value="">Gender</option>
                         <option style="background: white;">Male</option>
                         <option style="background: white;">Female</option>
                         <option style="background: white;">Other</option>
@@ -60,7 +60,7 @@
             </div>
             </div>
             <div class="form-group"><label for="email">Email</label><input class="form-control item" type="email" name = "email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"  required></div>
-            <div class="form-group"><label for="name">NID Number</label><input class="form-control" name = "nid" type="number" required></div>
+            <div class="form-group"><label for="name">NID Number</label><input class="form-control" name = "nid" type="text" pattern="\d*" title="Must contain numercial digits only" minlength="10" maxlength="17" required></div>
             <div class="form-group" style="padding-top: 5px;margin-bottom: 0px;"><label for="name">Address:</label></div>
             <div class="form-group"><label for="name" style="width: 200px;">House Number</label><label class="float-right" for="name" style="width: 200px;">Road Number</label><input class="form-control float-left item" name = "houseno" type="text" id="name-6" style="width: 200px;"><input class="form-control float-right item" name = "roadno"
                     type="text" id="name-5" style="width: 200px;"></div>
