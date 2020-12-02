@@ -142,9 +142,9 @@ def list_trains(request):
                    'snigdhaseat':snigdha,'s_chairseat':s_chair,'shovanseat':shovan}
             dict_result.append(row)
         request.session['trains']=dict_result
-        request.session['cost']=st
+        request.session['cost']=str(int(st))
         request.session['snigdha_fare'] = fare_list
-        return render(request, 'list_trains.html', {'trains': dict_result, 'cost': str(st) + '' + ' BDT', 'details': details})
+        return render(request, 'list_trains.html', {'trains': dict_result, 'cost': str(int(st)) + '' + ' BDT', 'details': details})
     else:
         dict_result=request.session.get('trains')
         st=request.session.get('cost')
