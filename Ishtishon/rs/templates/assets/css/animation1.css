@@ -1,0 +1,49 @@
+.link{
+	padding: 15px 30px;
+	margin: 10px;
+	display: inline-block;
+	color: #000;
+	background: #ffce54;
+  text-decoration: none;
+}
+
+.link:hover{
+	text-decoration: none;
+	color: #000;
+}
+
+/*===================*/
+/* PULSE GROW
+/*===================*/
+
+@-webkit-keyframes pulse-grow-on-hover {
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+@keyframes pulse-grow-on-hover {
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+.pulse-grow-on-hover {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.pulse-grow-on-hover:hover, .pulse-grow-on-hover:focus, .pulse-grow-on-hover:active {
+  -webkit-animation-name: pulse-grow-on-hover;
+  animation-name: pulse-grow-on-hover;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: 2;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+}
