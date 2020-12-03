@@ -550,7 +550,7 @@ def updateinfo(request):
         mail = request.session.get('usermail')
         print(request.POST)
         cursor = connection.cursor()
-        sql = "UPDATE R_USER SET  FIRST_NAME=upper(%s),LAST_NAME=UPPER (%s),DOB=TO_DATE(%s,'YYYY-MM-DD'),GENDER=UPPER (%s),NID_NO=%s,HOUSE_NO=UPPER(%s),ROAD_NO=UPPER(%s),ZIP_CODE=UPPER(%s),CITY=UPPER(%s) WHERE EMAIL_ADD=%s;"
+        sql = "UPDATE R_USER SET  FIRST_NAME=%s,LAST_NAME=%s,DOB=TO_DATE(%s,'YYYY-MM-DD'),GENDER=%s,NID_NO=%s,HOUSE_NO=%s,ROAD_NO=%s,ZIP_CODE=%s,CITY=%s WHERE EMAIL_ADD=%s;"
         cursor.execute(sql, [first,last,dob,gender,nid,house,road,zip,city,mail])
         cursor.close()
         first=first.upper()
@@ -868,6 +868,16 @@ def changenum(request):
         num1 = request.POST["num1"]
         num2 = request.POST["num2"]
         number1='+880'+str(num1)
+        number2='+880'+str(num2)
+        out=""
+        cursor1 = connection.cursor()
+        result = cursor1.callproc('CHECKNUM', [number2, out])
+        print(result[1])
+        if (result[1] == 'true'):
+            msg = "This number already exists!"
+            return render(request, 'changenum.html',
+                          {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
+                           "pnr": pnr, "nid": nid, "password": hashps})
         dbnum=request.session.get('contact')
         if number1 != dbnum:
             msg = "Current number does not match. Try again. "
@@ -907,7 +917,7 @@ def changenum(request):
             newnum='+880'+tempnum
             cursor = connection.cursor()
             sql = "UPDATE R_USER SET CONTACT_NO=%s WHERE USER_ID=TO_NUMBER(%s);"
-            cursor.execute(sql, [newnum,uid])
+            cursor.execute(sql, [tempnum,uid])
             cursor.close()
             request.session["contact"] =newnum
             contact = request.session.get('contact')
