@@ -46,6 +46,8 @@ urlpatterns = [
     path('nexus_payment',rs_views.nexus,name= 'nexus_payment'),
     path('rocket_payment',rs_views.rocket,name= 'rocket_payment'),
     path('Ticket',rs_views.pdf,name='ticket'),
+    path('forget_pass',rs_views.forgetpass,name='forget_pass'),
+    path('forget_pass_change',rs_views.forgetchangepass,name='forget_pass_change'),
 
     #hr delete hoyna
 

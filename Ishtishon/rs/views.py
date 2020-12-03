@@ -29,8 +29,10 @@ from xhtml2pdf import pisa
 
 global is_logged_in
 global details
+global auth_token
 is_logged_in=0
 details={}
+auth_token = 'f02f43ab1fd8ef6587360f0854441346'
 
 def make_pw_hash(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
@@ -39,7 +41,6 @@ def check_pw_hash(password,hash):
     if make_pw_hash(password)==hash:
         return True
     return False
-
 
 
 
@@ -342,7 +343,76 @@ def login(request):
             return render(request, 'login.html', {"status": response})
         else:
             return render(request, 'login.html')
+def forgetpass(request):
+    if request.method == "POST" and 'btn1' in request.POST:
+        contact = request.POST["num"]
+        tempcontact= '+880' + contact
+        cursor = connection.cursor()
+        sql = "SELECT EMAIL_ADD FROM R_USER WHERE CONTACT_NO=%s;"
+        cursor.execute(sql, [tempcontact])
+        result = cursor.fetchall()
+        cursor.close()
+        if result:
+            for r in result:
+                mail = r[0]
+            request.session["fg_mail"] = mail
 
+
+            otp = random.randint(1000, 9999)
+            request.session["fg_otp"] = str(otp)
+            print("otp= " + str(otp))
+            account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
+            # auth_token = '975807bfb5da380c2fb27497280bb732'
+            client = Client(account_sid, auth_token)
+
+            message = client.messages \
+                .create(
+                body='Your OTP is ' + str(otp),
+                from_='+12543235243',
+                to='+880' + contact
+            )
+
+            print(message.sid)
+
+            return redirect("/forget_pass_change")
+        else:
+            msg = "This number does not match with any account."
+            return render(request, 'forgetpass.html',{"status":msg})
+    if request.method == "POST" and 'btn2' in request.POST:
+        mail=request.POST["mail"]
+        request.session["fg_mail"] = mail
+        print("mail jacche")
+        return redirect("/forget_pass_change")
+    return render(request, 'forgetpass.html')
+
+
+def forgetchangepass(request):
+    if request.method == "POST":
+        vcode = request.POST["otp"]
+        ps = request.POST["pass"]
+        otp = request.session.get('fg_otp')
+
+        if vcode == str(otp):
+            mail = request.session.get('fg_mail')
+
+            ps_hash = make_pw_hash(ps)
+
+            f = open("info.txt", "a+")
+            f.write(mail + " " + ps)
+            f.write("\n")
+            f.close()
+            cursor1 = connection.cursor()
+            sql1 = "UPDATE R_USER SET  PASSWORD= %s WHERE EMAIL_ADD=%s;"
+            cursor1.execute(sql1, [ps_hash, mail])
+            cursor1.close()
+            return redirect("/login"+"?update_pass=1")
+        else:
+            print("otp milena")
+            msg = "Wrong OTP Entered."
+            return render(request, 'forgetchangepass.html', {"status": msg})
+
+
+    return render(request, 'forgetchangepass.html')
 def seatselection(request):
     if(request.GET.get('id')):
         id=request.GET.get('id')
@@ -808,7 +878,7 @@ def changenum(request):
         request.session["otp"] = str(otp)
         print("otp= " + str(otp))
         account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
-        auth_token = '975807bfb5da380c2fb27497280bb732'
+        #auth_token = '975807bfb5da380c2fb27497280bb732'
         client = Client(account_sid, auth_token)
 
         message = client.messages \
@@ -1044,7 +1114,7 @@ def bkash(request):
         request.session["otp"] = str(otp)
         print("otp= "+str(otp))
         account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
-        auth_token = '975807bfb5da380c2fb27497280bb732'
+        #auth_token = '975807bfb5da380c2fb27497280bb732'
         client = Client(account_sid, auth_token)
 
         message = client.messages \
@@ -1252,7 +1322,7 @@ def rocket(request):
         request.session["otp"] = str(otp)
         print("otp= "+str(otp))
         account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
-        auth_token = '975807bfb5da380c2fb27497280bb732'
+        #auth_token = '975807bfb5da380c2fb27497280bb732'
         client = Client(account_sid, auth_token)
 
         message = client.messages \

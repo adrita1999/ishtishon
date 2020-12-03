@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -13,25 +14,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
     <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
 </head>
-
 <body>
     <div class="text-center login-dark" style="background: url(&quot;assets/img/train6.jpg&quot;);color: rgb(0,0,0);width: 100%;height: 800px;">
         {% if status %}
         <label id="LOADING" style="margin-top: 75px;margin-left: 680px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>{{ status }}</strong></label>
             {% endif %}
     {% if request.GET.user %}
-        <label id="LOADING2" style="margin-top: 75px;margin-left: 680px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>You have successfully registered</strong></label>
+        <label id="LOADING2" style="margin-top: 75px;margin-left: 680px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>You have successfully registered.</strong></label>
             {% endif %}
     {% if request.GET.notdash_logged_in == '0' %}
-        <label id="LOADING3" style="margin-top: 75px;margin-left: 680px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>Log in to see your dashboard</strong></label>
+        <label id="LOADING3" style="font-family: Lato, sans-serif; margin-top: 75px;margin-left: 680px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;padding-top:5px;color: white"><strong>Log in to see your dashboard.</strong></label>
             {% endif %}
-        <form action="" method="post" style="text-align: right;border-style: none;border-right-style: none;background: rgba(30,40,51,0.88);margin-top: 5px;width: 420px;max-width: 420px;">
+    {% if request.GET.update_pass == '1' %}
+        <label id="LOADING4" style="margin-top: 75px;margin-left: 680px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>Password successfully updated.</strong></label>
+            {% endif %}
+        <form action="" method="post" style="text-align: right;border-style: none;border-right-style: none;background: rgba(30,40,51,0.88);margin-top: 5px;">
             {%  csrf_token %}
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="icon ion-ios-locked-outline" style="color: rgb(104,171,80);"></i></div>
             <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"  required></div>
             <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password" required></div>
-            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background: rgb(104,171,80);color: rgb(0,0,0);">Log In</button></div><a class="forgot" href="#">Forgot your email or password?</a></form>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background: rgb(104,171,80);color: rgb(0,0,0);">Log In</button></div>
+            <a class="forgot" href="forget_pass">Forgot password?</a></form>
     </div>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(118,35,35);padding: 18.2px 0px;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%);">
         <div class="container">
@@ -82,5 +86,9 @@ function logout() {
         document.getElementById('LOADING3').style.display = 'none';
     }, 4000);
     </script>
-
+<script>
+    setTimeout(function(){
+        document.getElementById('LOADING4').style.display = 'none';
+    }, 4000);
+    </script>
 </html>

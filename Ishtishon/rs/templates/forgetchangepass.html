@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Register - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+    <link rel="stylesheet" href="assets/css/smoothproducts.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(118,35,35);padding: 18.2px 0px;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%);">
+        <div class="container">
+
+            <a class="navbar-brand logo" href="#" style="background: rgba(255,255,255,0);padding-left: 10px;color: rgb(0,0,0);text-align: left;"><strong>Railsheba</strong></a>
+
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="navbar-toggler-icon" style="filter: brightness(0%);"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navbarNav" style="text-align: right;">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link active" href="http://127.0.0.1:8000/" style="color: #070606;">Home</a></li>
+                    <li class="nav-item" style="color: #070606;"><a class="nav-link active" href="login" style="color: #070606;">Log in</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="registration" style="color: #070606;">Register</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="updateinfo" style="color: #070606;">Dashboard</a></li>
+                    <li class="nav-item" style="color: #070606;"><a class="nav-link active" href="contactus" style="color: #070606;">Contact us</a></li>
+                    <li class="nav-item" style="padding-right: 0px;"><a class="nav-link active"  onclick="logout()"  style="color: #070606;padding: 8px 0px 8px 8px;">Log out</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+    {% if status %}
+    <section class="clean-block clean-form dark" style="background: url(&quot;assets/img/train6.jpg&quot;) no-repeat;margin: 10px0px;padding: 119px;padding-top: 30px;padding-bottom: 20px;margin-bottom: 0px;height: 800px;margin-top: 50px;">
+        <label id="LOADING" style="margin-top: -105px;margin-left: 950px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>{{ status }}</strong></label>
+    {% else %}
+        <section class="clean-block clean-form dark" style="background: url(&quot;assets/img/train6.jpg&quot;) no-repeat;margin: 10px0px;padding: 119px;padding-top: 120px;padding-bottom: 20px;margin-bottom: 0px;height: 800px;margin-top: 50px;">
+        {% endif %}
+
+        <form action="" method="post" style=" border-top: 2px solid #5ea4f3;background-color: #fff;max-width: 500px;margin-top: 40px;margin-left: 380px;padding: 40px;box-shadow: 0 2px 10px rgba(0,0,0,.075);width: 800px;font-family: Lato, sans-serif;padding-top: 30px;margin-bottom: 0px;"><i class="fa fa-lock d-inline" style="font-size: 29px;padding: 5px;"></i>
+            {%  csrf_token %}
+            <h1 class="d-inline" style="font-family: Lato, sans-serif;font-size: 34px;">Change Password</h1>
+            <hr style="background: #000000;">
+            <div class="form-group"><label >Verification Code</label><input class="form-control item" name="otp" maxlength="4" minlength="4" pattern="\d*" title="Input can be only numbers" type="password" id="password-2" required></div>
+            <div class="form-group"><label >New Password</label><input class="form-control item" name="pass" type="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" maxlength="15" required></div>
+            <div class="form-group" style="padding-bottom: 20px;"><label for="password">Confirm Passsword</label><input class="form-control item" name="newpass" type="password" id="confirm_password" maxlength="15" required style="padding-bottom: 6px;"></div>
+            <button class="btn btn-primary btn-block" type="submit" style="border-radius: 5px;background: rgb(104,171,80);">Change Password</button></form>
+    </section>
+    <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"><img src="assets/img/1.png"><img src="assets/img/2.png"><img src="assets/img/3.png"><img src="assets/img/4.png"><img src="assets/img/5.png"><img src="assets/img/6.png"></main>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script src="assets/js/smoothproducts.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+ <script>
+    var password = document.getElementById("password")
+      , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword(){
+      if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
+      } else {
+        confirm_password.setCustomValidity('');
+      }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+    </script>
+
+    <script>
+function logout() {
+            window.location.href = "{% url 'login' %}" +"?logged_out="+"1";
+          }
+
+</script>
+<script>
+    setTimeout(function(){
+        document.getElementById('LOADING').style.visibility = "hidden";
+    }, 4000);
+    </script>
+
+
+</html>
