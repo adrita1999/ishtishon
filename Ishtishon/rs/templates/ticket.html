@@ -4,99 +4,113 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title></title>
+    <title>Ticket</title>
+    <style type="text/css">
+        @page {
+            size: A4;
+            margin-top: 1cm;
+            margin-left: 1.5cm;
+            margin-bottom: 1.5cm;
+            margin-right: 1.5cm;
+            @frame content_frame {
+            left: 43pt; width: 512pt; top: 60pt; height: 720pt;
+            -pdf-frame-border: 3;
+
+        }
+        }
+
+    </style>
 
 </head>
 
 <body>
-    <div>
-
-        <h1 >Online Ticket</h1>
-        <p>Dear {{ fullname }},</p>
-        <p>Your request to book e-ticket for your journey was successful. Your ticket was booked in your originating station (the station you mentioned as "From Station") using your cellphone (mobile) number . The details of your e-ticket are as below:-</p>
-        <h1><strong>This Ticket will be valid on production of Photo Identity Card of the Passenger.</strong></h1>
-            <h1 >Journey Information</h1>
-            <div class="table-responsive" >
+    <div style="margin: 30px;">
+        <h1 style="text-align: center; font-size: 34px;margin-top: 20px;padding-top: 35px;margin-bottom: 15px;">Online Ticket</h1>
+        <p style=" margin-top: -10px;margin-bottom: 0px;padding: 0px;font-size: 12px;">Dear {{ fullname }},</p>
+        <p style="margin-top: 0px;padding: 0px;font-size: 12px;">Your request to book e-ticket for your journey was successful. Your ticket was booked in your originating station (the station you mentioned as "From Station") using your cellphone (mobile) number. The details of your e-ticket are as below :-</p>
+        <h1 style="text-align: center;font-size: 14px;"><strong>This Ticket will be valid on production of Photo Identity Card of the Passenger.</strong></h1>
+        <h1 style="font-size: 20px;background: rgb(104,171,80);padding: 0px;padding-top:5px;padding-left: 10px;padding-bottom: -5px; margin-bottom: 0px;margin-top: 5px;">Journey Information</h1>
+        <div class="table-responsive" style="margin-left: 5px; padding-left: 5px; font-size: 12px; margin-top: 3px;margin-bottom: 30px;">
                 <table class="table table-striped">
                     <tbody>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td >Issue Date &amp; Time</td>
                             <td>{{ issue }}</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>Journey Date and Departure Time</td>
                             <td>{{journey}}</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>Train Number and Name</td>
                             <td>{{train}}</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>Originating Station (From Station)</td>
                             <td>{{from}}</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>Destination Station (To Station)</td>
                             <td>{{to}}</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>Class Name</td>
                             <td>{{class}}</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>Coach Name</td>
                             <td>{{coach}}</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>Seat Range</td>
                             <td>{{range}}</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>No of Seats</td>
                             <td>{{total}}</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>No of Adult Passenger(s)</td>
                             <td>{{adult}}</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>No of Child Passenger(s)</td>
                             <td>{{child}}</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>FARE</td>
                             <td>{{fare}}</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>VAT</td>
                             <td>--</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>TOTAL FARE</td>
                             <td>--</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <h1 >Ticket Printing Information</h1>
-            <div class="table-responsive" >
+            <h1 style="font-size: 20px;background: rgb(104,171,80);padding: 0px;padding-top:5px;padding-left: 10px;padding-bottom: -5px; margin-bottom: 0px;margin-top: 5px;" >Ticket Printing Information</h1>
+            <div class="table-responsive" style="margin-left: 5px; padding-left: 5px; font-size: 12px; margin-top: 3px; " >
                 <table class="table table-striped">
                     <tbody>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td >Last time of collection of printed tickets</td>
                             <td>{{collect}}</td>
                         </tr>
-                        <tr>
+                        <tr style="padding-top: 2px;">
                             <td>Cellphone (Mobile) Number</td>
                             <td>{{pnr}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p >(*) If you purchased e-ticket for your own travel, print copy of email is sufficient to travel. You don’t need to print out any hard copy of ticket from station. But please make sure to bring along valid photo identity.<br>(*)If you purchased
+            <p style="font-size: 10px;">(*) If you purchased e-ticket for your own travel, print copy of email is sufficient to travel. You don’t need to print out any hard copy of ticket from station. But please make sure to bring along valid photo identity.<br>(*)If you purchased
                 e-ticket for other persons, you have to print out hard copy of e-ticket from designated counters of any online stations. Hope you have a pleasant and safe journey .</p>
-            <p><strong><span>Please Note</span></strong><br><strong>Please keep your Mobile Number/PIN combination in a safe place and DO NOT share the PIN information with anybody. Our team&nbsp;and/or its affiliates will not be responsible for misused PIN combinations.</strong></p>
-            <p>Thank You!!!</p>
+            <p style="font-size: 12px;"><strong><span>Please Note</span></strong><br><strong>Please keep your Mobile Number/PIN combination in a safe place and DO NOT share the PIN information with anybody. Our team&nbsp;and/or its affiliates will not be responsible for misused PIN combinations.</strong></p>
+            <p style="font-size: 12px;">Thank You!!!</p>
     </div>
 
 </body>

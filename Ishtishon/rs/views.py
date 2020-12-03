@@ -381,8 +381,32 @@ def forgetpass(request):
     if request.method == "POST" and 'btn2' in request.POST:
         mail=request.POST["mail"]
         request.session["fg_mail"] = mail
-        print("mail jacche")
-        return redirect("/forget_pass_change")
+        cursor1 = connection.cursor()
+        sql1 = "SELECT EMAIL_ADD FROM R_USER WHERE EMAIL_ADD=%s;"
+        cursor1.execute(sql1, [mail])
+        result1 = cursor1.fetchall()
+        cursor1.close()
+        if result1:
+            otp = random.randint(1000, 9999)
+            request.session["fg_otp"] = str(otp)
+            print("mail jacche")
+            print("otp= " + str(otp))
+            template = render_to_string('fgpass_email.html', {'code':str(otp),'digit':'4'})
+            email = EmailMessage(
+                'Verification code for changing password',
+                template,
+                settings.EMAIL_HOST_USER,
+                [mail],
+            )
+            email.fail_silently = False
+            email.send()
+            return redirect("/forget_pass_change")
+
+        else:
+            msg = "This email address does not match with any account."
+            return render(request, 'forgetpass.html', {"status": msg})
+
+
     return render(request, 'forgetpass.html')
 
 
