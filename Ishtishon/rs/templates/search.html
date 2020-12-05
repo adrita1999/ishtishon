@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
@@ -13,7 +14,13 @@
     <link rel="stylesheet" href="assets/css/Features-Clean.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
     <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <script>
+    AOS.init();
+    </script>
+
 </head>
 
 <body>
@@ -78,7 +85,7 @@
                         <a class="nav-link active" onclick="logout()" style="cursor:pointer;color: #070606;padding: 8px 0px 8px 8px;">Log out</a>
             </div>
         </nav>
-    <div class="features-clean" style="color: #313437;background-color: #fff;padding-bottom: 30px;">
+    <div class="features-clean" data-aos="flip-left" style="color: #313437;background-color: #fff;padding-bottom: 30px;">
         <div class="container">
             <div class="intro"></div>
             <div class="row features">
@@ -98,13 +105,22 @@
         </div>
     </div>
         <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"><img src="assets/img/1.png"><img src="assets/img/2.png"><img src="assets/img/3.png"><img src="assets/img/4.png"><img src="assets/img/5.png"><img src="assets/img/6.png"></main>
+
+
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
         <script src="assets/js/theme.js"></script>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+          <script>
+            AOS.init(
+                {
+                    offset: 200, // offset (in px) from the original trigger point
 
-
-
+                    duration: 1500, // values from 0 to 3000, with step 50ms
+                }
+            );
+          </script>
 
 
 </body>

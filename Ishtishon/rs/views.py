@@ -32,7 +32,7 @@ global details
 global auth_token
 is_logged_in=0
 details={}
-auth_token = 'a4eda66b2f4a770884213a1551b577aa'
+auth_token = '388876d68ca97355290928082787fa40'
 
 def make_pw_hash(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
@@ -261,7 +261,7 @@ def registration(request):
                     f.close()
 
                     cursor = connection.cursor()
-                    sql = "INSERT INTO R_USER VALUES(NVL((SELECT MAX(USER_ID)+1 FROM R_USER),1),%s,%s,%s,TO_DATE(%s,'YYYY-MM-DD'),%s,%s,%s,%s,%s,%s,%s,%s);"
+                    sql = "INSERT INTO R_USER VALUES(NVL((SELECT MAX(USER_ID)+1 FROM R_USER),1),%s,%s,%s,TO_DATE(%s,'YYYY-MM-DD'),CONCAT('+880',%s),%s,%s,%s,%s,%s,%s,%s);"
                     cursor.execute(sql, [pw_hash, first, last, dob, contact, gender, mail, nid, house, road, zip, city])
                     # result = cursor.fetchall()
                     cursor.close()
@@ -941,7 +941,7 @@ def changenum(request):
             newnum='+880'+tempnum
             cursor = connection.cursor()
             sql = "UPDATE R_USER SET CONTACT_NO=%s WHERE USER_ID=TO_NUMBER(%s);"
-            cursor.execute(sql, [tempnum,uid])
+            cursor.execute(sql, [newnum,uid])
             cursor.close()
             request.session["contact"] =newnum
             contact = request.session.get('contact')
