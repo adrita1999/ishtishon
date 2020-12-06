@@ -34,21 +34,25 @@
         </div>
         </div>
     </nav>
-    {% if status %}
-    <section class="clean-block clean-form dark" style="background: url(&quot;assets/img/train6.jpg&quot;) no-repeat;margin: 10px0px;padding: 119px;padding-top: 30px;padding-bottom: 20px;margin-bottom: 0px;height: 800px;margin-top: 50px;">
-        <label id="LOADING" style="margin-top: -105px;margin-left: 950px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>{{ status }}</strong></label>
+     {% if status %}
+    <section class="clean-block clean-form dark" style="background: url(&quot;assets/img/train6.jpg&quot;) no-repeat;margin: 10px0px;padding: 119px;padding-top: 81px;padding-bottom: 20px;margin-bottom: 0px;height: 800px;text-align: left;">
+    <label id="LOADING" style="margin-top: -105px;margin-left: 950px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>{{ status }}</strong></label>
     {% else %}
-        <section class="clean-block clean-form dark" style="background: url(&quot;assets/img/train6.jpg&quot;) no-repeat;margin: 10px0px;padding: 119px;padding-top: 120px;padding-bottom: 20px;margin-bottom: 0px;height: 800px;margin-top: 50px;">
-        {% endif %}
+    <section class="clean-block clean-form dark" style="background: url(&quot;assets/img/train6.jpg&quot;) no-repeat;margin: 10px0px;padding: 119px;padding-top: 124px;padding-bottom: 20px;margin-bottom: 0px;height: 800px;text-align: left;">
+    {% endif %}
 
-        <form action="" method="post" style=" border-top: 2px solid #5ea4f3;background-color: #fff;max-width: 500px;margin-top: 40px;margin-left: 380px;padding: 40px;box-shadow: 0 2px 10px rgba(0,0,0,.075);width: 800px;font-family: Lato, sans-serif;padding-top: 30px;margin-bottom: 0px;"><i class="fa fa-lock d-inline" style="font-size: 29px;padding: 5px;"></i>
-            {%  csrf_token %}
-            <h1 class="d-inline" style="font-family: Lato, sans-serif;font-size: 34px;">Change Password</h1>
-            <hr style="background: #000000;">
-            <div class="form-group"><label >Verification Code</label><input class="form-control item" name="otp" maxlength="4" minlength="4" pattern="\d*" title="Input can be only numbers" type="password" id="password-2" required></div>
-            <div class="form-group"><label >New Password</label><input class="form-control item" name="pass" type="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" maxlength="15" required></div>
-            <div class="form-group" style="padding-bottom: 20px;"><label for="password">Confirm Passsword</label><input class="form-control item" name="newpass" type="password" id="confirm_password" maxlength="15" required style="padding-bottom: 6px;"></div>
-            <button class="btn btn-primary btn-block" type="submit" style="border-radius: 5px;background: rgb(104,171,80);">Change Password</button></form>
+        <div style="background: #ffffff;width: 500px;margin-left: 370px;padding-bottom: 15px;margin-top: 90px;">
+            <form action="" method="post" style="border-top: 2px solid #5ea4f3;background-color: #fff;max-width: 500px;margin: auto;padding: 40px;box-shadow: 0 2px 10px rgba(0,0,0,.075);border-top-style: none;background: rgba(255,255,255,0);box-shadow: 0px 0px;padding-bottom: 20px;">
+                {%  csrf_token %}
+                <i class="fa fa-lock d-inline" style="font-size: 29px;padding: 5px;"></i>
+                <h1 class="d-inline" style="font-family: Lato, sans-serif;font-size: 34px;">Change Password</h1>
+                <hr style="background: #000000;">
+                <div class="form-group"><label >Verification Code</label><input class="form-control item" name="otp" maxlength="4" minlength="4" pattern="\d*" title="Input can be only numbers" type="password" id="password-2" required></div>
+                <div class="form-group"><label >New Password</label><input class="form-control item" name="pass" type="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" maxlength="15" required></div>
+                <div class="form-group" style="padding-bottom: 20px;"><label for="password">Confirm Passsword</label><input class="form-control item" name="newpass" type="password" id="confirm_password" maxlength="15" required style="padding-bottom: 6px;"></div>
+                <button class="btn btn-primary btn-block" type="submit" style="border-radius: 5px;background: rgb(104,171,80);">Change Password</button></form>
+            </form>
+        </div>
     </section>
     <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"><img src="assets/img/1.png"><img src="assets/img/2.png"><img src="assets/img/3.png"><img src="assets/img/4.png"><img src="assets/img/5.png"><img src="assets/img/6.png"></main>
     <script src="assets/js/jquery.min.js"></script>

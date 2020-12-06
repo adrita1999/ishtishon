@@ -82,7 +82,7 @@
         <div class="container" style="padding-left: 0px;padding-right: 0px;">
             <h1 style="background: rgb(104,171,80);padding: 10px;text-align: left;padding-left: 10px;margin: 0px;">Dashboard</h1>
             <div class="row" style="padding-left: 15px;padding-top: 10px;padding-right: 15px;">
-                <div class="col-md-4" style="background: #f5fff1;padding-left: 0px;">
+                <div class="col-md-3" style="background: #f5fff1;padding-left: 0px;">
                     <div class="row">
                         <div class="col-lg-12 offset-lg-0" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a href="updateinfo" style="text-align: center;padding: 0px;height: 48px;width: 200px;"><i class="fa fa-user" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Update User Profile</span></a></div>
                     </div>
@@ -102,17 +102,18 @@
                         <div class="col" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a href="upcoming"><i class="fa fa-forward" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Upcoming Journeys</span></a></div>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div style="padding-left: 10px;padding-top: 10px;padding-right: 0px;"><i class="fa fa-lock" style="padding-right: 10px;font-size: 36px;"></i>
                         <h1 class="d-inline" style="font-size: 36px;padding-top: 10px;">Change Password</h1>
-                        <hr style="color: rgb(0,0,0);background: #000000;">
+                        <hr style="height:0.8px;border-width:0;color:black;background-color:black">
                         <form action="" method="post" style="padding-bottom: 10px;">
                             {%  csrf_token %}
                             <div class="form-group"><label>Current Password</label><input class="form-control" name="pass" type="password" placeholder="Password" required></div>
                             <div class="form-group"><label>New Password</label><input class="form-control" name="newpass" id="password" type="password" placeholder="New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" required></div>
                             <div class="form-group"><label>Confirm New Password</label><input class="form-control" id="confirm_password" type="password" placeholder="Re-type Password" required></div>
 
-                        <hr style="background: rgba(0,0,0,0.5);color: rgb(0,0,0);margin-bottom: 32px;"><button class="btn btn-primary border rounded" type="submit" style="margin-bottom: 35px;width: 720px;background: rgb(104,171,80);color: rgb(0,0,0);">Change Password</button></div>
+                        <hr style="height:0.8px;border-width:0;color:black;background-color:black">
+                        <button class="btn btn-primary border rounded" type="submit" style="margin-bottom: 35px;width: 100%;background: rgb(104,171,80);color: rgb(0,0,0);">Change Password</button></div>
                     </form>
                 </div>
             </div>
