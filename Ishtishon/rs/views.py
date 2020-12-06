@@ -73,12 +73,12 @@ def list_trains(request):
         cursor.close()
 
         cursor1 = connection.cursor()
-        sql1 = "select TRUNC(COST*%s+COST*%s*0.5) FROM COST WHERE STATION_ID=(SELECT STATION_ID from STATION where NAME=%s) AND TO_STATION_ID=(SELECT STATION_ID from STATION where NAME=%s)"
+        sql1 = "select NVL(TRUNC(COST*%s+COST*%s*0.5),0) FROM COST WHERE STATION_ID=(SELECT STATION_ID from STATION where NAME=%s) AND TO_STATION_ID=(SELECT STATION_ID from STATION where NAME=%s)"
         cursor1.execute(sql1, [adult,child,fro, to])
         result1 = cursor1.fetchall()
         cursor1.close()
         cursor2 = connection.cursor()
-        sql2 = "select COST FROM COST WHERE STATION_ID=(SELECT STATION_ID from STATION where NAME=%s) AND TO_STATION_ID=(SELECT STATION_ID from STATION where NAME=%s)"
+        sql2 = "select NVL(COST,0) FROM COST WHERE STATION_ID=(SELECT STATION_ID from STATION where NAME=%s) AND TO_STATION_ID=(SELECT STATION_ID from STATION where NAME=%s)"
         cursor2.execute(sql2, [fro,to])
         result2 = cursor2.fetchall()
         cursor2.close()
@@ -104,13 +104,18 @@ def list_trains(request):
         fare_list.append(str(st6))
         st = ""
         for re in result1:
+
             if clas=='SNIGDHA':
                 st = re[0]
             elif clas=='S_CHAIR':
                 st=re[0]*0.8
             else:
                 st=re[0]*0.6
-        st=st+(st*0.15)
+        print(st)
+        if st!="":
+            st=st+(st*0.15)
+        else:
+            st="0"
         dict_result = []
         doj = request.session.get('doj')
         for r in result:
