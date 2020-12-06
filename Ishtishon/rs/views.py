@@ -110,7 +110,7 @@ def list_trains(request):
                 st=re[0]*0.8
             else:
                 st=re[0]*0.6
-
+        st=st+(st*0.15)
         dict_result = []
         doj = request.session.get('doj')
         for r in result:

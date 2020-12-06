@@ -86,7 +86,7 @@
         <td style="text-align: center;padding-top: 35px">{{train.NAME}}</td>
         <td style="text-align: center;padding-top: 35px">{{train.DEPARTURE_TIME}}</td>
         <td style="text-align: center;padding-top: 35px">{{train.ARRIVAL_TIME}}</td>
-        <td style="text-align: center;padding-top: 35px">{{cost}}</td>
+        <td style="text-align: center;padding-top: 35px">{{cost}}<br><p style="font-size: 12px">(Including 15% VAT)</p></td>
         <td><div class="mx-5 p-4 text-center">
     <a class="btn btn-primary" id="{{ train.TRAIN_ID }}" onclick="getid(id)" style="background: rgb(104,171,80)">Purchase</a>
             <a id="{{train.TRAIN_ID}}_{{train.NAME}}"  name="btn2" type="button" data-toggle="modal" data-target="#{{ train.TRAIN_ID }}" class="btn btn-primary" style="background: rgb(104,171,80)">Availability</a>
