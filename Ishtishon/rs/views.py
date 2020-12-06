@@ -278,14 +278,12 @@ def login(request):
         mail = request.POST["email"]
         ps = request.POST["password"]
 
-
-
         cursor = connection.cursor()
         sql = "SELECT PASSWORD FROM R_USER WHERE EMAIL_ADD=%s;"
         cursor.execute(sql,[mail])
         result = cursor.fetchall()
         cursor.close()
-
+        print(result)
 
         if(result):
 

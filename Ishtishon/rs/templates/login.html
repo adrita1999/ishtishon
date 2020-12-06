@@ -18,16 +18,17 @@
 <body>
 
     <div class="text-center login-dark" style="background: url(&quot;assets/img/train6.jpg&quot;);color: rgb(0,0,0);width: 100%;height: 800px;">
-    {% if status %}
+        {% if status %}
         <label id="LOADING" style="margin-top: 75px;margin-left: 680px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>{{ status }}</strong></label>
-    {% elif request.GET.user %}
+         {% elif request.GET.user %}
         <label id="LOADING2" style="margin-top: 75px;margin-left: 680px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>You have successfully registered.</strong></label>
-    {% elif request.GET.notdash_logged_in == '0' %}
+        {% elif request.GET.notdash_logged_in == '0' %}
         <label id="LOADING3" style="font-family: Lato, sans-serif; margin-top: 75px;margin-left: 680px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;padding-top:5px;color: white"><strong>Log in to see your dashboard.</strong></label>
-    {%elif request.GET.update_pass == '1' %}
+        {%elif request.GET.update_pass == '1' %}
         <label id="LOADING4" style="margin-top: 75px;margin-left: 680px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>Password successfully updated.</strong></label>
+        {% endif %}
 
-            {% endif %}
+
         <form action="" method="post" style="text-align: right;border-style: none;border-right-style: none;background: rgba(30,40,51,0.88);margin-top: 5px;width: 380px;max-width: 380px;">
             {%  csrf_token %}
             <h2 class="sr-only">Login Form</h2>
@@ -36,6 +37,8 @@
             <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password" required></div>
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background: rgb(104,171,80);color: rgb(0,0,0);">Log In</button></div>
             <a class="forgot" href="forget_pass">Forgot password?</a></form>
+
+
     </div>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(118,35,35);padding: 18.2px 0px;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%);">
         <div class="container">
@@ -54,6 +57,7 @@
                     <li class="nav-item" style="padding-right: 0px;"><a class="nav-link active"  onclick="logout()"  style="color: #070606;padding: 8px 0px 8px 8px;">Log out</a></li>
                 </ul>
         </div>
+
         </div>
     </nav>
     <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"><img src="assets/img/1.png"><img src="assets/img/2.png"><img src="assets/img/3.png"><img src="assets/img/4.png"><img src="assets/img/5.png"><img src="assets/img/6.png"></main>
