@@ -29,13 +29,18 @@
         </div>
         </div>
     </nav>
-    {% if statusgreen %}
-        <label id="LOADING" style="margin-top: 75px;margin-left: 1050px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>{{ statusgreen }}</strong></label>
-        {% elif statusred %}
-        <label id="LOADING2" style="margin-top: 75px;margin-left: 1050px;width: 450px;height: 35px;background: red;text-align: left;padding-left: 5px;color: white"><strong>{{ statusred }}</strong></label>
-            {% endif %}
+
     <div style="padding-top: 95px;">
-        <div class="container" style="background: url(&quot;assets/img/train6.jpg&quot;) center / cover no-repeat;">
+        {% if statusgreen %}
+    <div style="z-index: 2; padding: 0px;margin: 0px;height: 0px;">
+        <label id="LOADING" style="margin-top: -100px;margin-left: 879.5px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>{{ statusgreen }}</strong></label>
+    </div>
+            {% elif statusred %}
+    <div style="z-index: 2; padding: 0px;margin: 0px;height: 0px;">
+        <label id="LOADING2" style="margin-top: -100px;margin-left: 879.5px;width: 450px;height: 35px;background: red;text-align: left;padding-left: 5px;color: white"><strong>{{ statusred }}</strong></label>
+    </div>
+    {% endif %}
+        <div class="container" style="z-index: 1;background: url(&quot;assets/img/train6.jpg&quot;) center / cover no-repeat;">
             <section style="padding-top: 25px;background: rgba(0,0,0,0.85);padding-right: 20px;padding-left: 20px;">
                 <h1 style="padding-bottom: 20px;color: rgb(255,255,255);font-size: 28px;">Personal Information</h1>
                 <div class="row" style="padding-left: 10px;">

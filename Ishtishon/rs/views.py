@@ -839,8 +839,6 @@ def changemail(request):
                       {"statusgreen": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
                        "pnr": pnr, "nid": nid})
 
-    #btn1 first submit button jeta input nibe
-    #btn3 second submit button jeta otp ar password input nibe
 
     return render(request, 'changemail.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 
