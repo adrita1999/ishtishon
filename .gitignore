@@ -1,4 +1,3 @@
-
 *.xml
 *.iml
 Ishtishon/.idea/Ishtishon.iml
@@ -7,4 +6,4 @@ Ishtishon/.idea/workspace.xml
 Ishtishon/rs/__pycache__/views.cpython-39.pyc
 Ishtishon\rs\__pycache__
 *.pyc
-**/_pycache_
+__pycache__/
