@@ -27,19 +27,19 @@
 <body>
     <div class="login-dark" style="background: url(&quot;assets/img/train6.jpg&quot;);color: #d9ebfb;padding: 10px;width: 100%;height: 800px;">
         {% if request.GET.not_logged_in == '0' %}
-        <label id="LOADING" data-aos="fade-down" data-aos-delay="0" data-aos-duration="350" style="margin-top: 67px;margin-left: 1059px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>Please log in first to search trains.</strong></label>
+        <label id="LOADING" data-aos="fade-down" data-aos-delay="0" data-aos-duration="300" style="margin-top: 67px;margin-left: 1059px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 10px;padding-top:5px;color: white"><strong>Please log in first to search trains.</strong></label>
             {% endif %}
         {% if request.GET.user %}
-            <label id="LOADING2" data-aos="fade-down" data-aos-delay="0" data-aos-duration="350"  style="margin-top: 67px;margin-left: 1059px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>You have successfully logged in.</strong></label>
+            <label id="LOADING2" data-aos="fade-down" data-aos-delay="0" data-aos-duration="300"  style="margin-top: 67px;margin-left: 1059px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 10px;padding-top:5px;color: white"><strong>You have successfully logged in.</strong></label>
         {% endif %}
         {% if request.GET.logged_in == '1' %}
-        <label id="LOADING3" data-aos="fade-down" data-aos-delay="0" data-aos-duration="350"  style="margin-top: 67px;margin-left: 1059px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>You are already logged in</strong></label>
+        <label id="LOADING3" data-aos="fade-down" data-aos-delay="0" data-aos-duration="300"  style="margin-top: 67px;margin-left: 1059px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 10px;padding-top:5px;color: white"><strong>You are already logged in.</strong></label>
         {% endif %}
         {% if request.GET.already_logged_in == '1' %}
-            <label id="LOADING4" data-aos="fade-down" data-aos-delay="0" data-aos-duration="350"  style="margin-top: 67px;margin-left: 1059px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>Please log out first to register.</strong></label>
+            <label id="LOADING4" data-aos="fade-down" data-aos-delay="0" data-aos-duration="300"  style="margin-top: 67px;margin-left: 1059px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 10px;padding-top:5px;color: white"><strong>Please log out first to register.</strong></label>
         {% endif %}
            {% if request.GET.max_seat_exceeded == '1' %}
-            <label id="LOADING5" data-aos="fade-down" data-aos-delay="0" data-aos-duration="350"  style="margin-top: 67px;margin-left: 1059px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>Maximum 4 seats can be issued.</strong></label>
+            <label id="LOADING5" data-aos="fade-down" data-aos-delay="0" data-aos-duration="300"  style="margin-top: 67px;margin-left: 1059px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 10px;padding-top:5px;color: white"><strong>Maximum 4 seats can be issued.</strong></label>
         {% endif %}
 
 

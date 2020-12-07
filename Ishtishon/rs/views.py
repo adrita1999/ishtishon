@@ -323,20 +323,26 @@ def login(request):
             else:
                 print(make_pw_hash(ps))
                 response = "Login Denied. Wrong Password."
-                return render(request, "login.html", {"status": response})
+                return render(request, "login.html", {"statusred": response})
         else:
             response = "Login Denied. Invalid E-mail."
-            return render(request, "login.html", {"status": response})
+            return render(request, "login.html", {"statusred": response})
 
     else :
         if (request.GET.get('logged_out')):
+            fl=0
             if(request.session.get('is_logged_in')!="1"):
-                response="You are not logged in yet.Please log in first"#if (request.GET.logged_out == '1'):
+                fl=0
+                response="You are not logged in yet. Please log in first."#if (request.GET.logged_out == '1'):
             else:
+                fl=1
                 is_logged_in = 0
                 request.session.flush()
-                response="You are logged out."
-            return render(request, 'login.html', {"status": response})
+                response="You have successfully logged out."
+            if fl:
+                return render(request, 'login.html', {"statusgreen": response})
+            else:
+                return render(request, 'login.html', {"statusred": response})
         else:
             return render(request, 'login.html')
 def forgetpass(request):
