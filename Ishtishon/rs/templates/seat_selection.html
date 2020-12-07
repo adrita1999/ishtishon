@@ -76,11 +76,18 @@
             </section>
         </div>
     </div>
+<<<<<<< Updated upstream
         <div class="toggle" style="margin-left: 185px;margin-top: 10px"><input onclick="large()" type="radio" id="cond_new" data-toggle="collapse" data-target="#collapseExample.show" aria-expanded="false" aria-controls="collapseExample" name="bike_cond" checked="checked"><label for="cond_new">Auto</label><input onclick="small()" type="radio" id="cond_used" name="bike_cond" data-toggle="collapse" data-target="#collapseExample:not(.show)" aria-expanded="false" aria-controls="collapseExample"><label for="cond_used">Manual</label>
 
+=======
+        <div class="toggle" style="margin-left: 185px;margin-top: 10px;"><input onclick="large()" type="radio" id="cond_new" data-toggle="collapse" data-target="#collapseExample.show" aria-expanded="false" aria-controls="collapseExample" name="bike_cond" checked="checked" ><label for="cond_new">Auto</label><input onclick="small()" type="radio" id="cond_used" name="bike_cond" data-toggle="collapse" data-target="#collapseExample:not(.show)" aria-expanded="false" aria-controls="collapseExample"><label for="cond_used">Manual</label>
+        {% if request.GET.not_equal %}
+     <label id="LOADING" style="margin-top: 0px;margin-left: 620px;width: 850px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white;font-size: 16px; "><strong>Selected seat numbers don't match with the number of passengers</strong></label>
+    {% endif %}
+>>>>>>> Stashed changes
         </div>
     </fieldset>
-    <div style="height: 100px; margin-left:185px;"><label style="width: 1145px;background: #bec5ba;">Passenger Details</label>
+    <div style="height: 100px; margin-left:185px;"><label style="width: 1145px;background: #bec5ba;color: black;">Passenger Details</label>
         <div style="height: 24px;"><label style="width: 400px">Name:  {{ full }}</label><label style="margin-left: 300px;">Mobile:  {{ mobile }}</label></div>
         <div style="height: 24px;"><label style="width: 400px">Email:  {{ mail }}</label><label style="margin-left: 300px;">Address:  {{ address }}</label></div>
     </div>
@@ -646,17 +653,17 @@
                 </div>
             </div>
         </div>
-        <div class="float-left" id="div1" style="width: 620px;height: 300px;margin-left: 185px;"><label id="label1" style="width: 1145px;background: #bec5ba;">&nbsp;Ticket Details</label>
+        <div class="float-left" id="div1" style="width: 620px;height: 300px;margin-left: 185px;"><label id="label1" style="width: 1145px;background: #bec5ba;color: black;">&nbsp;Ticket Details</label>
             <div style="height: 24px;"><label>&nbsp;Train name:  {{ train_name }}</label></div>
             <div style="height: 24px;"><label>&nbsp;Adult:  {{ adult }}</label></div>
             <div style="height: 24px;"><label>&nbsp;Child:  {{ child }}</label></div>
             <div style="height: 24px;"><label>&nbsp;Total cost:  {{ cost }} BDT</label></div>
-            <div style="height: 24px;"><label id="label2" style="width: 1145px;background: #bec5ba;margin-top: 10px;">&nbsp;Review the Rules and Restrictions</label></div>
+            <div style="height: 24px;"><label id="label2" style="width: 1145px;background: #bec5ba;color: black;margin-top: 10px;">&nbsp;Review The Rules And Restrictions</label></div>
             <ul style="margin-top: 22px;padding-left: 15px;">
                 <li>Terms and conditions are applicable</li>
                 <li style="width: 520px;">Tickets are non-transferable and name changes are not allowed</li>
             </ul>
-            <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#exampleModalScrollable" style="border-radius: 3px;background: rgb(0,153,70);margin-left: 20px;margin-top: 20px">Buy ticket</button></div>
+            <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#exampleModalScrollable" style="border-radius: 5px;background:#58a25b;color: white;margin-left: 20px;margin-top: 20px">Buy Ticket</button></div>
     </div>
 
    <!-- Modal -->
@@ -677,8 +684,8 @@
                             of transactions on this website.<br><br></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="border-radius: 3px;">Close</button>
-        <button type="button" class="btn btn-primary" onclick="blackbuttons()" style="background: rgb(104,171,80); border-radius: 3px;">I agree</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="border-radius: 5px;">Close</button>
+        <button type="button" class="btn btn-primary" onclick="blackbuttons()" style="background: #58a25b; border-radius: 5px;">I agree</button>
       </div>
     </div>
   </div>

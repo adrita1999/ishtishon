@@ -167,26 +167,6 @@ def list_trains(request):
         return render(request, 'list_trains.html',
                       {'trains': dict_result, 'cost': str(st) + '' + ' BDT', 'details': details})
 
-def list_stations(request):
-
-    cursor = connection.cursor()
-    sql = "SELECT * FROM STATION ORDER BY STATION_ID"
-    cursor.execute(sql)
-    result = cursor.fetchall()
-
-    cursor.close()
-    dict_result = []
-
-    for r in result:
-        STATION_ID = r[0]
-        NAME = r[1]
-
-        row = {'STATION_ID': STATION_ID, 'NAME': NAME}
-        dict_result.append(row)
-
-    return render(request, 'list_stations.html', {'stations': dict_result})
-
-
 def homepage(request):
     cursor = connection.cursor()
     sql="SELECT NAME FROM STATION"
