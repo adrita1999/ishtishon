@@ -81,24 +81,25 @@
     </div>
 </fieldset>
 {% if trains %}
+    <label style="margin-left:190px; margin-top: 5px; width: 1139px;background: rgb(104,171,80);height: 50px;padding-top: 5px;padding-left:10px;color: #212529;font-size: 24px;"><strong>Result: {{ tcount }} trains found</strong></label>
 
-    <div style="padding-top: 40px;padding-bottom:80px;padding-left: 200px;padding-right: 200px;">
+    <div style="padding-top: 20px;padding-bottom:80px;padding-left: 200px;padding-right: 200px;">
        {% for train in trains %}
         {% if train.lr == '0'%}
 
-            <div data-aos="fade-left"  data-aos-delay="{{train.delay}}" style="background: rgb(240,255,234);padding: 20px;border-radius: 15px;padding-top: 25px;padding-left: 30px;padding-right: 30px;margin-bottom: 20px;box-shadow: 0px 2px 4px rgb(225,225,225);">
+            <div data-aos="fade-left"  data-aos-delay="{{train.delay}}" style="background: rgb(233,242,229);padding: 20px;border-radius: 15px;padding-top: 25px;padding-left: 30px;padding-right: 30px;margin-bottom: 20px;box-shadow: 0px 2px 4px rgb(225,225,225);">
                 <div class="row">
                     <div class="col">
-                        <p>TRAIN<br>{{train.NAME}} ({{train.TRAIN_ID}})</p>
+                        <p><strong>TRAIN</strong><br>{{train.NAME}} ({{train.TRAIN_ID}})</p>
                     </div>
                     <div class="col">
-                        <p>DEPARTURE TIME<br>{{train.DEPARTURE_TIME}}</p>
+                        <p><strong>DEPARTURE TIME</strong><br>{{train.DEPARTURE_TIME}}</p>
                     </div>
                     <div class="col">
-                        <p>ARRIVAL TIME<br>{{train.ARRIVAL_TIME}}</p>
+                        <p><strong>ARRIVAL TIME</strong><br>{{train.ARRIVAL_TIME}}</p>
                     </div>
                     <div class="col">
-                        <p>TOTAL COST{{cost}}<br><p style="font-size: 12px">(Including 15% VAT)</p></p>
+                        <p><strong>TOTAL COST<br></strong>{{cost}}<br><p style="font-size: 12px">(Including 15% VAT)</p></p>
                     </div>
                     <div class="col" style="text-align: center;">
                         <button class="btn btn-primary" type="button" id="{{ train.TRAIN_ID }}" onclick="getid(id)" style="width: 90px;margin-top: 5px;background: rgb(104,171,80);border-style: none;margin-left: 5px;">Purchase</button>
@@ -157,16 +158,16 @@
                    <div data-aos="fade-right"  data-aos-delay="{{train.delay}}" style="background: rgb(240,255,234);padding: 20px;border-radius: 15px;padding-top: 25px;padding-left: 30px;padding-right: 30px;margin-bottom: 20px;box-shadow: 0px 2px 4px rgb(225,225,225);">
                     <div class="row">
                         <div class="col">
-                            <p>TRAIN<br>{{train.NAME}} ({{train.TRAIN_ID}})</p>
+                            <p><strong>TRAIN</strong><br>{{train.NAME}} ({{train.TRAIN_ID}})</p>
                         </div>
                         <div class="col">
-                            <p>DEPARTURE TIME<br>{{train.DEPARTURE_TIME}}</p>
+                            <p><strong>DEPARTURE TIME</strong><br>{{train.DEPARTURE_TIME}}</p>
                         </div>
                         <div class="col">
-                            <p>ARRIVAL TIME<br>{{train.ARRIVAL_TIME}}</p>
+                            <p><strong>ARRIVAL TIME</strong><br>{{train.ARRIVAL_TIME}}</p>
                         </div>
                         <div class="col">
-                            <p>TOTAL COST{{cost}}<br><p style="font-size: 12px">(Including 15% VAT)</p></p>
+                            <p><strong>TOTAL COST<br></strong>{{cost}}<br><p style="font-size: 12px">(Including 15% VAT)</p></p>
                         </div>
                         <div class="col" style="text-align: center;">
                             <button class="btn btn-primary" type="button" id="{{ train.TRAIN_ID }}" onclick="getid(id)" style="width: 90px;margin-top: 5px;background: rgb(104,171,80);border-style: none;margin-left: 5px;">Purchase</button>
@@ -246,7 +247,7 @@
                 {
                     offset: 50, // offset (in px) from the original trigger point
                     once: true,
-                    duration: 2000, // values from 0 to 3000, with step 50ms
+                    duration: 1200, // values from 0 to 3000, with step 50ms
                     delay: 0,
                 }
             );

@@ -127,7 +127,7 @@ def list_trains(request):
             arrival = r[3]
             sn=r[4]
             leftright=str(sn%2)
-            delay=sn*500
+            delay=(sn-1)*200
             cursor = connection.cursor()
             sql = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SNIGDHA' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
             cursor.execute(sql, [TRAIN_ID, doj])
