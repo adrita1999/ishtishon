@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/css/Features-Boxed.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
     <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="assets/css/animation1.css">
 </head>
 
 <body>
@@ -24,25 +25,30 @@
             <button class="btn btn-primary" type="submit" style="border-radius: 5px;width: 400px;font-size: 16px;background: linear-gradient(rgb(88,162,91), rgb(88,162,91)), rgb(88,162,91);filter: brightness(102%);text-transform: capitalize;">Proceed to pay</button></form>
     </div>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(118,35,35);padding: 18.2px 0px;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%);">
-        <div class="container"><a class="navbar-brand logo" href="#" style="text-align: left;background: rgba(255,255,255,0);color: rgb(0,0,0);"><strong>Railsheba</strong></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="navbar-toggler-icon" style="filter: brightness(0%);"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navbarNav" style="text-align: right;">
+            <div class="container">
+                <strong><img src="assets/img/testlogo.png" style="cursor:context-menu;width: 120px;height: 70px;margin-top: -20px;margin-bottom: -13px"></strong>
+                <div class="collapse navbar-collapse" id="navbarNav" style="text-align: right;">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link active" href="http://127.0.0.1:8000/" style="color: #070606;">Home</a></li>
-                    <li class="nav-item" style="color: #070606;"><a class="nav-link active" href="login" style="color: #070606;">Log in</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="registration" style="color: #070606;">Register</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="updateinfo" style="color: #070606;">Dashboard</a></li>
-                    <li class="nav-item" style="color: #070606;"><a class="nav-link active" href="contactus" style="color: #070606;">Contact us</a></li>
-                    <li class="nav-item" style="padding-right: 0px;"><a class="nav-link active" onclick="logout()" style="color: #070606;padding: 8px 0px 8px 8px;">Log out</a></li>
+                    <li class="nav-item"><a class="nav-link active link link-four pulse-grow-on-hover" href="http://127.0.0.1:8000/" style="color: #070606;background-color: #f5fff1;padding: 0px;">Home</a></li>
+                    <li class="nav-item" style="color: #070606;"><a class="nav-link active link link-four pulse-grow-on-hover" href="login" style="color: #070606;background-color: #f5fff1;padding: 0px;">Log in</a></li>
+                    <li class="nav-item"><a class="nav-link active link link-four pulse-grow-on-hover" href="registration" style="color: #070606;background-color: #f5fff1;padding: 0px;">Register</a></li>
+                    <li class="nav-item"><a class="nav-link active link link-four pulse-grow-on-hover" href="updateinfo" style="color: #070606;background-color: #f5fff1;padding: 0px;">Dashboard</a></li>
+                    <li class="nav-item" style="color: #070606;"><a class="nav-link active link link-four pulse-grow-on-hover" href="contactus" style="color: #070606;background-color: #f5fff1;padding: 0px;">Contact us</a></li>
+                    <li class="nav-item" style="cursor:pointer;padding-right: 0px;"><a class="nav-link active link link-four pulse-grow-on-hover" onclick="logout()" style="color: #070606;background-color: #f5fff1;padding: 0px;">Log out</a></li>
                 </ul>
         </div>
-        </div>
-    </nav>
+            </div>
+        </nav>
     <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"></main>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="assets/js/theme.js"></script>
 </body>
+<script>
+function logout() {
+            window.location.href = "{% url 'login' %}" +"?logged_out="+"1";
+          }
 
+</script>
 </html>
