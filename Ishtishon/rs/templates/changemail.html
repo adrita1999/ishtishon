@@ -112,8 +112,8 @@
                         <hr style="height:0.8px;border-width:0;color:black;background-color:black">
                         <form method="post" action="" style="padding-bottom: 10px;">
                             {%  csrf_token %}
-                            <div class="form-group"><label>Current E-mail</label><input name="currentmail" class="form-control" type="email" placeholder="E-mail" value="{{ mail }}"></div>
-                            <div class="form-group"><label>New E-mail</label><input name="newmail" class="form-control" type="email" placeholder="New E-mail"></div>
+                            <div class="form-group"><label>Current E-mail</label><input name="currentmail" class="form-control" type="email" placeholder="E-mail" value="{{ mail }}" required></div>
+                            <div class="form-group"><label>New E-mail</label><input name="newmail" class="form-control" type="email" placeholder="New E-mail" required> </div>
                             <button class="btn btn-primary border rounded" name="btn1" type="submit" style="margin-bottom: 10px;width: auto;background: #58a25b;color: rgb(0,0,0);">Send Verification Code</button>
                         <hr style="height:0.8px;border-width:0;color:black;background-color:black">
                         <button class="btn btn-primary border rounded" name="btn2" type="button" data-toggle="modal" data-target="#exampleModalCenter" style="margin-bottom: 35px;width: 100%;background: #58a25b;color: rgb(0,0,0);">Verify Code And Change E-mail</button>

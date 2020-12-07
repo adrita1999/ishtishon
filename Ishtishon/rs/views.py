@@ -768,6 +768,8 @@ def changemail(request):
     pnr = contact[slice_object]
     request.session["pnr"] = pnr
     if request.method == "POST" and 'btn1' in request.POST:
+        verification = randint(100000, 999999)
+        request.session['veri'] = str(verification)
         currentmail = request.POST["currentmail"]
         out=""
         newmail = request.POST["newmail"]
@@ -775,27 +777,27 @@ def changemail(request):
         result=cursor1.callproc('CHECKMAIL',[newmail,out])
         print(result[1])
         if(result[1]=='true'):
-            msg = "There is already an account registered with this e-mail. Try with another e-mail."
+            msg = "There is already an account registered with this e-mail."
             return render(request, 'changemail.html',
                           {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
                            "pnr": pnr, "nid": nid})
         request.session['newmail']=newmail
         if currentmail == request.session.get('usermail'):
-            verification = randint(100000, 999999)
-            request.session['veri']=str(verification)
+            # verification = randint(100000, 999999)
+            # request.session['veri']=str(verification)
             #print(str(verification))
             first = request.session.get('first')
             first = first.capitalize()
             last = request.session.get('last')
             last = last.capitalize()
             full = first + ' ' + last
-            mail = newmail
+            #mail = newmail
             template = render_to_string('verificationemmail.html', {"name": full,'code':str(verification)})
             email = EmailMessage(
                 'Verification code for changing email address',
                 template,
                 settings.EMAIL_HOST_USER,
-                [mail],
+                [newmail],
             )
             email.fail_silently = False
             email.send()
@@ -819,13 +821,13 @@ def changemail(request):
         ps = request.POST["password"]
         ps = make_pw_hash(ps)
         if ps != hashps:
-            print('here1')
+            #print('here1')
             msg = "Password does not match. Try Again!"
             return render(request, 'changemail.html',
                           {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
                            "pnr": pnr, "nid": nid})
         if code!=request.session.get('veri'):
-            print('here2')
+            #print('here2')
             msg="Verification code does not match. Try again!."
             return render(request, 'changemail.html',
                           {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
@@ -838,7 +840,7 @@ def changemail(request):
         cursor.close()
         request.session['usermail']=newmail
         mail=request.session.get('usermail')
-        msg="E-mail changed successfully."
+        msg="E-mail successfully updated."
         print('here3')
         return render(request, 'changemail.html',
                       {"statusgreen": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
@@ -890,6 +892,8 @@ def changenum(request):
     request.session["pnr"] = pnr
 
     if request.method == "POST" and 'btn1' in request.POST:
+        otp = random.randint(1000, 9999)
+        request.session["otp"] = str(otp)
         num1 = request.POST["num1"]
         num2 = request.POST["num2"]
         number1='+880'+str(num1)
@@ -899,18 +903,16 @@ def changenum(request):
         result = cursor1.callproc('CHECKNUM', [number2, out])
         print(result[1])
         if (result[1] == 'true'):
-            msg = "This number already exists!"
+            msg = "There is already an account registered with this number."
             return render(request, 'changenum.html',
                           {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
                            "pnr": pnr, "nid": nid, "password": hashps})
         dbnum=request.session.get('contact')
         if number1 != dbnum:
-            msg = "Current number does not match. Try again. "
+            msg = "Current number does not match. Try again! "
             return render(request, 'changenum.html', {"statusred": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
         request.session["tempnum"] = str(num2)
         request.session["numflag"] = "done"
-        otp = random.randint(1000, 9999)
-        request.session["otp"] = str(otp)
         print("otp= " + str(otp))
         account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
         #auth_token = '975807bfb5da380c2fb27497280bb732'
@@ -927,13 +929,13 @@ def changenum(request):
     if request.method == "POST" and 'btn3' in request.POST:
         flag = request.session.get('numflag')
         if flag == "":
-            msg = "Click 'Send Verification Code' first to get an OTP."
+            msg = "Click 'Send Verification Code' first to get a verification code."
             return render(request, 'changenum.html', {"statusred": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
         vcode = request.POST["otpin"]
         ps=request.POST["password"]
         ps=make_pw_hash(ps)
         if ps!=hashps:
-            msg = "Wrong password. Try again."
+            msg = "Password does not match. Try again!"
             return render(request, 'changenum.html', {"statusred": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
         uid = request.session.get('user_id')
         tempnum= request.session.get('tempnum')
@@ -949,13 +951,13 @@ def changenum(request):
             slice_object = slice(4, 14, 1)
             pnr = contact[slice_object]
             request.session["pnr"] = pnr
-            msg = "Contact number has been updated successfully."
+            msg = "Contact number successfully updated."
             return render(request, 'changenum.html',
                           {"statusgreen": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
                            "pnr": pnr, "nid": nid, "password": hashps})
         else:
             print("otp milena")
-            msg = "Wrong OTP Entered."
+            msg = "Password does not match. Try again!"
             return render(request, 'changenum.html', {"statusred": msg,"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
 
     return render(request, 'changenum.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid,"password":hashps})
@@ -1226,7 +1228,7 @@ def bkash(request):
             return redirect("/successful")
         if vcode != "" and vcode != str(otp):
             print("otp milena")
-            msg = "Verification Code Does Not Match.Try Again!"
+            msg = "Wrong OTP Entered."
             return render(request, 'bkash_payment.html', {"status": msg, 'amount':amount})
 
 
@@ -1434,7 +1436,7 @@ def rocket(request):
             return redirect("/successful")
         if vcode != "" and vcode != str(otp):
             print("otp milena")
-            msg = "Verification Code Does Not Match.Try Again!"
+            msg = "Wrong OTP Entered."
             return render(request, 'rocket_payment.html', {"status": msg, 'amount':amount})
 
     return render(request, 'rocket_payment.html',{'amount':amount})
