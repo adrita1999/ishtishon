@@ -67,7 +67,7 @@ def list_trains(request):
         global details
         details={'from':fro,'to':to,'date':date,'adult':adult,'child':child,'class':clas}
         cursor = connection.cursor()
-        sql = "SELECT TT1.TRAIN_ID,(SELECT NAME FROM TRAIN T1 WHERE T1.TRAIN_ID=TT1.TRAIN_ID) NAME1,TT1.DEPARTURE_TIME,TT2.DEPARTURE_TIME FROM TRAIN_TIMETABLE TT1,TRAIN_TIMETABLE TT2 WHERE (TT1.DIRECTION='FROM' AND TT1.STATION_ID=(SELECT STATION_ID FROM STATION WHERE NAME=%s)) AND (TT2.DIRECTION='TO' AND TT2.STATION_ID=(SELECT STATION_ID FROM STATION WHERE NAME=%s)) AND (TT1.TRAIN_ID=TT2.TRAIN_ID) ORDER BY TO_TIMESTAMP(LPAD(TT1.DEPARTURE_TIME,4,'0'), 'HH24:MI');"
+        sql = "SELECT TT1.TRAIN_ID,(SELECT NAME FROM TRAIN T1 WHERE T1.TRAIN_ID=TT1.TRAIN_ID) NAME1,TT1.DEPARTURE_TIME,TT2.DEPARTURE_TIME,ROW_NUMBER() Over (ORDER BY TO_TIMESTAMP(LPAD(TT1.DEPARTURE_TIME,4,'0'), 'HH24:MI')) As SN FROM TRAIN_TIMETABLE TT1,TRAIN_TIMETABLE TT2 WHERE (TT1.DIRECTION='FROM' AND TT1.STATION_ID=(SELECT STATION_ID FROM STATION WHERE NAME=%s)) AND (TT2.DIRECTION='TO' AND TT2.STATION_ID=(SELECT STATION_ID FROM STATION WHERE NAME=%s)) AND (TT1.TRAIN_ID=TT2.TRAIN_ID) ORDER BY TO_TIMESTAMP(LPAD(TT1.DEPARTURE_TIME,4,'0'), 'HH24:MI');"
         cursor.execute(sql, [fro, to])
         result = cursor.fetchall()
         cursor.close()
@@ -118,11 +118,16 @@ def list_trains(request):
             st="0"
         dict_result = []
         doj = request.session.get('doj')
+        traincnt=0
         for r in result:
+            traincnt=traincnt+1
             TRAIN_ID = r[0]
             NAME = r[1]
             departure = r[2]
             arrival = r[3]
+            sn=r[4]
+            leftright=str(sn%2)
+            delay=sn*500
             cursor = connection.cursor()
             sql = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SNIGDHA' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
             cursor.execute(sql, [TRAIN_ID, doj])
@@ -141,14 +146,14 @@ def list_trains(request):
             result2 = cursor2.fetchall()
             for r2 in result2:
                 shovan = r2[0];
-            row = {'TRAIN_ID': TRAIN_ID, 'NAME': NAME, 'DEPARTURE_TIME': departure, 'ARRIVAL_TIME': arrival,'snigdhaad':fare_list[0],
+            row = {'sn':sn,'lr':leftright,'delay':delay, 'TRAIN_ID': TRAIN_ID, 'NAME': NAME, 'DEPARTURE_TIME': departure, 'ARRIVAL_TIME': arrival,'snigdhaad':fare_list[0],
                    'snigdhach':fare_list[1],'s_chairad':fare_list[2],'s_chairch':fare_list[3],'shovanad':fare_list[4],'shovanch':fare_list[5],
                    'snigdhaseat':snigdha,'s_chairseat':s_chair,'shovanseat':shovan}
             dict_result.append(row)
         request.session['trains']=dict_result
         request.session['cost']=str(int(st))
         request.session['snigdha_fare'] = fare_list
-        return render(request, 'list_trains.html', {'trains': dict_result, 'cost': str(int(st)) + '' + ' BDT', 'details': details})
+        return render(request, 'list_trains.html', {'tcount':traincnt, 'trains': dict_result, 'cost': str(int(st)) + '' + ' BDT', 'details': details})
     else:
         dict_result=request.session.get('trains')
         st=request.session.get('cost')
@@ -1494,3 +1499,6 @@ def render_to_pdf(template_src, context_dict={}):
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
     return None
+
+def demo(request):
+    return render(request, 'demo.html')

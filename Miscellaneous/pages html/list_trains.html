@@ -1,0 +1,183 @@
+<!doctype html>
+{% load static %}
+
+<html lang="eng">
+<head>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="{% static  'fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Features-Boxed.css' %}">
+    <link rel="stylesheet" href="{% static "fonts/font-awesome.min.css"%}">
+    <link rel="stylesheet" href="{% static "fonts/ionicons.min.css"%}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Trains</title>
+</head>
+<body>
+
+<nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(118,35,35);padding: 18.2px 0px;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%);">
+        <div class="container"><a class="navbar-brand logo" href="#" style="text-align: left;background: rgba(255,255,255,0);color: rgb(0,0,0);"><strong>Railsheba</strong></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="navbar-toggler-icon" style="filter: brightness(0%);"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navbarNav" style="text-align: right;">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link active" href="http://127.0.0.1:8000/" style="color: #070606;">Home</a></li>
+                    <li class="nav-item" style="color: #070606;"><a class="nav-link active" href="login" style="color: #070606;">Log in</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="registration" style="color: #070606;">Register</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="updateinfo" style="color: #070606;">Dashboard</a></li>
+                    <li class="nav-item" style="color: #070606;"><a class="nav-link active" href="contactus" style="color: #070606;">Contact us</a></li>
+                    <li class="nav-item" style="padding-right: 0px;"><a class="nav-link active" onclick="logout()"  style="color: #070606;padding: 8px 0px 8px 8px;">Log out</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+<fieldset style="padding-top: 100px;">
+<div style="padding-top: 0px;">
+        <div class="container" style="background: url(&quot;assets/img/train6.jpg&quot;) center / cover no-repeat;">
+            <section style="padding-top: 25px;background: rgba(0,0,0,0.85);padding-right: 20px;padding-left: 20px;">
+                <div class="row" style="padding-left: 10px;">
+                    <div class="col" style="padding-left: 55px;">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="icon ion-location" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>From:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);">{{details.from}}</p>
+                    </div>
+                    <div class="col" style="margin-bottom: 10px;padding-left: 55px;">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="icon ion-location" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>To</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 10px;">{{details.to}}</p>
+                    </div>
+                    <div class="col" style="padding-left: 55px;">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="fa fa-calendar-times-o" style="margin-right: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>Date:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 10px;">{{details.date}}</p>
+                    </div>
+                    </div>
+                <div class="row" style="padding-left: 10px;padding-bottom: 10px;">
+                    <div class="col" style="padding-left: 55px;">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="fa fa-train" style="margin-right: 5px;color: rgb(255,255,255);"></i>Class:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 5px;">{{details.class}}</p>
+                        <a href="http://127.0.0.1:8000/" style="color:#f0f0f0;margin-bottom: 10px"><u>Change</u></a>
+                    </div>
+                    <div class="col" style="padding-left: 55px;">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="icon ion-person" style="margin-right: 5px;color: rgb(255,255,255);"></i>Adult:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 5px;">{{details.adult}}</p>
+                    </div>
+                    <div class="col" style="padding-left: 55px;">
+                        <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="fa fa-child" style="margin-right: 5px;color: rgb(255,255,255);"></i>Child:</h1>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 5px;">{{details.child}}</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</fieldset>
+
+{% if trains %}
+    <div style="height: 50px; margin-left:185px;margin-top: 10px"><label style="width: 1145px;background: rgb(104,171,80);height: 50px;padding-top: 5px;padding-left:5px;color: #212529;font-size: 24px;"><strong>Results :</strong></label></div>
+<table class="table table-striped table-sm"  style="width:1145px;margin-left: 185px;margin-top: 20px ;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%)">
+    <tr>
+        <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">TRAIN ID</th>
+        <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">NAME</th>
+        <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">DEPARTURE TIME</th>
+        <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">ARRIVAL TIME</th>
+        <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">TOTAL COST</th>
+        <th style="background: rgb(104,171,80);height: 50px;padding-top: 5px;text-align:center;color: #212529;font-size: 24px;">SELECT THE SUITABLE TRAIN</th>
+    </tr>
+    {% for train in trains %}
+
+    <tr>
+        <td style="text-align: center;padding-top: 35px">{{train.TRAIN_ID}}</td>
+        <td style="text-align: center;padding-top: 35px">{{train.NAME}}</td>
+        <td style="text-align: center;padding-top: 35px">{{train.DEPARTURE_TIME}}</td>
+        <td style="text-align: center;padding-top: 35px">{{train.ARRIVAL_TIME}}</td>
+        <td style="text-align: center;padding-top: 35px">{{cost}}<br><p style="font-size: 12px">(Including 15% VAT)</p></td>
+        <td><div class="mx-5 p-4 text-center">
+    <a class="btn btn-primary" id="{{ train.TRAIN_ID }}" onclick="getid(id)" style="background: rgb(104,171,80)">Purchase</a>
+            <a id="{{train.TRAIN_ID}}_{{train.NAME}}"  name="btn2" type="button" data-toggle="modal" data-target="#{{ train.TRAIN_ID }}" class="btn btn-primary" style="background: rgb(104,171,80)">Availability</a>
+
+</div></td>
+    </tr>
+        <!-- Modal -->
+<div class="modal fade" id="{{ train.TRAIN_ID }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">{{ train.NAME }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+         <div class=" container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <p style="text-align: center"><strong>Class</strong></p>
+                        <p style="text-align: center">Snigdha</p>
+                        <p style="text-align: center">S_chair</p>
+                        <p style="text-align: center">Shovan</p>
+                    </div>
+
+                     <div class="col-md-3">
+                         <p style="text-align: center"><strong>Available Seats</strong></p>
+                         <p style="text-align: center">{{ train.snigdhaseat }}</p>
+                         <p style="text-align: center">{{ train.s_chairseat }}</p>
+                         <p style="text-align: center"> {{ train.shovanseat }}</p>
+                     </div>
+
+                     <div class="col-md-3">
+                         <p style="text-align: center"><strong>Fare(Adult)</strong></p>
+                         <p style="text-align: center">{{ train.snigdhaad }} BDT</p>
+                         <p style="text-align: center">{{ train.s_chairad }} BDT</p>
+                         <p style="text-align: center">{{ train.shovanad }} BDT</p>
+                     </div>
+                    <div class="col-md-3">
+                         <p style="text-align: center"><strong>Fare(Child)</strong></p>
+                        <p style="text-align: center">{{ train.snigdhach }} BDT</p>
+                         <p style="text-align: center">{{ train.s_chairch }} BDT</p>
+                         <p style="text-align: center">{{ train.shovanch }} BDT</p>
+                    </div>
+                     </div>
+                 </div>
+             </div>
+
+    </div>
+  </div>
+</div>
+    {% endfor %}
+</table>
+    {% else %}
+
+     <label style="margin-left: 190px;margin-top: 20px;font-size: 24px"><strong>No available train from source to destination</strong></label>
+    <svg xmlns="http://www.w3.org/2000/svg" style="margin-left:10px;padding-top: 0px" width="1em" height="2em" font-size="50px" viewBox="0 0 24 24" fill="none"><path d="M9 11C9.55228 11 10 10.5523 10 10C10 9.44772 9.55228 9 9 9C8.44772 9 8 9.44772 8 10C8 10.5523 8.44772 11 9 11Z" fill="currentColor"></path><path d="M14 17C14 15.8954 13.1046 15 12 15C10.8954 15 10 15.8954 10 17H8C8 14.7909 9.79086 13 12 13C14.2091 13 16 14.7909 16 17H14Z" fill="currentColor"></path><path d="M16 10C16 10.5523 15.5523 11 15 11C14.4477 11 14 10.5523 14 10C14 9.44772 14.4477 9 15 9C15.5523 9 16 9.44772 16 10Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z" fill="currentColor"></path></svg>
+{% endif %}
+</div>
+
+
+
+<main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;"><img src="assets/img/1.png"><img src="assets/img/2.png"><img src="assets/img/3.png"><img src="assets/img/4.png"><img src="assets/img/5.png"><img src="assets/img/6.png"></main>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+<script>
+
+    function getid(ID) {
+            var txt = document.getElementById(ID).id;
+            window.location.href = "{% url 'seat_selection' %}" +"?id="+txt;
+          }
+          function getname(ID) {
+            var text = document.getElementById(ID).id;
+            window.location.href = "{% url 'train' %}" +"?name="+'1'+text;
+          }
+          function getname2(ID) {
+            var text = document.getElementById(ID).id;
+            window.location.href = "{% url 'train' %}" +"?name="+'0'+text;
+          }
+
+</script>
+<script>
+function logout() {
+            window.location.href = "{% url 'login' %}" +"?logged_out="+"1";
+          }
+
+</script>
+</html>
