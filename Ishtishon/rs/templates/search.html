@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home</title>
+    <title>ইস্টিশন</title>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
@@ -45,7 +45,7 @@
         <form action="{% url 'train' %}" method="post" style="font-family: Lato, sans-serif; padding-top: 10px; text-align: right;border-style: none;border-right-style: none;background: rgba(30,40,51,0.88);width:440px;max-width: 440px;margin-top: -5pxpx;">
             {%  csrf_token %}
             <h2 class="sr-only">Login Form</h2>
-            <div class="illustration" style="padding: 0px;"><i class="icon ion-search" style="color: rgb(104,171,80);"></i></div><small class="form-text text-light" style="width: 120px;text-align: left;font-size: 16px;margin-left: 10px;">Route</small>
+            <div class="illustration" style="padding: 0px;"><i class="icon ion-search" style="color: #58a25b;"></i></div><small class="form-text text-light" style="width: 120px;text-align: left;font-size: 16px;margin-left: 10px;">Route</small>
                 <div class="dropdown float-right" style="width: 165px;height: 38px;text-align: left;margin-bottom: 4px">
                     <select class="form-control" style="filter: brightness(200%) contrast(200%);padding: 0px;margin-left: 4px" name="to" required>
                     <option  hidden="" value="">To</option>
@@ -74,12 +74,7 @@
     <input class="form-control float-right" type="text" name="child"  required placeholder="Child" style="width: 165px;filter: brightness(200%) contrast(200%);padding: 5px"><input required class="form-control float-left" type="text" name="adult" placeholder="Adult" style="width: 165px;filter: brightness(200%) contrast(200%);">
             <div class="form-group"> <label class="float-left" style="text-align: left;margin-top: 8px; margin-left:8px;color: rgba(248,249,250,0.8); font-size: 14px ">*Maximum 4 seats can be issued</label></div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit" style="background:rgb(104,171,80);color: rgb(0,0,0);">Find</button>
-            <button class="btn btn-primary btn-block" type="submit" style="background: #3CB371;color: rgb(0,0,0);">Find</button>
-        <button class="btn btn-primary btn-block" type="submit" style="background: #597e4a;color: rgb(0,0,0);">Find</button>
-            <button class="btn btn-primary btn-block" type="submit" style="background: #2E8B57;color: rgb(0,0,0);">Find</button>
-            <button class="btn btn-primary btn-block" type="submit" style="background: #58a25b;color: rgb(0,0,0);">Find</button>
-            <button class="btn btn-primary btn-block" type="submit" style="background: #4b914e;color: rgb(0,0,0);">Find</button>
+            <button class="btn btn-primary btn-block" type="submit" style="background:#58a25b;color: rgb(0,0,0);">Find</button>
         </div>
         </form>
 
@@ -103,15 +98,15 @@
         <div class="container">
             <div class="intro"></div>
             <div class="row features">
-                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-tags icon"></i>
+                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-tags icon" style="color: #58a25b;"></i>
                     <h3 class="name"><strong>Get Train Tickets from the comfort of your home</strong><br></h3>
                     <p class="description" style="color: #7d8285;"><strong>Book train tickets from anywhere using the robust ticketing platform exclusively built to provide the passengers with pleasant ticketing experience.</strong><br></p>
                 </div>
-                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-clock-o icon"></i>
+                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-clock-o icon" style="color:#58a25b;"></i>
                     <h3 class="name"><strong>Train &amp; Ticketing related information at your fingertips</strong><br></h3>
                     <p class="description" style="color: #7d8285;"><strong>Checkout available trains, seat availability, fare information on real time basis with this platform.</strong><br></p>
                 </div>
-                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-lock icon"></i>
+                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-lock icon" style="color: #58a25b;"></i>
                     <h3 class="name"><strong>Pay Securely</strong><br></h3>
                     <p class="description" style="color: #7d8285;"><strong>Pay using your convenient payment option. This website supports Visa, Master &amp; Nexus Cards, Rocket and bKash Mobile Financial Services for your convenience.</strong><br></p>
                 </div>

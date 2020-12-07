@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Seat Selection</title>
+    <title>ইস্টিশন</title>
     <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css"%}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
     <link rel="stylesheet" href="{% static "fonts/font-awesome.min.css"%}">
@@ -35,7 +35,15 @@
 
     <fieldset style="padding-top: 95px;">
     <div style="padding-top: 0px;">
-        <div class="container" style="background: url(&quot;assets/img/train6.jpg&quot;) center / cover no-repeat;">
+
+        {% if request.GET.not_equal %}
+            <div style="z-index: 2; padding: 0px;margin: 0px;height: 0px;">
+         <label id="LOADING" style="margin-top: -100px;margin-left: 879.5px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>Selected seat numbers don't match with the number of passengers</strong></label>
+        </div>
+        {% endif %}
+
+
+        <div class="container" style="z-index:1;background: url(&quot;assets/img/train6.jpg&quot;) center / cover no-repeat;">
             <section style="padding-top: 25px;background: rgba(0,0,0,0.85);padding-right: 20px;padding-left: 20px;">
                 <div class="row" style="padding-left: 10px;">
                     <div class="col">
@@ -69,9 +77,7 @@
         </div>
     </div>
         <div class="toggle" style="margin-left: 185px;margin-top: 10px"><input onclick="large()" type="radio" id="cond_new" data-toggle="collapse" data-target="#collapseExample.show" aria-expanded="false" aria-controls="collapseExample" name="bike_cond" checked="checked"><label for="cond_new">Auto</label><input onclick="small()" type="radio" id="cond_used" name="bike_cond" data-toggle="collapse" data-target="#collapseExample:not(.show)" aria-expanded="false" aria-controls="collapseExample"><label for="cond_used">Manual</label>
-        {% if request.GET.not_equal %}
-     <label id="LOADING" style="margin-top: 0px;margin-left: 620px;width: 850px;height: 35px;background: #cf2222;text-align: left;padding-left: 5px;color: white;font-size: 16px; "><strong>Selected seat numbers don't match with the number of passengers</strong></label>
-    {% endif %}
+
         </div>
     </fieldset>
     <div style="height: 100px; margin-left:185px;"><label style="width: 1145px;background: #bec5ba;">Passenger Details</label>

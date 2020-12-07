@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home - Brand</title>
+    <title>ইস্টিশন</title>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
@@ -30,8 +30,7 @@
 <body style="border-style: none;">
 <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(118,35,35);padding: 18.2px 0px;background: linear-gradient(47deg, rgb(245,255,241), rgb(245,255,241) 99%);">
         <div class="container"><a class="navbar-brand logo" href="#" style="text-align: left;background: rgba(255,255,255,0);color: rgb(0,0,0);"><strong>Railsheba</strong></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="navbar-toggler-icon" style="filter: brightness(0%);"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navbarNav" style="text-align: right;">
+            <div class="collapse navbar-collapse" id="navbarNav" style="text-align: right;">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link active" href="http://127.0.0.1:8000/" style="color: #070606;">Home</a></li>
                     <li class="nav-item" style="color: #070606;"><a class="nav-link active" href="login" style="color: #070606;">Log in</a></li>
@@ -81,7 +80,7 @@
     </div>
 </fieldset>
 {% if trains %}
-    <label style="margin-left:190px; margin-top: 5px; width: 1139px;background: rgb(104,171,80);height: 45px;padding: 5px; padding-left:10px; color: #212529;font-size: 22px;"><strong>Result: {{ tcount }} trains found</strong></label>
+    <label style="border-left: 4px; border-left-style:solid;border-left-color: #58a25b;border-right: 4px;border-right-style:solid;border-right-color: #58a25b;  margin-left:190px; margin-top: 5px; width: 1139px;background: rgb(233,242,229);height: 45px;padding: 5px; padding-left:10px; color: black ;font-size: 22px;"><strong>Result: {{ tcount }} trains found</strong></label>
 
     <div style="padding-top: 20px;padding-bottom:80px;padding-left: 200px;padding-right: 200px;">
        {% for train in trains %}
@@ -102,8 +101,8 @@
                         <p style="margin-bottom: 5px;color: rgba(34,61,31,0.85);font-size: 12px;">TOTAL COST</p><p style="margin-bottom: 5px;"><strong>{{cost}}</strong></p><p style="font-size: 12px">(Including 15% VAT)</p>
                     </div>
                     <div class="col" style="text-align: center;">
-                        <button class="btn btn-primary" type="button" id="{{ train.TRAIN_ID }}" onclick="getid(id)" style="padding:5px; width: 110px;margin-top: 5px;background: rgb(104,171,80);border-style: none;margin-left: 5px;">Purchase</button>
-                        <button class="btn btn-primary" type="button" id="{{train.TRAIN_ID}}_{{train.NAME}}"  name="btn2" data-toggle="modal" data-target="#mymodal{{ train.TRAIN_ID }}" style="padding: 5px; margin-left: 5px;width: 110px;margin-top: 5px;background: rgb(104,171,80);border-style: none;">Availability</button>
+                        <button class="btn btn-primary" type="button" id="{{ train.TRAIN_ID }}" onclick="getid(id)" style="padding:5px; width: 110px;margin-top: 5px;background:#58a25b;border-style: none;margin-left: 5px;">Purchase</button>
+                        <button class="btn btn-primary" type="button" id="{{train.TRAIN_ID}}_{{train.NAME}}"  name="btn2" data-toggle="modal" data-target="#mymodal{{ train.TRAIN_ID }}" style="padding: 5px; margin-left: 5px;width: 110px;margin-top: 5px;background: #58a25b;border-style: none;">Availability</button>
                     </div>
                 </div>
             </div>
@@ -171,8 +170,8 @@
                                 <p style="margin-bottom: 5px;color: rgba(34,61,31,0.85);font-size: 12px;">TOTAL COST</p><p style="margin-bottom: 5px;"><strong>{{cost}}</strong></p><p style="font-size: 12px">(Including 15% VAT)</p>
                             </div>
                             <div class="col" style="text-align: center;">
-                                <button class="btn btn-primary" type="button" id="{{ train.TRAIN_ID }}" onclick="getid(id)" style="padding:5px; width: 110px;margin-top: 5px;background: rgb(104,171,80);border-style: none;margin-left: 5px;">Purchase</button>
-                                <button class="btn btn-primary" type="button" id="{{train.TRAIN_ID}}_{{train.NAME}}"  name="btn2" data-toggle="modal" data-target="#mymodal{{ train.TRAIN_ID }}" style="padding: 5px; margin-left: 5px;width: 110px;margin-top: 5px;background: rgb(104,171,80);border-style: none;">Availability</button>
+                                <button class="btn btn-primary" type="button" id="{{ train.TRAIN_ID }}" onclick="getid(id)" style="padding:5px; width: 110px;margin-top: 5px;background: #58a25b;border-style: none;margin-left: 5px;">Purchase</button>
+                                <button class="btn btn-primary" type="button" id="{{train.TRAIN_ID}}_{{train.NAME}}"  name="btn2" data-toggle="modal" data-target="#mymodal{{ train.TRAIN_ID }}" style="padding: 5px; margin-left: 5px;width: 110px;margin-top: 5px;background: #58a25b;border-style: none;">Availability</button>
                             </div>
                         </div>
                    </div>
