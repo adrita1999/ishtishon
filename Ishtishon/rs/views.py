@@ -768,7 +768,6 @@ def changemail(request):
     pnr = contact[slice_object]
     request.session["pnr"] = pnr
     if request.method == "POST" and 'btn1' in request.POST:
-
         currentmail = request.POST["currentmail"]
         out=""
         newmail = request.POST["newmail"]
@@ -1227,7 +1226,7 @@ def bkash(request):
             return redirect("/successful")
         if vcode != "" and vcode != str(otp):
             print("otp milena")
-            msg = "Wrong OTP Entered."
+            msg = "Verification Code Does Not Match.Try Again!"
             return render(request, 'bkash_payment.html', {"status": msg, 'amount':amount})
 
 
@@ -1435,7 +1434,7 @@ def rocket(request):
             return redirect("/successful")
         if vcode != "" and vcode != str(otp):
             print("otp milena")
-            msg = "Wrong OTP Entered."
+            msg = "Verification Code Does Not Match.Try Again!"
             return render(request, 'rocket_payment.html', {"status": msg, 'amount':amount})
 
     return render(request, 'rocket_payment.html',{'amount':amount})

@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="{% static "css/Login-Form-Dark.css" %}">
     <link rel="stylesheet" href="{% static "css/Toggle-Switches.css"%}">
     <link rel="stylesheet" href="assets/css/animation1.css">
+     <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
     <script>
@@ -44,13 +48,13 @@
     <div style="padding-top: 0px;">
         {% if request.GET.not_equal %}
             <div style="z-index: 2; padding: 0px;margin: 0px;height: 0px;">
-         <label id="LOADING" style="margin-top: 0px;margin-bottom:200px;margin-left: 829.5px;width: 500px;height: 35px;background: green;text-align: left;padding-left: 5px;color: white"><strong>Selected seat numbers don't match with the number of passengers</strong></label>
+         <label id="LOADING" data-aos="fade-down" data-aos-delay="0" data-aos-duration="300" style="margin-top: 0px;margin-bottom:200px;margin-left: 829.5px;width: 500px;height: 30px;background: #cf2222;text-align: left;padding-left: 5px;color: white"><strong>Selected seat numbers don't match with the number of passengers.</strong></label>
         </div>
         {% endif %}
 
 
         <div class="container" style="z-index:1;background: url(&quot;assets/img/train6.jpg&quot;) center / cover no-repeat;">
-            <section style="padding-top: 25px;background: rgba(0,0,0,0.85);padding-right: 20px;padding-left: 20px;">
+            <section style="padding-top: 30px;background: rgba(0,0,0,0.85);padding-right: 20px;padding-left: 20px;">
                 <div class="row" style="padding-left: 10px;">
                     <div class="col">
                         <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="icon ion-location" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>From:</h1>
@@ -82,7 +86,7 @@
             </section>
         </div>
     </div>
-        <div class="toggle" style="margin-left: 185px;margin-top: 10px;"><input onclick="large()" type="radio" id="cond_new" data-toggle="collapse" data-target="#collapseExample.show" aria-expanded="false" aria-controls="collapseExample" name="bike_cond" checked="checked" ><label for="cond_new">Auto</label><input onclick="small()" type="radio" id="cond_used" name="bike_cond" data-toggle="collapse" data-target="#collapseExample:not(.show)" aria-expanded="false" aria-controls="collapseExample"><label for="cond_used">Manual</label>
+        <div class="toggle"  style="margin-left: 185px;margin-top: 10px;"><input onclick="large()" type="radio" id="cond_new" data-toggle="collapse" data-target="#collapseExample.show" aria-expanded="false" aria-controls="collapseExample" name="bike_cond" checked="checked" ><label for="cond_new">Auto</label><input onclick="small()" type="radio" id="cond_used" name="bike_cond" data-toggle="collapse" data-target="#collapseExample:not(.show)" aria-expanded="false" aria-controls="collapseExample"><label for="cond_used">Manual</label>
         </div>
     </fieldset>
     <div style="height: 100px; margin-left:185px;"><label style="width: 1145px;background: #bec5ba;color: black;">Passenger Details</label>
@@ -91,9 +95,9 @@
     </div>
     <div id="height1" style="height: 350px;">
         <div class="float-left" style="height: 1010.4px;">
-            <div class="container collapse" id="collapseExample" style="margin-left: 165px;">
-                <div class="table-responsive" style="width: 100%;padding: 0px;">
-                    <table class="table">
+            <div class="container collapse animate__animated animate__fadeInLeft " id="collapseExample"  style="margin-left: 165px;">
+                <div class="table-responsive"   style="width: 100%;padding: 0px;">
+                    <table class="table" >
                         <thead>
                             <tr>
                                 <th>DOOR<i class="icon ion-arrow-swap" style="margin-left: 5px;"></i></th>
