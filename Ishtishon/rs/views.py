@@ -67,18 +67,25 @@ def list_trains(request):
         global details
         details={'from':fro,'to':to,'date':date,'adult':adult,'child':child,'class':clas}
         cursor = connection.cursor()
-        sql = "SELECT TT1.TRAIN_ID,(SELECT NAME FROM TRAIN T1 WHERE T1.TRAIN_ID=TT1.TRAIN_ID) NAME1,TT1.DEPARTURE_TIME,TT2.DEPARTURE_TIME,ROW_NUMBER() Over (ORDER BY TO_TIMESTAMP(LPAD(TT1.DEPARTURE_TIME,4,'0'), 'HH24:MI')) As SN FROM TRAIN_TIMETABLE TT1,TRAIN_TIMETABLE TT2 WHERE (TT1.DIRECTION='FROM' AND TT1.STATION_ID=(SELECT STATION_ID FROM STATION WHERE NAME=%s)) AND (TT2.DIRECTION='TO' AND TT2.STATION_ID=(SELECT STATION_ID FROM STATION WHERE NAME=%s)) AND (TT1.TRAIN_ID=TT2.TRAIN_ID) ORDER BY TO_TIMESTAMP(LPAD(TT1.DEPARTURE_TIME,4,'0'), 'HH24:MI');"
+        sql = "SELECT TT1.TRAIN_ID,(SELECT NAME FROM TRAIN T1 WHERE T1.TRAIN_ID=TT1.TRAIN_ID) NAME1,TT1.DEPARTURE_TIME,TT2.DEPARTURE_TIME,ROW_NUMBER() Over (ORDER BY TO_TIMESTAMP(LPAD(TT1.DEPARTURE_TIME,4,'0'), 'HH24:MI')) As SN " \
+              "FROM TRAIN_TIMETABLE TT1,TRAIN_TIMETABLE TT2 " \
+              "WHERE (TT1.DIRECTION='FROM' AND TT1.STATION_ID=(SELECT STATION_ID FROM STATION WHERE NAME=%s)) AND (TT2.DIRECTION='TO' AND TT2.STATION_ID=(SELECT STATION_ID FROM STATION WHERE NAME=%s)) AND (TT1.TRAIN_ID=TT2.TRAIN_ID) " \
+              "ORDER BY TO_TIMESTAMP(LPAD(TT1.DEPARTURE_TIME,4,'0'), 'HH24:MI');"
         cursor.execute(sql, [fro, to])
         result = cursor.fetchall()
         cursor.close()
 
         cursor1 = connection.cursor()
-        sql1 = "select NVL(TRUNC(COST*%s+COST*%s*0.5),0) FROM COST WHERE STATION_ID=(SELECT STATION_ID from STATION where NAME=%s) AND TO_STATION_ID=(SELECT STATION_ID from STATION where NAME=%s)"
+        sql1 = "select NVL(TRUNC(COST*%s+COST*%s*0.5),0) " \
+               "FROM COST " \
+               "WHERE STATION_ID=(SELECT STATION_ID from STATION where NAME=%s) AND TO_STATION_ID=(SELECT STATION_ID from STATION where NAME=%s)"
         cursor1.execute(sql1, [adult,child,fro, to])
         result1 = cursor1.fetchall()
         cursor1.close()
         cursor2 = connection.cursor()
-        sql2 = "select NVL(COST,0) FROM COST WHERE STATION_ID=(SELECT STATION_ID from STATION where NAME=%s) AND TO_STATION_ID=(SELECT STATION_ID from STATION where NAME=%s)"
+        sql2 = "select NVL(COST,0) " \
+               "FROM COST " \
+               "WHERE STATION_ID=(SELECT STATION_ID from STATION where NAME=%s) AND TO_STATION_ID=(SELECT STATION_ID from STATION where NAME=%s)"
         cursor2.execute(sql2, [fro,to])
         result2 = cursor2.fetchall()
         cursor2.close()
@@ -306,7 +313,9 @@ def login(request):
                 #user = authenticate(request, username=username, password=password)
 
                 cursor1 = connection.cursor()
-                sql1 = "SELECT FIRST_NAME,LAST_NAME,DOB,GENDER,NID_NO,HOUSE_NO,ROAD_NO,ZIP_CODE,CITY,CONTACT_NO,USER_ID,PASSWORD,SUBSTR(CONTACT_NO,5) FROM R_USER WHERE EMAIL_ADD=%s;"
+                sql1 = "SELECT FIRST_NAME,LAST_NAME,DOB,GENDER,NID_NO,HOUSE_NO,ROAD_NO,ZIP_CODE,CITY,CONTACT_NO,USER_ID,PASSWORD,SUBSTR(CONTACT_NO,5) " \
+                       "FROM R_USER " \
+                       "WHERE EMAIL_ADD=%s;"
                 cursor1.execute(sql1, [mail])
                 result1 = cursor1.fetchall()
                 cursor1.close()
@@ -451,7 +460,9 @@ def seatselection(request):
     request.session["train_id"]=id
     fro=request.session.get('from')
     cursor0 = connection.cursor()
-    sql0 = "SELECT (SELECT NAME FROM TRAIN T WHERE T.TRAIN_ID=TT.TRAIN_ID),TT.DEPARTURE_TIME,TO_CHAR(TO_DATE(TT.DEPARTURE_TIME,'HH24:MI')-(1/1440*15),'HH24:MI') FROM TRAIN_TIMETABLE TT WHERE TT.TRAIN_ID=TO_NUMBER(%s) AND STATION_ID=(SELECT STATION_ID FROM STATION WHERE NAME=%s);"
+    sql0 = "SELECT (SELECT NAME FROM TRAIN T WHERE T.TRAIN_ID=TT.TRAIN_ID),TT.DEPARTURE_TIME,TO_CHAR(TO_DATE(TT.DEPARTURE_TIME,'HH24:MI')-(1/1440*15),'HH24:MI') " \
+           "FROM TRAIN_TIMETABLE TT " \
+           "WHERE TT.TRAIN_ID=TO_NUMBER(%s) AND STATION_ID=(SELECT STATION_ID FROM STATION WHERE NAME=%s);"
     cursor0.execute(sql0, [id, fro])
     result0 = cursor0.fetchall();
     cursor0.close()
@@ -1005,7 +1016,10 @@ def prev(request):
     id= request.session.get('user_id')
 
     cursor = connection.cursor()
-    sql = "SELECT (SELECT (SELECT T.NAME FROM TRAIN T WHERE T.TRAIN_ID=B.TRAIN_ID) FROM BOOKED_SEAT B GROUP BY B.RESERVATION_ID,B.TRAIN_ID HAVING B.RESERVATION_ID=R.RESERVATION_ID),R.FROM_STATION,R.TO_STATION,TO_CHAR(R.DATE_OF_JOURNEY,'DD-MON-YYYY')  FROM RESERVATION R  WHERE CHECKBEFORE(R.DATE_OF_JOURNEY)=1 AND R.USER_ID=TO_NUMBER(%s) ORDER BY R.DATE_OF_JOURNEY;"
+    sql = "SELECT (SELECT (SELECT T.NAME FROM TRAIN T WHERE T.TRAIN_ID=B.TRAIN_ID) FROM BOOKED_SEAT B GROUP BY B.RESERVATION_ID,B.TRAIN_ID HAVING B.RESERVATION_ID=R.RESERVATION_ID),R.FROM_STATION,R.TO_STATION,TO_CHAR(R.DATE_OF_JOURNEY,'DD-MON-YYYY')  " \
+          "FROM RESERVATION R  " \
+          "WHERE CHECKBEFORE(R.DATE_OF_JOURNEY)=1 AND R.USER_ID=TO_NUMBER(%s) " \
+          "ORDER BY R.DATE_OF_JOURNEY;"
     cursor.execute(sql,[id])
     result = cursor.fetchall()
     dict_result=[]
@@ -1062,7 +1076,10 @@ def upcoming(request):
     request.session["pnr"] = pnr
     id = request.session.get('user_id')
     cursor = connection.cursor()
-    sql = "SELECT (SELECT (SELECT T.NAME FROM TRAIN T WHERE T.TRAIN_ID=B.TRAIN_ID) FROM BOOKED_SEAT B GROUP BY B.RESERVATION_ID,B.TRAIN_ID HAVING B.RESERVATION_ID=R.RESERVATION_ID),R.FROM_STATION,R.TO_STATION,TO_CHAR(R.DATE_OF_RESERVATION,'HH24:MI, DD-MON-YYYY'),TO_CHAR(R.DATE_OF_JOURNEY,'DD-MON-YYYY') FROM RESERVATION R WHERE CHECKAFTER(R.DATE_OF_JOURNEY)=1 AND R.USER_ID=TO_NUMBER(%s) ORDER BY R.DATE_OF_JOURNEY;"
+    sql = "SELECT (SELECT (SELECT T.NAME FROM TRAIN T WHERE T.TRAIN_ID=B.TRAIN_ID) FROM BOOKED_SEAT B GROUP BY B.RESERVATION_ID,B.TRAIN_ID HAVING B.RESERVATION_ID=R.RESERVATION_ID),R.FROM_STATION,R.TO_STATION,TO_CHAR(R.DATE_OF_RESERVATION,'HH24:MI, DD-MON-YYYY'),TO_CHAR(R.DATE_OF_JOURNEY,'DD-MON-YYYY') " \
+          "FROM RESERVATION R " \
+          "WHERE CHECKAFTER(R.DATE_OF_JOURNEY)=1 AND R.USER_ID=TO_NUMBER(%s) " \
+          "ORDER BY R.DATE_OF_JOURNEY;"
     cursor.execute(sql,[id])
     result = cursor.fetchall()
     dict_result = []
