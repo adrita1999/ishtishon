@@ -32,7 +32,7 @@ global details
 global auth_token
 is_logged_in=0
 details={}
-auth_token = '388876d68ca97355290928082787fa40'
+auth_token = 'e2138c15970f6c9863fefb33be6335d7'
 
 def make_pw_hash(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
@@ -41,8 +41,6 @@ def check_pw_hash(password,hash):
     if make_pw_hash(password)==hash:
         return True
     return False
-
-
 
 def list_trains(request):
     if request.method == "POST":
@@ -712,13 +710,13 @@ def changepass(request):
             cursor1.execute(sql1, [newps_hash,mail])
             cursor1.close()
             response = "Password successfully updated. "
-            return render(request, "changepass.html", {"status": response, "fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
+            return render(request, "changepass.html", {"statusgreen": response, "fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 
 
         else:
             response = "Wrong Password."
             print(response+ fullname+mail+address+contact+pnr+nid)
-            return render(request, "changepass.html", {"status": response, "fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
+            return render(request, "changepass.html", {"statusred": response, "fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 
 
     return render(request, 'changepass.html',{"fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
