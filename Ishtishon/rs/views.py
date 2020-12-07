@@ -32,7 +32,7 @@ global details
 global auth_token
 is_logged_in=0
 details={}
-auth_token = '818fd16b9e5587983c511e0133c4c1e4'
+auth_token = '3a82db092deefe39d8a3964c5345b44c'
 
 def make_pw_hash(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
@@ -720,7 +720,7 @@ def changepass(request):
 
 
         else:
-            response = "Wrong Password."
+            response = "Current password does not match. Try Again!"
             print(response+ fullname+mail+address+contact+pnr+nid)
             return render(request, "changepass.html", {"statusred": response, "fullname":fullname,"mail":mail,"address":address,"contact":contact,"pnr":pnr,"nid":nid})
 
@@ -776,7 +776,7 @@ def changemail(request):
         result=cursor1.callproc('CHECKMAIL',[newmail,out])
         print(result[1])
         if(result[1]=='true'):
-            msg = "This e-mail already exists!"
+            msg = "There is already an account registered with this e-mail. Try with another e-mail."
             return render(request, 'changemail.html',
                           {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
                            "pnr": pnr, "nid": nid})
@@ -802,7 +802,7 @@ def changemail(request):
             email.send()
             request.session['mailflag']="ok"
         else:
-            msg="Current e-mail does not match.Try Again!"
+            msg="Current e-mail does not match. Try Again!"
             return render(request, 'changemail.html',
                           {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
                            "pnr": pnr, "nid": nid})
@@ -810,7 +810,7 @@ def changemail(request):
     if request.method == "POST" and 'btn3' in request.POST:
         flag = request.session.get('mailflag')
         if flag=="":
-            msg = "Click 'Send Verification Code' first to get a code."
+            msg = "Click 'Send Verification Code' first to get a verification code."
             return render(request, 'changemail.html',
                           {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
                            "pnr": pnr, "nid": nid,})
@@ -821,13 +821,13 @@ def changemail(request):
         ps = make_pw_hash(ps)
         if ps != hashps:
             print('here1')
-            msg = "Wrong password. Try again."
+            msg = "Password does not match. Try Again!"
             return render(request, 'changemail.html',
                           {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
                            "pnr": pnr, "nid": nid})
         if code!=request.session.get('veri'):
             print('here2')
-            msg="Wrong Verification Code Entered."
+            msg="Verification code does not match. Try again!."
             return render(request, 'changemail.html',
                           {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
                            "pnr": pnr, "nid": nid})
