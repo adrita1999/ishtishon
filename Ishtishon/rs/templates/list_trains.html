@@ -117,43 +117,71 @@
             <div class="modal fade"  id="mymodal{{ train.TRAIN_ID }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered" role="document">
                 <div class="modal-content">
-                  <div class="modal-header">
+                  <div style="background: rgb(240,255,234);" class="modal-header">
                     <h5 class="modal-title" id="exampleModalCenterTitle">{{ train.NAME }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
+                  <div class="modal-body" style="background: rgb(233,242,229);">
 
                      <div class=" container-fluid">
-                            <div class="row">
+                            <div class="row" style="border-bottom: 1px solid black" >
                                 <div class="col-md-3">
-                                    <p style="text-align: center"><strong>Class</strong></p>
-                                    <p style="text-align: center">Snigdha</p>
-                                    <p style="text-align: center">S_chair</p>
-                                    <p style="text-align: center">Shovan</p>
+                                    <p style="text-align: center;"><strong>Class</strong></p>
                                 </div>
-
-                                 <div class="col-md-3">
-                                     <p style="text-align: center"><strong>Available Seats</strong></p>
-                                     <p style="text-align: center">{{ train.snigdhaseat }}</p>
-                                     <p style="text-align: center">{{ train.s_chairseat }}</p>
-                                     <p style="text-align: center"> {{ train.shovanseat }}</p>
-                                 </div>
-
-                                 <div class="col-md-3">
-                                     <p style="text-align: center"><strong>Fare(Adult)</strong></p>
-                                     <p style="text-align: center">{{ train.snigdhaad }} BDT</p>
-                                     <p style="text-align: center">{{ train.s_chairad }} BDT</p>
-                                     <p style="text-align: center">{{ train.shovanad }} BDT</p>
-                                 </div>
                                 <div class="col-md-3">
-                                     <p style="text-align: center"><strong>Fare(Child)</strong></p>
-                                    <p style="text-align: center">{{ train.snigdhach }} BDT</p>
-                                     <p style="text-align: center">{{ train.s_chairch }} BDT</p>
-                                     <p style="text-align: center">{{ train.shovanch }} BDT</p>
+                                    <p style="text-align: center"><strong>Available Seats</strong></p>
                                 </div>
-                                 </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>Fare(Adult)</strong></p>
+                                </div >
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>Fare(Child)</strong></p>
+                                </div>
+                            </div>
+                         <div class="row" style="border-bottom: 1px solid black;" >
+                                <div class="col-md-3">
+                                    <p style="text-align: center;"><strong>Snigdha</strong></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.snigdhaseat }}</strong></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.snigdhaad }} BDT</strong></p>
+                                </div >
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.snigdhach }} BDT</strong></p>
+                                </div>
+                            </div>
+                         <div class="row" style="border-bottom: 1px solid black;" >
+                                <div class="col-md-3">
+                                    <p style="text-align: center;"><strong>S_Chair</strong></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.s_chairseat }}</strong></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.s_chairad }} BDT</strong></p>
+                                </div >
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.s_chairch }} BDT</strong></p>
+                                </div>
+                            </div>
+                         <div class="row" style="border-bottom: 1px solid black;" >
+                                <div class="col-md-3">
+                                    <p style="text-align: center;"><strong>Shovan</strong></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.shovanseat }}</strong></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.shovanad }} BDT</strong></p>
+                                </div >
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.shovanch }} BDT</strong></p>
+                                </div>
+                            </div>
                              </div>
                          </div>
 
@@ -187,54 +215,78 @@
             <div class="modal fade" id="mymodal{{ train.TRAIN_ID }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered" role="document">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">{{ train.NAME }}</h5>
+                  <div style="background: rgb(240,255,234);" class="modal-header">
+                    <h5  class="modal-title" id="exampleModalCenterTitle">{{ train.NAME }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
-
+                  <div class="modal-body" style="background: rgb(233,242,229);">
                      <div class=" container-fluid">
-                            <div class="row">
+                            <div class="row" style="border-bottom: 1px solid black" >
                                 <div class="col-md-3">
-                                    <p style="text-align: center"><strong>Class</strong></p>
-                                    <p style="text-align: center">Snigdha</p>
-                                    <p style="text-align: center">S_chair</p>
-                                    <p style="text-align: center">Shovan</p>
+                                    <p style="text-align: center;"><strong>Class</strong></p>
                                 </div>
-
-                                 <div class="col-md-3">
-                                     <p style="text-align: center"><strong>Available Seats</strong></p>
-                                     <p style="text-align: center">{{ train.snigdhaseat }}</p>
-                                     <p style="text-align: center">{{ train.s_chairseat }}</p>
-                                     <p style="text-align: center"> {{ train.shovanseat }}</p>
-                                 </div>
-
-                                 <div class="col-md-3">
-                                     <p style="text-align: center"><strong>Fare(Adult)</strong></p>
-                                     <p style="text-align: center">{{ train.snigdhaad }} BDT</p>
-                                     <p style="text-align: center">{{ train.s_chairad }} BDT</p>
-                                     <p style="text-align: center">{{ train.shovanad }} BDT</p>
-                                 </div>
                                 <div class="col-md-3">
-                                     <p style="text-align: center"><strong>Fare(Child)</strong></p>
-                                    <p style="text-align: center">{{ train.snigdhach }} BDT</p>
-                                     <p style="text-align: center">{{ train.s_chairch }} BDT</p>
-                                     <p style="text-align: center">{{ train.shovanch }} BDT</p>
+                                    <p style="text-align: center"><strong>Available Seats</strong></p>
                                 </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>Fare(Adult)</strong></p>
+                                </div >
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>Fare(Child)</strong></p>
+                                </div>
+                            </div>
+                         <div class="row" style="border-bottom: 1px solid black;" >
+                                <div class="col-md-3">
+                                    <p style="text-align: center;"><strong>Snigdha</strong></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.snigdhaseat }}</strong></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.snigdhaad }} BDT</strong></p>
+                                </div >
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.snigdhach }} BDT</strong></p>
+                                </div>
+                            </div>
+                         <div class="row" style="border-bottom: 1px solid black;" >
+                                <div class="col-md-3">
+                                    <p style="text-align: center;"><strong>S_Chair</strong></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.s_chairseat }}</strong></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.s_chairad }} BDT</strong></p>
+                                </div >
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.s_chairch }} BDT</strong></p>
+                                </div>
+                            </div>
+                         <div class="row" style="border-bottom: 1px solid black;" >
+                                <div class="col-md-3">
+                                    <p style="text-align: center;"><strong>Shovan</strong></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.shovanseat }}</strong></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.shovanad }} BDT</strong></p>
+                                </div >
+                                <div class="col-md-3">
+                                    <p style="text-align: center"><strong>{{ train.shovanch }} BDT</strong></p>
+                                </div>
+                            </div>
                                  </div>
                              </div>
-                         </div>
+
 
                 </div>
               </div>
             </div>
            {% endif %}
-
-
-
-
 {% endfor %}
 
 {% else %}
