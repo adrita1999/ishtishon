@@ -76,7 +76,7 @@ def list_trains(request):
         cursor.close()
 
         cursor1 = connection.cursor()
-        sql1 = "select NVL(TRUNC(COST*%s+COST*%s*0.5),0) " \
+        sql1 = "select NVL((TRUNC(COST*%s)+TRUNC(COST*%s*0.5)),0) " \
                "FROM COST " \
                "WHERE STATION_ID=(SELECT STATION_ID from STATION where NAME=%s) AND TO_STATION_ID=(SELECT STATION_ID from STATION where NAME=%s)"
         cursor1.execute(sql1, [adult,child,fro, to])
@@ -121,6 +121,7 @@ def list_trains(request):
         print(st)
         if st!="":
             st=st+(st*0.15)
+            request.session['vat']=str(int(st*0.15))
         else:
             st="0"
         dict_result = []
@@ -1482,10 +1483,12 @@ def pdf(request):
     adult=request.session.get('adult')
     child=request.session.get('child')
     fare='BDT '+ str(request.session.get('cost'))
+    vat='BDT '+ str(request.session.get('vat'))
+    minusfare='BDT '+str(int((int(request.session.get('cost'))-int(request.session.get('vat')))))
     last_time=request.session.get('last_time')
     collect=doj+ ' '+last_time
     pnr= request.session.get('pnr')
-    data = {'fullname': fullname,'issue':issue,'journey':journey,'train' :train,'from':fro,'to':to,'class':clas,'coach':coach,'range':range,'total':tot,'adult':adult,'child':child,'fare':fare,'collect':collect,'pnr':pnr}
+    data = {'fullname': fullname,'issue':issue,'journey':journey,'train' :train,'from':fro,'to':to,'class':clas,'coach':coach,'range':range,'total':tot,'adult':adult,'child':child,'fare':fare,'vat':vat,'minusfare':minusfare,'collect':collect,'pnr':pnr}
     template = get_template("ticket.html")
     data_p = template.render(data)
     #pdf = render_to_pdf('ticket.html', data)
