@@ -22,7 +22,7 @@
     </script>
 
 </head>
-<body>
+<body style="font-family: Lato, sans-serif;">
 
     <div class="text-center login-dark" style="background: url(&quot;assets/img/train6.jpg&quot;);color: rgb(0,0,0);width: 100%;height: 800px;">
         {% if statusred %}
@@ -32,7 +32,7 @@
         {% elif request.GET.user %}
         <label id="LOADING2" data-aos="fade-down" data-aos-delay="0" data-aos-duration="300" style="margin-top: 75px;margin-left: 1069px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 10px; padding-top:5px;color: white"><strong>You have successfully registered.</strong></label>
         {% elif request.GET.notdash_logged_in == '0' %}
-        <label id="LOADING3" data-aos="fade-down" data-aos-delay="0" data-aos-duration="300" style="font-family: Lato, sans-serif; margin-top: 75px;margin-left: 1069px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 10px;padding-top:5px;color: white"><strong>Log in to see your dashboard.</strong></label>
+        <label id="LOADING3" data-aos="fade-down" data-aos-delay="0" data-aos-duration="300" style="margin-top: 75px;margin-left: 1069px;width: 450px;height: 35px;background: #cf2222;text-align: left;padding-left: 10px;padding-top:5px;color: white"><strong>Log in to see your dashboard.</strong></label>
         {%elif request.GET.update_pass == '1' %}
         <label id="LOADING4" data-aos="fade-down" data-aos-delay="0" data-aos-duration="300" style="margin-top: 75px;margin-left: 1069px;width: 450px;height: 35px;background: green;text-align: left;padding-left: 10px;padding-top:5px;color: white"><strong>Password successfully updated.</strong></label>
         {% endif %}
