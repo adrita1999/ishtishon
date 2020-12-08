@@ -142,8 +142,9 @@ def list_trains(request):
                 st=re[0]*0.6
         print(st)
         if st!="":
+            request.session['vat'] = str(int(st * 0.15))
             st=st+(st*0.15)
-            request.session['vat']=str(int(st*0.15))
+            
         else:
             st="0"
         dict_result = []
