@@ -88,22 +88,22 @@
             <div class="row" style="padding-left: 15px;padding-top: 10px;padding-right: 15px;">
                 <div class="col-md-3" style="background: rgb(240,255,234);padding-left: 0px;">
                     <div class="row">
-                        <div class="col-lg-12 offset-lg-0" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a href="updateinfo" style="text-align: center;padding: 0px;height: 48px;width: 200px;"><i class="fa fa-user" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Update User Profile</span></a></div>
+                        <div class="col-lg-12 offset-lg-0" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a class="pulse-grow-on-hover" href="updateinfo" style="text-decoration:none;"><i class="fa fa-user" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Update User Profile</span></a></div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a href="changepass"><i class="fa fa-lock" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Change Password</span></a></div>
+                        <div class="col-lg-12" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a class="pulse-grow-on-hover" href="changepass" style="text-decoration:none;"><i class="fa fa-lock" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Change Password</span></a></div>
                     </div>
                     <div class="row">
-                        <div class="col" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a href="changemail"><i class="fa fa-envelope-o" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Change E-mail</span></a></div>
+                        <div class="col" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a class="pulse-grow-on-hover" href="changemail" style="text-decoration:none;"><i class="fa fa-envelope-o" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Change E-mail</span></a></div>
                     </div>
                     <div class="row">
-                        <div class="col" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a href="changenum"><i class="fa fa-mobile-phone" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Change Contact Number</span></a></div>
+                        <div class="col" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a class="pulse-grow-on-hover" href="changenum" style="text-decoration:none;"><i class="fa fa-mobile-phone" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Change Contact Number</span></a></div>
                     </div>
                     <div class="row">
-                        <div class="col" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a href="prev"><i class="fa fa-backward" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Previous Journeys</span></a></div>
+                        <div class="col" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a class="pulse-grow-on-hover" href="prev" style="text-decoration:none;"><i class="fa fa-backward" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Previous Journeys</span></a></div>
                     </div>
                     <div class="row">
-                        <div class="col" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a href="upcoming"><i class="fa fa-forward" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Upcoming Journeys</span></a></div>
+                        <div class="col" style="text-align: left;padding-top: 14px;padding-bottom: 14px;padding-left: 40px;"><a class="pulse-grow-on-hover" href="upcoming" style="text-decoration:none;"><i class="fa fa-forward" style="color: rgb(0,0,0);font-size: 18px;padding-right: 5px;"></i><span style="color: rgb(0,0,0);font-size: 18px;">Upcoming Journeys</span></a></div>
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -114,9 +114,9 @@
                             {%  csrf_token %}
                             <div class="form-group"><label>Current E-mail</label><input name="currentmail" class="form-control" type="email" placeholder="E-mail" value="{{ mail }}" required></div>
                             <div class="form-group"><label>New E-mail</label><input name="newmail" class="form-control" type="email" placeholder="New E-mail" required> </div>
-                            <button class="btn btn-primary border rounded" name="btn1" type="submit" style="margin-bottom: 10px;width: auto;background: #58a25b;color: rgb(0,0,0);">Send Verification Code</button>
+                            <button id="demo" class="btn btn-primary border rounded" name="btn1" type="submit" style="margin-bottom: 10px;width: auto;background: #58a25b;color: rgb(0,0,0);">Send Verification Code</button>
                         <hr style="height:0.8px;border-width:0;color:black;background-color:black">
-                        <button class="btn btn-primary border rounded" name="btn2" type="button" data-toggle="modal" data-target="#exampleModalCenter" style="margin-bottom: 35px;width: 100%;background: #58a25b;color: rgb(0,0,0);">Verify Code And Change E-mail</button>
+                        <button id="demo1" class="btn btn-primary border rounded" name="btn2" type="button" data-toggle="modal" data-target="#exampleModalCenter" style="margin-bottom: 35px;width: 100%;background: #58a25b;color: rgb(0,0,0);">Verify Code And Change E-mail</button>
                     </form>
                     </div>
             </div>
@@ -183,4 +183,35 @@ function logout() {
         document.getElementById('LOADING2').style.display = 'none';
     }, 4000);
     </script>
+<script>
+document.getElementById("demo").onmouseover = function() {mouseOver()};
+document.getElementById("demo").onmouseout = function() {mouseOut()};
+document.getElementById("demo1").onmouseover = function() {mouseOver1()};
+document.getElementById("demo1").onmouseout = function() {mouseOut1()};
+
+function mouseOver() {
+  document.getElementById("demo").style.background = "rgb(23, 143, 74)";
+  document.getElementById("demo").style.boxShadow="0px 2px 5px #696969";
+  document.getElementById("demo").style.color="white";
+
+}
+
+function mouseOut() {
+  document.getElementById("demo").style.background = "#58a25b";
+  document.getElementById("demo").style.boxShadow="none";
+  document.getElementById("demo").style.color="black";
+}
+function mouseOver1() {
+  document.getElementById("demo1").style.background = "rgb(23, 143, 74)";
+  document.getElementById("demo1").style.boxShadow="0px 2px 5px #696969";
+  document.getElementById("demo1").style.color="white";
+
+}
+
+function mouseOut1() {
+  document.getElementById("demo1").style.background = "#58a25b";
+  document.getElementById("demo1").style.boxShadow="none";
+  document.getElementById("demo1").style.color="black";
+}
+</script>
 </html>

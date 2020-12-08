@@ -28,7 +28,7 @@
             <h2 class="text-center"><img src="assets/img/6.png" style="width: 100px;height: 100px;"></h2>
             <div style="margin-bottom: 0px" class="form-group"><label>Card Holder Name</label><input class="form-control" type="text" name="name" required></div><label style="width: 400px;margin: 0px 0px 5px">Card type :DBBL NEXUS</label><label>Card Number</label><input class="form-control" maxlength="9" minlength="9" name="cardnumber" required type="text" pattern="\d*" title="Must contain 9 numercial digits"><label style="margin-top: 5px">PIN</label><input name="pin" minlength="4" maxlength="4" required class="form-control" type="password" pattern="\d*" title="Must contain 4 numercial digits"><label style="width: 400px;margin-top: 10px;margin-bottom: 12px;">Amount: {{ amount }}</label><label style="width: 400px;">Currency: BDT</label>
             <div class="form-check"><input required class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">I agree to the terms and conditions of service</label></div>
-            <button class="btn btn-primary" type="submit" style="border-radius: 5px;width: 400px;font-size: 16px;background: linear-gradient(rgb(88,162,91), rgb(88,162,91)), rgb(88,162,91);filter: brightness(102%);text-transform: capitalize;">Proceed to pay</button></form>
+            <button id="demo" class="btn btn-primary" type="submit" style="border-radius: 5px;width: 400px;font-size: 16px;background: linear-gradient(rgb(88,162,91), rgb(88,162,91)), rgb(88,162,91);filter: brightness(102%);text-transform: capitalize;">Proceed to pay</button></form>
     </div>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: rgb(118,35,35);padding: 18.2px 0px;background: linear-gradient(47deg, rgb(240,255,234), rgb(240,255,234) 99%);">
             <div class="container">
@@ -68,4 +68,5 @@ function logout() {
           }
 
 </script>
+
 </html>
