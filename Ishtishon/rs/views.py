@@ -44,8 +44,8 @@ def check_pw_hash(password,hash):
 
 def list_trains(request):
     if request.method == "POST":
-        if is_logged_in==0:
-            return redirect("/" + "?not_logged_in=" + str(is_logged_in))
+        if request.session.get('is_logged_in')!="1":
+            return redirect("/" + "?not_logged_in=" + str(0))
 
 
         fro = request.POST["from"]
@@ -207,8 +207,8 @@ def homepage(request):
         return render(request,'search.html',{'names':dict,'date':date, 'lastdate':lastdate})
 
 def registration(request):
-    if is_logged_in == 1:
-        return redirect("/" + "?already_logged_in=" + str(is_logged_in))
+    if request.session.get('is_logged_in') == "1":
+        return redirect("/" + "?already_logged_in=" + str(1))
     if request.method == "POST":
         print(request.POST)
         first = request.POST["frst"]
@@ -280,11 +280,11 @@ def registration(request):
 
 def login(request):
     if request.method == "POST":
-        global is_logged_in
+        #global is_logged_in
         #print(request.POST)
-        if is_logged_in==1:
+        if request.session.get('is_logged_in')=="1":
             print('already logged in')
-            return redirect("/" + "?logged_in=" + str(is_logged_in))
+            return redirect("/" + "?logged_in=" + str(1))
         mail = request.POST["email"]
         ps = request.POST["password"]
 
@@ -303,6 +303,7 @@ def login(request):
 
                 is_logged_in=1
                 request.session['usermail']=mail
+                request.session['is_logged_in']="1"
                 #user = authenticate(request, username=username, password=password)
 
                 cursor1 = connection.cursor()
@@ -340,7 +341,7 @@ def login(request):
 
     else :
         if (request.GET.get('logged_out')):
-            if(is_logged_in==0):
+            if(request.session.get('is_logged_in')!="1"):
                 response="You are not logged in yet.Please log in first"#if (request.GET.logged_out == '1'):
             else:
                 is_logged_in = 0
@@ -512,8 +513,8 @@ def contactus(request):
     return render(request, 'contactus.html')
 
 def updateinfo(request):
-    if is_logged_in == 0:
-        return redirect("/login" + "?notdash_logged_in=" + str(is_logged_in))
+    if request.session.get('is_logged_in')!="1":
+        return redirect("/login" + "?notdash_logged_in=" + str(0))
     request.session["numflag"] = ""
     request.session["mailflag"] = ""
     mail = request.session.get('usermail')
