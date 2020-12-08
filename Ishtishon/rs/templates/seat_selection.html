@@ -54,33 +54,33 @@
 
 
         <div class="container" style="z-index:1;background: url(&quot;assets/img/train6.jpg&quot;) center / cover no-repeat;">
-            <section style="padding-top: 30px;background: rgba(0,0,0,0.85);padding-right: 20px;padding-left: 20px;">
+            <section style="padding-top: 15px;background: rgba(0,0,0,0.85);padding-right: 20px;padding-left: 20px;">
                 <div class="row" style="padding-left: 10px;">
                     <div class="col">
                         <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="icon ion-location" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>From:</h1>
-                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{from}}</p>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 5px;">{{from}}</p>
                     </div>
                     <div class="col" style="margin-bottom: 10px">
                         <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="icon ion-location" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>To</h1>
-                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{to}}</p>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 5px;">{{to}}</p>
                     </div>
                     <div class="col">
                         <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="fa fa-calendar-times-o" style="margin-right: 5px;background: rgba(255,255,255,0);color: rgb(255,255,255);"></i>Date:</h1>
-                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{date}}</p>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 5px;">{{date}}</p>
                     </div>
                     </div>
-                <div class="row" style="padding-left: 10px;padding-bottom: 10px;">
+                <div class="row" style="padding-left: 10px;padding-bottom: 0px;">
                     <div class="col">
                         <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="fa fa-train" style="margin-right: 5px;color: rgb(255,255,255);"></i>Class:</h1>
-                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{class}}</p>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 5px;">{{class}}</p>
                     </div>
                     <div class="col">
                         <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="icon ion-person" style="margin-right: 5px;color: rgb(255,255,255);"></i>Adult:</h1>
-                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{adult}}</p>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 5px;">{{adult}}</p>
                     </div>
                     <div class="col">
                         <h1 style="font-size: 16px;color: rgb(118,118,118);"><i class="fa fa-child" style="margin-right: 5px;color: rgb(255,255,255);"></i>Child:</h1>
-                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 25px;">{{child}}</p>
+                        <p style="font-size: 16px;color: rgb(255,255,255);padding-bottom: 5px;">{{child}}</p>
                     </div>
                 </div>
             </section>
@@ -89,7 +89,7 @@
         <div class="toggle"  style="margin-left: 185px;margin-top: 10px;"><input onclick="large()" type="radio" id="cond_new" data-toggle="collapse" data-target="#collapseExample.show" aria-expanded="false" aria-controls="collapseExample" name="bike_cond" checked="checked" ><label for="cond_new">Auto</label><input onclick="small()" type="radio" id="cond_used" name="bike_cond" data-toggle="collapse" data-target="#collapseExample:not(.show)" aria-expanded="false" aria-controls="collapseExample"><label for="cond_used">Manual</label>
         </div>
     </fieldset>
-    <div style="height: 100px; margin-left:185px;"><label style="width: 1145px;background: #bec5ba;color: black;">Passenger Details</label>
+    <div style="height: 100px; margin-left:185px;margin-top: -12px;"><label style="padding-left:5px;width: 1145px;background: #bec5ba;color: black;">Passenger Details</label>
         <div style="height: 24px;"><label style="width: 400px">Name:  {{ full }}</label><label style="margin-left: 300px;">Mobile:  {{ mobile }}</label></div>
         <div style="height: 24px;"><label style="width: 400px">Email:  {{ mail }}</label><label style="margin-left: 300px;">Address:  {{ address }}</label></div>
     </div>
@@ -655,17 +655,17 @@
                 </div>
             </div>
         </div>
-        <div class="float-left" id="div1" style="width: 620px;height: 300px;margin-left: 185px;"><label id="label1" style="width: 1145px;background: #bec5ba;color: black;">&nbsp;Ticket Details</label>
+        <div class="float-left" id="div1" style="width: 620px;height: 300px;margin-left: 185px;margin-top: -5px;"><label id="label1" style="padding-left:5px;width: 1145px;background: #bec5ba;color: black;">Ticket Details</label>
             <div style="height: 24px;"><label>&nbsp;Train name:  {{ train_name }}</label></div>
             <div style="height: 24px;"><label>&nbsp;Adult:  {{ adult }}</label></div>
             <div style="height: 24px;"><label>&nbsp;Child:  {{ child }}</label></div>
             <div style="height: 24px;"><label>&nbsp;Total cost:  {{ cost }} BDT</label></div>
-            <div style="height: 24px;"><label id="label2" style="width: 1145px;background: #bec5ba;color: black;margin-top: 10px;">&nbsp;Review The Rules And Restrictions</label></div>
+            <div style="height: 24px;"><label id="label2" style="padding-left:5px;width: 1145px;background: #bec5ba;color: black;margin-top: 10px;">Review The Rules And Restrictions</label></div>
             <ul style="margin-top: 22px;padding-left: 15px;">
                 <li>Terms and conditions are applicable</li>
                 <li style="width: 520px;">Tickets are non-transferable and name changes are not allowed</li>
             </ul>
-            <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#exampleModalScrollable" style="border-radius: 5px;background:#58a25b;color: white;margin-left: 20px;margin-top: 20px">Buy Ticket</button></div>
+            <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#exampleModalScrollable" style="border-radius: 5px;background:#58a25b;color: white;margin-left: 20px;margin-top: 5px;">Buy Ticket</button></div>
     </div>
 
    <!-- Modal -->
