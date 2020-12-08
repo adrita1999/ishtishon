@@ -159,19 +159,21 @@ def list_trains(request):
             leftright=str(sn%2)
             delay=(sn-1)*200
             cursor = connection.cursor()
-            sql = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SNIGDHA' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
+            sql = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SNIGDHA' AND TRUNC(DATE_OF_JOURNEY)= TO_DATE(%s,'YYYY-MM-DD');"
             cursor.execute(sql, [TRAIN_ID, doj])
             result = cursor.fetchall()
             for r in result:
                 snigdha = r[0];
+            print(snigdha)
             cursor1 = connection.cursor()
-            sql1 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='S_CHAIR' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
+            sql1 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='S_CHAIR' AND TRUNC(DATE_OF_JOURNEY)= TO_DATE(%s,'YYYY-MM-DD');"
             cursor1.execute(sql1, [TRAIN_ID, doj])
             result1 = cursor1.fetchall()
             for r1 in result1:
                 s_chair = r1[0];
+            print(s_chair)
             cursor2 = connection.cursor()
-            sql2 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SHOVAN' AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
+            sql2 = "SELECT 78-COUNT(*) FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS='SHOVAN' AND TRUNC(DATE_OF_JOURNEY)= TO_DATE(%s,'YYYY-MM-DD');"
             cursor2.execute(sql2, [TRAIN_ID, doj])
             result2 = cursor2.fetchall()
             for r2 in result2:
@@ -525,7 +527,7 @@ def seatselection(request):
             else:
                 address = city
     cursor = connection.cursor()
-    sql="SELECT SEAT_NO FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS=%s AND DATE_OF_JOURNEY= TO_DATE(%s,'YYYY-MM-DD');"
+    sql="SELECT SEAT_NO FROM BOOKED_SEAT WHERE TRAIN_ID=%s AND CLASS=%s AND TRUNC(DATE_OF_JOURNEY)= TO_DATE(%s,'YYYY-MM-DD');"
     cursor.execute(sql,[id,clas,doj])
     result=cursor.fetchall();
     cursor.close()
