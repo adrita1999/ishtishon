@@ -187,11 +187,16 @@ document.getElementById("demo").onmouseover = function() {mouseOver()};
 document.getElementById("demo").onmouseout = function() {mouseOut()};
 
 function mouseOver() {
-  document.getElementById("demo").style.background = "red";
+  document.getElementById("demo").style.background = "rgb(11, 125, 76)";
+  document.getElementById("demo").style.boxShadow="0px 4px 10px #888888";
+  document.getElementById("demo").style.color="white";
+
 }
 
 function mouseOut() {
-  document.getElementById("demo").style.background = "green";
+  document.getElementById("demo").style.background = "#58a25b";
+  document.getElementById("demo").style.boxShadow="none";
+  document.getElementById("demo").style.color="black";
 }
 </script>
 </html>
