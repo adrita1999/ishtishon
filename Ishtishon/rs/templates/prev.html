@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>ইস্টিশন</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
@@ -12,6 +13,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
     <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
     <link rel="stylesheet" href="assets/css/animation1.css">
+    <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+    <script>
+    AOS.init();
+    </script>
 </head>
 
 <body>
@@ -94,7 +100,7 @@
                     <div style="padding-left: 10px;padding-top: 10px;padding-right: 0px;"><i class="fa fa-backward" style="padding-right: 10px;font-size: 36px;"></i>
                         <h1 class="d-inline" style="font-size: 36px;padding-top: 10px;">Previous Journeys</h1>
                         <hr style="height:0.8px;border-width:0;color:black;background-color:black">
-                        <div class="table-responsive" style="background: rgb(240,255,234);">
+                        <div class="table-responsive" data-aos="fade-up" style="background: rgb(240,255,234);">
                             <table class="table table-striped">
                                 {% if record %}
                                 {% else %}
@@ -124,7 +130,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <hr style="height:0.8px;border-width:0;color:black;background-color:black">
+                        
                     </div>
                 </div>
             </div>
@@ -134,6 +140,17 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="assets/js/theme.js"></script>
+ <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+          <script>
+            AOS.init(
+                {
+                    offset: 50, // offset (in px) from the original trigger point
+                    once: true,
+                    duration: 1200, // values from 0 to 3000, with step 50ms
+                    delay: 0,
+                }
+            );
+          </script>
 </body>
 <script>
 function logout() {
