@@ -15,6 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>ইস্টিশন</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
@@ -29,12 +30,17 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+    <script>
+    AOS.init();
+    </script>
 </head>
 
 <body style="padding-bottom: 0px;">
-<div style="padding: 10px;margin-top: 40px;margin-right: 180px;padding-left: 450px;padding-right: 450px;">
-    <section style="text-align:center;width: 800px;height: 500px;background-color: rgb(240,255,234)">
-    <div class="dummy-positioning d-flex" style="height: 100px;margin-top: 100px;margin-bottom: -40px;">
+<div style="padding: 10px;margin-top: 10px;margin-right: 180px;padding-left: 380px;padding-right: 380px;padding-top: 100px;">
+    <section style="text-align:center;width: 760px;margin-bottom:15px;background-color: rgb(240,255,234);padding-left: 15px;padding-right:15px;padding-bottom: 50px;padding-top: 50px;">
+    <div class="dummy-positioning d-flex" style="height: 100px;margin-bottom: -40px;">
       <div class="success-icon">
         <div class="success-icon__tip"></div>
         <div class="success-icon__long"></div>
@@ -55,13 +61,13 @@
         </div>
             </div>
         </nav>
-    <div style="height: 50px;margin-top: 100px;"><label style="height: 50px;font-size: 36px;margin-bottom: 0px;"><strong>E-ticket Booking Successful!!</strong></label><i class="icon ion-android-happy" style="margin-left: 8px;font-size: 36px;"></i></div>
-    <div style="height: 30px;margin-top: 10px;margin-bottom: 20px;"><label style="font-size: 16px;margin-top: 0px;margin-bottom: 0px;"><strong>** </strong>A confirmation mail has been sent to the provided e-mail address</label></div>
-    <button class="btn btn-primary" type="button" id="flip" style="margin-top: 10px;text-align: center;margin-bottom: 10px;margin-top: 10px; width: 400px;font-size: 16px;color: rgb(0,0,0); background: rgb(81,171,90);filter: brightness(102%);">See Journey Details</button>
-    <div id="panel">
-        <div style="height: 50px;margin-left: 50px;margin-top: 20px;"><label style="padding-left: 10px;width: 95%;background: #58a25b;margin-top: 0px;font-size: 24px;filter: brightness(102%);">Journey Information</label></div>
-        <div class="table-responsive" style="margin-left: 38px;margin-right:50px;padding: 15px;">
-            <table class="table" style="width:90%;margin-right:50px;">
+    <div style="height: 50px;margin-top: 90px;"><label data-aos="fade" data-aos-delay="0" style="height: 50px;font-size: 34px;margin-bottom: 0px;"><strong>E-ticket Booking Successful!!</strong></label><i class="icon ion-android-happy" style="margin-left: 8px;font-size: 36px;"></i></div>
+    <div style="height: 30px;margin-top: 10px;margin-bottom: 20px;"><label data-aos="fade" data-aos-delay="50" style="font-size: 16px;margin-top: 0px;margin-bottom: 0px;"><strong>** </strong>A confirmation mail has been sent to the provided e-mail address</label></div>
+    <button data-aos="fade" data-aos-delay="100" class="btn btn-primary" type="button" id="flip" style="margin-top: 10px;text-align: center;margin-bottom: 10px;margin-top: 5px; width: 380px;font-size: 16px;color: rgb(0,0,0); background: rgb(81,171,90);filter: brightness(102%);">See Journey Details</button>
+    <div id="panel" style="background-color:  rgb(233,242,229);">
+        <div style="height: 50px;margin-left: 5px;margin-right: 5px;margin-top: 0px;"><label style="width:100%;padding-left: 5px;background: #58a25b;margin-top: 0px;font-size: 24px;filter: brightness(102%);">Journey Information</label></div>
+        <div class="table-responsive" style="margin-left: 0px;margin-right:0px;padding: 0px;">
+            <table class="table" style="text-align: left;padding-left: 10px;font-size: 12px; margin-bottom: 0px;">
                 <thead>
                     <tr>
                         <th>Train ID</th>
@@ -70,7 +76,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="width: 600px;"><strong>Train Name</strong></td>
+                        <td style=""><strong>Train Name</strong></td>
                         <td><strong>{{ name }}</strong></td>
                     </tr>
                     <tr>
@@ -98,22 +104,35 @@
         </div>
 
     </div>
-    <br><button class="btn btn-primary" type="button" onclick="getid()" style="border-style:none;text-align: center;margin-bottom: 20px;margin-top: 10px; width: 400px;font-size: 16px;color: rgb(0,0,0); background: rgb(81,171,90);filter: brightness(102%);">Download Ticket</button><br>
-
-    <label style="font-size: 24px;margin-bottom: 10px;"><strong>Please note</strong></label>
+    <br><button class="btn btn-primary" data-aos="fade" data-aos-delay="150" type="button" onclick="getid()" style="border-style:none;text-align: center;margin-bottom: 20px;margin-top: 10px; width: 380px;font-size: 16px;color: rgb(0,0,0); background: rgb(81,171,90);filter: brightness(102%);">Download Ticket</button><br>
+    <div style="text-align: left;padding-left: 30px;padding-right: -15px;">
+    <label data-aos="fade" data-aos-delay="200" style="font-size: 20px;margin-bottom: 10px;padding-left: 23px;"><strong>Please note</strong></label>
     <ul style="margin-bottom: 10px;">
-        <li style="font-size: 16px;">This ticket will be valid on production of Photo Identity Card of the passenger only</li>
-        <li style="font-size: 16px;">Please do not share the PIN information with anybody.</li>
-        <li style="font-size: 16px;">The concerned authority and/or its affiliates will not be responsible for misused PIN information</li>
+        <li data-aos="fade" data-aos-delay="220" style="font-size: 14px;">This ticket will be valid on production of Photo Identity Card of the passenger only</li>
+        <li data-aos="fade" data-aos-delay="240" style="font-size: 14px;">Please do not share the PIN information with anybody.</li>
+        <li data-aos="fade" data-aos-delay="260" style="font-size: 14px;">The concerned authority and/or its affiliates will not be responsible for misused PIN information</li>
     </ul>
-    <div style="height: 50px;margin-top: 10px;"><label style="font-size: 36px;"><strong>Thank you for being with team ইস্টিশন</strong></label></div>
+        </div>
+    <div data-aos="zoom-in" data-aos-delay="320" style="height: 50px;margin-top: 10px;text-align: center;"><label style="font-size: 26px;padding-top: 5px;"><strong>Thank you for being with team ইস্টিশন</strong></label></div>
     </section>
 </div>
+
     <main class="text-center page lanidng-page" style="text-align: center;padding: 22px 22px 22px;box-shadow: inset 0px 1px 10px 0px rgb(230,230,230);margin-top: 85px;"><img src="assets/img/1.png"><img src="assets/img/2.png"><img src="assets/img/3.png"><img src="assets/img/4.png"><img src="assets/img/5.png"><img src="assets/img/6.png"></main>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="assets/js/theme.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+          <script>
+            AOS.init(
+                {
+                    offset: 0, // offset (in px) from the original trigger point
+                    once: true,
+                    mirror:true,
+                    duration: 1800, // values from 0 to 3000, with step 50ms
+                }
+            );
+          </script>
 
 </body>
 <script>
