@@ -3,6 +3,8 @@ import os
 import sys
 import twilio
 import random
+
+from twilio.base.exceptions import TwilioRestException
 from twilio.rest import Client
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import AnonymousUser
@@ -368,14 +370,18 @@ def forgetpass(request):
             # auth_token = '975807bfb5da380c2fb27497280bb732'
             client = Client(account_sid, auth_token)
 
-            message = client.messages \
-                .create(
-                body='Your OTP is ' + str(otp),
-                from_='+12543235243',
-                to='+880' + contact
-            )
+            try:
+                message = client.messages \
+                    .create(
+                    body='Your OTP is ' + str(otp),
+                    from_='+12543235243',
+                    to='+880' + contact
+                )
 
-            print(message.sid)
+                print(message.sid)
+            except TwilioRestException as e:
+                msg="Could Not Send SMS.Try Again Later!"
+                return render(request, 'forgetpass.html', {"status": msg})
 
             return redirect("/forget_pass_change")
         else:
@@ -923,14 +929,21 @@ def changenum(request):
         #auth_token = '975807bfb5da380c2fb27497280bb732'
         client = Client(account_sid, auth_token)
 
-        message = client.messages \
-            .create(
-            body='Your OTP is ' + str(otp),
-            from_='+12543235243',
-            to='+880' + str(num2)
-        )
+        try:
+            message = client.messages \
+                .create(
+                body='Your OTP is '+str(otp),
+                from_='+12543235243',
+                to='+880'+num2
+            )
 
-        print(message.sid)
+            print(message.sid)
+        except TwilioRestException as e:
+            msg="Could Not Send SMS.Try Again Later!"
+            return render(request, 'changenum.html',
+                          {"statusred": msg, "fullname": fullname, "mail": mail, "address": address, "contact": contact,
+                           "pnr": pnr, "nid": nid, "password": hashps})
+
     if request.method == "POST" and 'btn3' in request.POST:
         flag = request.session.get('numflag')
         if flag == "":
@@ -1164,15 +1177,18 @@ def bkash(request):
         account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
         #auth_token = '975807bfb5da380c2fb27497280bb732'
         client = Client(account_sid, auth_token)
+        try:
+            message = client.messages \
+                .create(
+                body='Your OTP is '+str(otp),
+                from_='+12543235243',
+                to='+88'+name
+            )
 
-        message = client.messages \
-            .create(
-            body='Your OTP is '+str(otp),
-            from_='+12543235243',
-            to='+88'+name
-        )
-
-        print(message.sid)
+            print(message.sid)
+        except TwilioRestException as e:
+            msg="Could Not Send SMS.Try Again Later!"
+            return render(request, 'bkash_payment.html', {"status": msg, 'amount': amount})
 
     if request.method == "POST" and 'btn3' in request.POST:
         flag=request.session.get('paymentflag')
@@ -1378,15 +1394,18 @@ def rocket(request):
         account_sid = 'AC12508562ed95fd8227bfb94ee4c762ae'
         #auth_token = '975807bfb5da380c2fb27497280bb732'
         client = Client(account_sid, auth_token)
+        try:
+            message = client.messages \
+                .create(
+                body='Your OTP is '+str(otp),
+                from_='+12543235243',
+                to='+88'+name
+            )
 
-        message = client.messages \
-            .create(
-            body='Your OTP is '+str(otp),
-            from_='+12543235243',
-            to='+88'+name
-        )
-
-        print(message.sid)
+            print(message.sid)
+        except TwilioRestException as e:
+            msg="Could Not Send SMS.Try Again Later!"
+            return render(request, 'rocket_payment.html', {"status": msg, 'amount': amount})
 
     if request.method == "POST" and 'btn3' in request.POST:
         flag=request.session.get('paymentflag')
