@@ -63,7 +63,7 @@
         </nav>
     <div style="height: 50px;margin-top: 90px;"><label data-aos="fade" data-aos-delay="0" style="height: 50px;font-size: 34px;margin-bottom: 0px;"><strong>E-ticket Booking Successful!!</strong></label><i class="icon ion-android-happy" style="margin-left: 8px;font-size: 36px;"></i></div>
     <div style="height: 30px;margin-top: 10px;margin-bottom: 20px;"><label data-aos="fade" data-aos-delay="50" style="font-size: 16px;margin-top: 0px;margin-bottom: 0px;"><strong>** </strong>A confirmation mail has been sent to the provided e-mail address</label></div>
-    <button data-aos="fade" data-aos-delay="100" class="btn btn-primary" type="button" id="flip" style="margin-top: 10px;text-align: center;margin-bottom: 10px;margin-top: 5px; width: 380px;font-size: 16px;color: rgb(0,0,0); background: rgb(81,171,90);filter: brightness(102%);">See Journey Details</button>
+    <button data-aos="fade" data-aos-delay="100"  class="btn btn-primary" type="button" id="flip" style="margin-top: 10px;text-align: center;margin-bottom: 10px;margin-top: 5px; width: 380px;font-size: 16px;color: rgb(0,0,0); background: rgb(81,171,90);filter: brightness(102%);">See Journey Details</button>
     <div id="panel" style="background-color:  rgb(233,242,229);">
         <div style="height: 50px;margin-left: 5px;margin-right: 5px;margin-top: 0px;"><label style="width:100%;padding-left: 5px;background: #58a25b;margin-top: 0px;font-size: 24px;filter: brightness(102%);">Journey Information</label></div>
         <div class="table-responsive" style="margin-left: 0px;margin-right:0px;padding: 0px;">
@@ -104,7 +104,7 @@
         </div>
 
     </div>
-    <br><button class="btn btn-primary" data-aos="fade" data-aos-delay="150" type="button" onclick="getid()" style="border-style:none;text-align: center;margin-bottom: 20px;margin-top: 10px; width: 380px;font-size: 16px;color: rgb(0,0,0); background: rgb(81,171,90);filter: brightness(102%);">Download Ticket</button><br>
+    <br><button id="demo1" class="btn btn-primary" data-aos="fade" data-aos-delay="150" type="button" onclick="getid()" style="border-style:none;text-align: center;margin-bottom: 20px;margin-top: 10px; width: 380px;font-size: 16px;color: rgb(0,0,0); background: rgb(81,171,90);filter: brightness(102%);">Download Ticket</button><br>
     <div style="text-align: left;padding-left: 30px;padding-right: -15px;">
     <label data-aos="fade" data-aos-delay="200" style="font-size: 20px;margin-bottom: 10px;padding-left: 23px;"><strong>Please note</strong></label>
     <ul style="margin-bottom: 10px;">
@@ -151,6 +151,37 @@ function logout() {
 
 
 
+</script>
+<script>
+document.getElementById("flip").onmouseover = function() {mouseOver()};
+document.getElementById("flip").onmouseout = function() {mouseOut()};
+document.getElementById("demo1").onmouseover = function() {mouseOver1()};
+document.getElementById("demo1").onmouseout = function() {mouseOut1()};
+
+function mouseOver() {
+  document.getElementById("flip").style.background = "rgb(23, 143, 74)";
+  document.getElementById("flip").style.boxShadow="0px 2px 5px #696969";
+  document.getElementById("flip").style.color="white";
+
+}
+
+function mouseOut() {
+  document.getElementById("flip").style.background = "#58a25b";
+  document.getElementById("flip").style.boxShadow="none";
+  document.getElementById("flip").style.color="black";
+}
+function mouseOver1() {
+  document.getElementById("demo1").style.background = "rgb(23, 143, 74)";
+  document.getElementById("demo1").style.boxShadow="0px 2px 5px #696969";
+  document.getElementById("demo1").style.color="white";
+
+}
+
+function mouseOut1() {
+  document.getElementById("demo1").style.background = "#58a25b";
+  document.getElementById("demo1").style.boxShadow="none";
+  document.getElementById("demo1").style.color="black";
+}
 </script>
 
 </html>
