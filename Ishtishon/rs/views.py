@@ -34,7 +34,7 @@ global details
 global auth_token
 is_logged_in=0
 details={}
-auth_token = '3a82db092deefe39d8a3964c5345b44c'
+auth_token = 'fc54e95ce2392b7a80bda661bda7e092'
 
 def make_pw_hash(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
@@ -320,7 +320,7 @@ def login(request):
                 #user = authenticate(request, username=username, password=password)
 
                 cursor1 = connection.cursor()
-                sql1 = "SELECT FIRST_NAME,LAST_NAME,DOB,GENDER,NID_NO,HOUSE_NO,ROAD_NO,ZIP_CODE,CITY,CONTACT_NO,USER_ID,PASSWORD,SUBSTR(CONTACT_NO,5) " \
+                sql1 = "SELECT INITCAP(FIRST_NAME),INITCAP(LAST_NAME),DOB,GENDER,NID_NO,HOUSE_NO,ROAD_NO,ZIP_CODE,CITY,CONTACT_NO,USER_ID,PASSWORD,SUBSTR(CONTACT_NO,5) " \
                        "FROM R_USER " \
                        "WHERE EMAIL_ADD=%s;"
                 cursor1.execute(sql1, [mail])
@@ -1517,9 +1517,12 @@ def pdf(request):
     trname=request.session.get('train_name')
     train=trid+' '+trname
     fro=request.session.get('from')
+    fro=fro.capitalize()
     to=request.session.get('to')
+    to=to.capitalize()
     clas=request.session.get('class')
-    coach='UMA'
+    clas=clas.capitalize()
+    coach='Uma'
     range=request.session.get('seat_nos')
     tot=request.session.get('total_seats')
     adult=request.session.get('adult')
