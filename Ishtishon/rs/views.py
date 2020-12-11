@@ -34,7 +34,7 @@ global details
 global auth_token
 is_logged_in=0
 details={}
-auth_token = 'fc54e95ce2392b7a80bda661bda7e092'
+auth_token = 'c9561d046f2c9b741746d46e4e424705'
 
 def make_pw_hash(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
