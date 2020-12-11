@@ -144,7 +144,7 @@ def list_trains(request):
         if st!="":
             request.session['vat'] = str(int(st * 0.15))
             st=st+(st*0.15)
-            
+
         else:
             st="0"
         dict_result = []
